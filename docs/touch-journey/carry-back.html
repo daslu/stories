@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A reading journey for hands-on practitioners.">
+<meta name="description" content="Ten things we came away with, further reading, and the complete reference list.">
 
-<title>Touch is not one sense</title>
+<title>What we carry back into the room – Touch is not one sense</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,7 +24,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -34,7 +53,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../touch-journey-next/territory.html" rel="next">
+<link href="../touch-journey/being-honest.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -80,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="warm.css">
 </head>
 
-<body class="nav-sidebar floating fullcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -89,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../touch-journey-next/index.html">Start here</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../touch-journey/carry-back.html">What we carry back</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,37 +135,37 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../touch-journey-next/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../touch-journey/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Start here</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../touch-journey-next/territory.html" class="sidebar-item-text sidebar-link">
+  <a href="../touch-journey/territory.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">One · the territory</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../touch-journey-next/second-system.html" class="sidebar-item-text sidebar-link">
+  <a href="../touch-journey/second-system.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Two · the second system</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../touch-journey-next/what-touch-does.html" class="sidebar-item-text sidebar-link">
+  <a href="../touch-journey/what-touch-does.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Three · what touch does</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../touch-journey-next/being-honest.html" class="sidebar-item-text sidebar-link">
+  <a href="../touch-journey/being-honest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Four · being honest about it</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../touch-journey-next/carry-back.html" class="sidebar-item-text sidebar-link">
+  <a href="../touch-journey/carry-back.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">What we carry back</span></a>
   </div>
 </li>
@@ -155,18 +174,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">The stops on this page</h2>
+   
+  <ul>
+  <li><a href="#rules" id="toc-rules" class="nav-link active" data-scroll-target="#rules">What we would carry back into the room</a></li>
+  <li><a href="#further" id="toc-further" class="nav-link" data-scroll-target="#further">If you want to go further</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Touch is not one sense</h1>
+<h1 class="title">What we carry back into the room</h1>
 </div>
 
 <div>
   <div class="description">
-    A reading journey for hands-on practitioners.
+    Ten things we came away with, further reading, and the complete reference list.
   </div>
 </div>
 
@@ -183,47 +211,141 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="hero">
-<p><span class="eyebrow">A reading journey for hands-on practitioners</span></p>
-<section id="touch-is-not-one-sense" class="level1">
-<h1>Touch is not one sense</h1>
-<div class="stand">
-<p>Skin carries at least two separate systems, and they are not sending the same message. One tells you <em>what</em> you are touching. The other answers mainly to being touched <em>affectionately</em> — found by accident, confirmed by a man who had lost the ordinary sense of touch, and it fires hardest at one particular speed. What follows is what we found reading our way through it: what each system responds to, what touch does to pain and to relationships, and which of the popular claims we could not get to stand up.</p>
+<div class="part">
+<p>Closing</p>
+</div>
+<section id="rules" class="level2 stop">
+<h2 class="stop anchored" data-anchor-id="rules">What we would carry back into the room</h2>
+<div class="year">
+<p>In practice</p>
+</div>
+<div class="lead">
+<p>Ten things we came away with, loosely ordered by how much weight we would put on each.</p>
+</div>
+<div class="rules">
+<ul>
+<li><strong>Slower than feels natural — about a hand’s width a second.</strong><br>
+One to ten centimetres a second is where the research clusters, and it is slower than most of us work by default.</li>
+<li><strong>Warmth seems to matter about as much as speed.</strong><br>
+Around skin temperature — hands, oil, room. Cold shifted every speed toward less pleasant, and technique did not appear to make up for it.</li>
+<li><strong>Hairy skin looks like the home ground, though not the only ground.</strong><br>
+Forearm, back, shoulders. The palm has some of these fibres after all — just fewer.</li>
+<li><strong>Still contact seems to count.</strong><br>
+Resting a hand is not a lesser version of stroking. It may be preferred to stroking done wrong.</li>
+<li><strong>What you are trying to do decides which system you are working with.</strong><br>
+Fine detail comes through a fingertip on hairless skin. Contact and comfort come through a broad, slow, warm hand on hairy skin.</li>
+<li><strong>Averages describe populations, not the person on the table.</strong><br>
+The curve is an average across a lot of people. We would ask, watch and adjust rather than put a number on someone.</li>
+<li><strong>Saying what you are about to do matters more than we expected.</strong><br>
+You have access the social map normally saves for the people we are closest to. Saying it out loud seems to be how that stays safe rather than just allowed.</li>
+<li><strong>Describing the touch travels further than describing the mechanism.</strong><br>
+“Slow, warm, light, moving” is honest and checkable. “Activating your C-tactile fibres” goes beyond the evidence.</li>
+<li><strong>The hormone claims are the ones we would hold most loosely.</strong><br>
+That evidence is the thinnest thing here. The pain and comfort findings are steadier and need no help from it.</li>
+<li><strong>Most of the work is probably not being done by the fibres.</strong><br>
+Safety, consent, predictability and relationship. The fibres are the doorway, not the visit.</li>
+</ul>
 </div>
 </section>
+<section id="further" class="level2 stop">
+<h2 class="stop anchored" data-anchor-id="further">If you want to go further</h2>
+<div class="year">
+<p>Reading</p>
 </div>
-<div class="about">
-<div class="ab">
-<p><span class="k">What this is</span></p>
-<p>A plain-language walk through the research on touch — the <a href="https://en.wikipedia.org/wiki/Somatosensory_system" class="wiki">sense</a>, not the technique. Twelve short stops, about thirty minutes, with figures you can operate rather than only look at.</p>
+<div class="lead">
+<p>Four places to go next, in the order we would send someone.</p>
 </div>
-<div class="ab">
-<p><span class="k">Who it is for</span></p>
-<p>Anyone whose work involves putting hands on other people: massage therapists, bodyworkers, physiotherapists, osteopaths, nurses, midwives, somatic and trauma practitioners. <strong>No science background is assumed</strong> — we did not begin with much of one either.</p>
-</div>
-<div class="ab">
-<p><span class="k">How it is sourced</span></p>
-<p>Every claim here points to a named paper, cited at the top of its section and listed at the foot of the page it appears on — so you can go and check where we have read it wrong. Where researchers disagree, and here they disagree a good deal, we have tried to say so rather than pick a side. It is not medical advice and not a technique manual.</p>
-</div>
-</div>
-<section id="parts" class="level2">
-<h2 class="anchored" data-anchor-id="parts">The four parts</h2>
-<p>The journey runs in order, and each part builds on the one before it. Every page carries its own references at the foot.</p>
 <div class="reading">
-<p><a href="../touch-journey-next/territory.html" class="n"><strong>One · the territory</strong></a> — two roads, the receptors they arrive on, and how finely skin can actually resolve what it feels.</p>
-<p><a href="../touch-journey-next/second-system.html" class="n"><strong>Two · the second system</strong></a> — how the slow road was found, the patient who proved it carries an experience, and the two things it is tuned to.</p>
-<p><a href="../touch-journey-next/what-touch-does.html" class="n"><strong>Three · what touch does</strong></a> — pain, the map of who may touch you where, and an honest sorting of how sure anyone can be about any of it.</p>
-<p><a href="../touch-journey-next/being-honest.html" class="n"><strong>Four · being honest about it</strong></a> — four things the field has had to take back, and why the fibre is not the feeling.</p>
-<p><a href="../touch-journey-next/carry-back.html" class="n"><strong>What we carry back into the room</strong></a> — ten things we came away with, further reading, and the complete reference list.</p>
+<p><a href="https://www.cell.com/neuron/fulltext/S0896-6273(14)00387-0" class="n">McGlone et al.&nbsp;(2014)</a> — The standard overview, free to read, and the source most people are quoting second-hand. Long, but the first half is very approachable.</p>
+<p><a href="https://link.springer.com/article/10.1007/s00221-009-2007-y" class="n">Morrison et al.&nbsp;(2010)</a> — The friendliest conceptual framing of why any of this might matter.</p>
+<p><a href="https://www.tandfonline.com/doi/full/10.1080/17437199.2021.1980082" class="n">Kidd et al.&nbsp;(2023)</a> — The bridge from nerve fibres to stress physiology, and the closest thing to a review written for people who do this for a living.</p>
+<p><a href="https://www.nature.com/articles/s44159-023-00217-5" class="n">Suvilehto et al.&nbsp;(2023)</a> — The widest recent view — who touches whom, where, and what for.</p>
 </div>
 <div class="foot">
-<p>Assembled in 2026 from the literature as it stood. A reading of published research, written for people who work with touch. It is not medical advice, it does not describe a technique, and it cannot tell you what the person in front of you wants.</p>
+<p>Assembled in 2026 from the literature as it stood. A reading of published research, written for people who work with touch. It is not medical advice, it does not describe a technique, and it cannot tell you what the person in front of you wants. Where researchers disagree we have tried to say so rather than tidy it away — that is not hedging, it is the current state of a young field still arguing productively with itself.</p>
 </div>
+<div class="refnote">
+<p>Every source the journey cites, in the order it cites them. Each page also carries its own references at the foot, numbered for that page.</p>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-mcglone14" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">McGlone F, Wessberg J, Olausson H. <span class="nocase">Discriminative and affective touch: sensing and feeling</span>. <em>Neuron</em>. 2014;82(4):737-755. <a href="https://www.cell.com/neuron/fulltext/S0896-6273(14)00387-0">https://www.cell.com/neuron/fulltext/S0896-6273(14)00387-0</a></div>
+</div>
+<div id="ref-standring" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline"><span class="nocase">Cutaneous mechanoreceptors: Merkel cells, Meissner corpuscles, Ruffini endings, Pacinian corpuscles and free nerve endings</span>. <a href="https://en.wikipedia.org/wiki/Mechanoreceptor">https://en.wikipedia.org/wiki/Mechanoreceptor</a></div>
+</div>
+<div id="ref-weinstein68" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Weinstein S. <span class="nocase">Intensive and extensive aspects of tactile sensitivity as a function of body part, sex and laterality</span>. In, ed.Kenshalo DR. <em><span>The Skin Senses</span></em>. Charles C. Thomas; 1968. <a href="https://en.wikipedia.org/wiki/Two-point_discrimination">https://en.wikipedia.org/wiki/Two-point_discrimination</a></div>
+</div>
+<div id="ref-tong13" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Tong J, Mao O, Goldreich D. <span class="nocase">Two-point orientation discrimination versus the traditional two-point test for tactile spatial acuity assessment</span>. <em>Frontiers in Psychology</em>. 2013;4:579. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3772339/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3772339/</a></div>
+</div>
+<div id="ref-vallbo99" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Vallbo ÅB, Olausson H, Wessberg J. <span class="nocase">Unmyelinated afferents constitute a second system coding tactile stimuli of the human hairy skin</span>. <em>Journal of Neurophysiology</em>. 1999;81(6):2753-2763. <a href="https://journals.physiology.org/doi/full/10.1152/jn.1999.81.6.2753">https://journals.physiology.org/doi/full/10.1152/jn.1999.81.6.2753</a></div>
+</div>
+<div id="ref-olausson02" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline"><span class="nocase">Olausson H, Lamarre Y, Backlund H, et al.</span> <span class="nocase">Unmyelinated tactile afferents signal touch and project to insular cortex</span>. <em>Nature Neuroscience</em>. 2002;5:900-904. <a href="https://www.nature.com/articles/nn896">https://www.nature.com/articles/nn896</a></div>
+</div>
+<div id="ref-loken09" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Löken LS, Wessberg J, Morrison I, McGlone F, Olausson H. <span class="nocase">Coding of pleasant touch by unmyelinated afferents in humans</span>. <em>Nature Neuroscience</em>. 2009;12:547-548. <a href="https://www.nature.com/articles/nn.2312">https://www.nature.com/articles/nn.2312</a></div>
+</div>
+<div id="ref-ackerley14" class="csl-entry" role="listitem">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline"><span class="nocase">Ackerley R, Backlund Wasling H, Liljencrantz J, et al.</span> <span class="nocase">Human C-tactile afferents are tuned to the temperature of a skin-stroking caress</span>. <em>Journal of Neuroscience</em>. 2014;34(8):2879-2883. <a href="https://www.jneurosci.org/content/34/8/2879">https://www.jneurosci.org/content/34/8/2879</a></div>
+</div>
+<div id="ref-melzack65" class="csl-entry" role="listitem">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Melzack R, Wall PD. <span class="nocase">Pain mechanisms: a new theory</span>. <em>Science</em>. 1965;150(3699):971-979. <a href="https://www.science.org/doi/10.1126/science.150.3699.971">https://www.science.org/doi/10.1126/science.150.3699.971</a></div>
+</div>
+<div id="ref-coan06" class="csl-entry" role="listitem">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Coan JA, Schaefer HS, Davidson RJ. <span class="nocase">Lending a hand: social regulation of the neural response to threat</span>. <em>Psychological Science</em>. 2006;17(12):1032-1039. <a href="https://journals.sagepub.com/doi/abs/10.1111/j.1467-9280.2006.01832.x">https://journals.sagepub.com/doi/abs/10.1111/j.1467-9280.2006.01832.x</a></div>
+</div>
+<div id="ref-goldstein18" class="csl-entry" role="listitem">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Goldstein P, Weissman-Fogel I, Dumas G, Shamay-Tsoory SG. <span class="nocase">Brain-to-brain coupling during handholding is associated with pain reduction</span>. <em>Proceedings of the National Academy of Sciences</em>. 2018;115(11):E2528-E2537. <a href="https://www.pnas.org/doi/10.1073/pnas.1703643115">https://www.pnas.org/doi/10.1073/pnas.1703643115</a></div>
+</div>
+<div id="ref-suvilehto15" class="csl-entry" role="listitem">
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Suvilehto JT, Glerean E, Dunbar RIM, Hari R, Nummenmaa L. <span class="nocase">Topography of social touching depends on emotional bonds between humans</span>. <em>Proceedings of the National Academy of Sciences</em>. 2015;112(45):13811-13816. <a href="https://www.pnas.org/doi/abs/10.1073/pnas.1519231112">https://www.pnas.org/doi/abs/10.1073/pnas.1519231112</a></div>
+</div>
+<div id="ref-kidd23" class="csl-entry" role="listitem">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Kidd T, Devine SL, Walker SC. <span class="nocase">Affective touch and regulation of stress responses</span>. <em>Health Psychology Review</em>. 2023;17(1):60-77. <a href="https://www.tandfonline.com/doi/full/10.1080/17437199.2021.1980082">https://www.tandfonline.com/doi/full/10.1080/17437199.2021.1980082</a></div>
+</div>
+<div id="ref-moyer11" class="csl-entry" role="listitem">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Moyer CA, Seefeldt L, Mans ES, Jackson LM. <span class="nocase">Does massage therapy reduce cortisol? A comprehensive quantitative review</span>. <em>Journal of Bodywork and Movement Therapies</em>. 2011;15(1):3-14. <a href="https://pubmed.ncbi.nlm.nih.gov/21147413/">https://pubmed.ncbi.nlm.nih.gov/21147413/</a></div>
+</div>
+<div id="ref-watkins21" class="csl-entry" role="listitem">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Watkins RH, Dione M, Ackerley R, Backlund Wasling H, Wessberg J, Löken LS. <span class="nocase">Evidence for sparse C-tactile afferent innervation of glabrous human hand skin</span>. <em>Journal of Neurophysiology</em>. 2021;125(1):232-237. <a href="https://journals.physiology.org/doi/full/10.1152/jn.00587.2020">https://journals.physiology.org/doi/full/10.1152/jn.00587.2020</a></div>
+</div>
+<div id="ref-case21" class="csl-entry" role="listitem">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline"><span class="nocase">Case LK, Liljencrantz J, McCall MV, et al.</span> <span class="nocase">Pleasant deep pressure: expanding the social touch hypothesis</span>. <em>Neuroscience</em>. 2021;464:3-11. <a href="https://pubmed.ncbi.nlm.nih.gov/33887384/">https://pubmed.ncbi.nlm.nih.gov/33887384/</a></div>
+</div>
+<div id="ref-ali23" class="csl-entry" role="listitem">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline"><span class="nocase">Ali SH, Makdani AD, Cordero MI, et al.</span> <span class="nocase">Hold me or stroke me? Individual differences in static and dynamic affective touch</span>. <em>PLoS ONE</em>. 2023;18(5):e0281253. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10204953/">https://pmc.ncbi.nlm.nih.gov/articles/PMC10204953/</a></div>
+</div>
+<div id="ref-bendas21" class="csl-entry" role="listitem">
+<div class="csl-left-margin">18. </div><div class="csl-right-inline">Bendas J, Ree A, Pabel L, Sailer U, Croy I. <span class="nocase">Dynamics of affective habituation to touch differ on the group and individual level</span>. <em>Neuroscience</em>. 2021;464:44-52. <a href="https://pubmed.ncbi.nlm.nih.gov/33359653/">https://pubmed.ncbi.nlm.nih.gov/33359653/</a></div>
+</div>
+<div id="ref-crucianelli22" class="csl-entry" role="listitem">
+<div class="csl-left-margin">19. </div><div class="csl-right-inline">Crucianelli L, Chancel M, Ehrsson HH. <span class="nocase">Modeling affective touch pleasantness across skin types at the individual level reveals a reliable and stable basic function</span>. <em>Journal of Neurophysiology</em>. 2022;128(6):1435-1452. <a href="https://journals.physiology.org/doi/full/10.1152/jn.00179.2022">https://journals.physiology.org/doi/full/10.1152/jn.00179.2022</a></div>
+</div>
+<div id="ref-schirmer23" class="csl-entry" role="listitem">
+<div class="csl-left-margin">20. </div><div class="csl-right-inline">Schirmer A, Croy I, Ackerley R. <span class="nocase">What are C-tactile afferents and how do they relate to <span>“affective touch”</span>?</span> <em>Neuroscience and Biobehavioral Reviews</em>. 2023;151:105236. <a href="https://www.sciencedirect.com/science/article/pii/S0149763423002270">https://www.sciencedirect.com/science/article/pii/S0149763423002270</a></div>
+</div>
+<div id="ref-sailer22" class="csl-entry" role="listitem">
+<div class="csl-left-margin">21. </div><div class="csl-right-inline">Sailer U, Leknes S. <span class="nocase">Meaning makes touch affective</span>. <em>Current Opinion in Behavioural Sciences</em>. 2022;44:101099. <a href="https://www.sciencedirect.com/science/article/pii/S2352154621001984">https://www.sciencedirect.com/science/article/pii/S2352154621001984</a></div>
+</div>
+<div id="ref-schirmer22" class="csl-entry" role="listitem">
+<div class="csl-left-margin">22. </div><div class="csl-right-inline">Schirmer A, Croy I, Schweinberger SR. <span class="nocase">Social touch — a tool rather than a signal</span>. <em>Current Opinion in Behavioural Sciences</em>. 2022;44:101100. <a href="https://www.sciencedirect.com/science/article/pii/S2352154621001996">https://www.sciencedirect.com/science/article/pii/S2352154621001996</a></div>
+</div>
+<div id="ref-morrison10" class="csl-entry" role="listitem">
+<div class="csl-left-margin">23. </div><div class="csl-right-inline">Morrison I, Löken LS, Olausson H. <span class="nocase">The skin as a social organ</span>. <em>Experimental Brain Research</em>. 2010;204(3):305-314. <a href="https://link.springer.com/article/10.1007/s00221-009-2007-y">https://link.springer.com/article/10.1007/s00221-009-2007-y</a></div>
+</div>
+<div id="ref-suvilehto23" class="csl-entry" role="listitem">
+<div class="csl-left-margin">24. </div><div class="csl-right-inline">Suvilehto JT, Cekaite A, Morrison I. <span class="nocase">The why, who and how of social touch</span>. <em>Nature Reviews Psychology</em>. 2023;2:606-621. <a href="https://www.nature.com/articles/s44159-023-00217-5">https://www.nature.com/articles/s44159-023-00217-5</a></div>
+</div>
+</div></section></div></main> <!-- /main -->
 <!-- Load order matters: figure-data.js defines CLAIMS (scenes.js draws it) and
      REVISIONS (figures.js builds the flip cards from it). scenes.js defines
      SCENES, esc, layout, NARROW, narrowQ, STROKE_GEOM and the option lists.
@@ -638,11 +760,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../touch-journey/being-honest.html" class="pagination-link" aria-label="Four · being honest about it">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Four · being honest about it</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../touch-journey-next/territory.html" class="pagination-link" aria-label="One · the territory">
-        <span class="nav-page-text">One · the territory</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

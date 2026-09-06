@@ -7,27 +7,23 @@
 ## and leaves it unable to clean docs/site_libs.
 ##
 ## docs/ is what GitHub Pages serves. It is output only — never hand-edited,
-## never a source. Quarto leaves files it did not generate alone, so the older
-## hand-built pages in there survive a render untouched.
+## never a source.
+##
+## Quarto DELETES anything in output-dir that the project does not know about.
+## It removed the published story once, and replaced the shelf with a redirect
+## stub. Anything that has to exist in docs/ must be a project input: either
+## rendered from a .qmd here, or listed under resources below.
 
 project:
   type: website
   output-dir: docs
   render:
-    - touch-journey-next/*.qmd
+    - touch-journey/*.qmd
   resources:
-    - touch-journey-next/js/**
-    # The already-published single-file story. docs/ is Quarto's output
-    # directory, and Quarto deletes anything in it that the project does not
-    # know about — it removed this page once. Listing it as a resource makes
-    # every render reproduce it verbatim instead. It goes when the new site
-    # takes over the touch-journey/ name.
-    - touch-journey/index.html
-    - touch-journey/hands-src.zip
-    - touch-journey/README.md
+    - touch-journey/js/**
     # The hand-written shelf. Without an index input Quarto writes a redirect
     # stub to whichever page sorts first, which it did once. Copied verbatim
-    # until it becomes an index.qmd.
+    # until it becomes an index.qmd — see touch-journey/TODO.md.
     - index.html
 
 website:
@@ -41,17 +37,17 @@ website:
     collapse-level: 1
     contents:
       - text: "Start here"
-        href: touch-journey-next/index.qmd
+        href: touch-journey/index.qmd
       - text: "One · the territory"
-        href: touch-journey-next/territory.qmd
+        href: touch-journey/territory.qmd
       - text: "Two · the second system"
-        href: touch-journey-next/second-system.qmd
+        href: touch-journey/second-system.qmd
       - text: "Three · what touch does"
-        href: touch-journey-next/what-touch-does.qmd
+        href: touch-journey/what-touch-does.qmd
       - text: "Four · being honest about it"
-        href: touch-journey-next/being-honest.qmd
+        href: touch-journey/being-honest.qmd
       - text: "What we carry back"
-        href: touch-journey-next/carry-back.qmd
+        href: touch-journey/carry-back.qmd
 
 format:
   html:
