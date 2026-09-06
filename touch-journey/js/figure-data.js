@@ -50,3 +50,22 @@ const REVISIONS = [
   neu:"They have been used interchangeably without warrant. Only about a third of affective-touch papers mention these fibres at all. One is a nerve; the other is an experience.",
   src:"Schirmer, Croy & Ackerley 2023"}
 ];
+
+/* Gazzola et al. 2012, verified from the full text. Eighteen heterosexual
+ * white men, mean age 26.2. Every caress was delivered by the same woman,
+ * blind to which video was playing, so the contact at the skin was constant
+ * and only the belief about its source changed. Ratings on a −5 to +5 scale,
+ * mean ± SD.
+ *
+ * Unlike CLAIMS above, these are measured numbers, and the figure has to say
+ * which half of it is measured and which half is illustrative — the verdict
+ * words in sceneContext are still nobody's data.
+ *
+ * The confound travels with the data on purpose. The woman in the video also
+ * behaved warmly and the man distantly, which the authors say themselves, so
+ * belief about sex, attractiveness and manner cannot be pulled apart. A figure
+ * that drops that is using the tidy version of the study. */
+const BELIEF = [
+ {id:"woman", n:"a woman", m:  3.05, sd:0.87},
+ {id:"man",   n:"a man",   m: -2.53, sd:1.38}
+];

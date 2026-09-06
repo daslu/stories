@@ -392,6 +392,108 @@ const CTX=[
  {id:"known",   n:"someone they trust", off:"a stranger"},
  {id:"warned",  n:"they knew it was coming", off:"it arrived unannounced"}
 ];
+/* The measured half of the meaning figure — Gazzola 2012, drawn below the
+ * illustrative half and labelled as measured, because the two must not be read
+ * as the same kind of thing. Everything above the divider is nobody's data;
+ * everything below it is.
+ *
+ * Called from sceneContext for both layouts. `top` is where the divider goes;
+ * the caller has already reserved room for what this returns. Geometry is
+ * derived from W so the same code serves 860 and 420.
+ *
+ * Colour: the active marker is clay — the page's feeling colour — and the
+ * inactive one fades to ink3. Only the rating VALUE is coloured by sign. The
+ * markers are deliberately not coloured good/bad by which person was believed;
+ * the axis position already carries that, and tinting a person is not something
+ * this figure should do. */
+/* One source for the panel's geometry, so the drawing and the canvas height
+   cannot disagree. The first version set H by hand from these offsets and got
+   both layouts short by about 40 units; layout-check.js found it, which is the
+   argument for deriving the number rather than typing it in two places. */
+function beliefGeom(top){
+  const PAD   = NARROW ? 12 : 70;
+  const noteH = NARROW ? 150 : 110;
+  /* Both marker labels sit ABOVE the axis and both scale anchors below it, so
+     no row has to share a line with another. The first version put the marker
+     names below at axis+50 and started the note at axis+46, which overlapped —
+     invisibly to layout-check.js, whose overlap test compares <text> against
+     <text> and does not see a <foreignObject> landing on one. Screenshot the
+     figure after moving anything here; the checker will not catch this class. */
+  const axis = top + (NARROW ? 168 : 156);
+  const y = {
+    rule:  top,
+    head:  top + 30,
+    intro: top + 42,
+    name:  axis - 38,
+    value: axis - 18,
+    axis,
+    anchor: axis + 26,
+    note:  axis + 46
+  };
+  return {
+    PAD, noteH, y,
+    introH: NARROW ? 62 : 44,
+    AX0: PAD, AX1: W - PAD,
+    bottom: y.note + noteH + 10        /* the 10 is breathing room under the text */
+  };
+}
+
+function believePanel(S, top){
+  const chosen = (S && S.belief) || "woman";
+  const g = beliefGeom(top);
+  const { PAD, AX0, AX1, y, introH } = g;
+  const MID  = (AX0 + AX1) / 2;
+  const U    = (AX1 - AX0) / 10;          /* user units per rating point, −5..+5 */
+  const x    = v => MID + v * U;
+
+  let s = `<line x1="${NARROW?12:0}" y1="${y.rule}" x2="${NARROW?W-12:W}" y2="${y.rule}"
+    stroke="var(--rule)" stroke-width="1.5"/>`;
+  s += `<text class="lab" x="${PAD}" y="${y.head}" style="fill:var(--clay)">measured, not illustrative</text>`;
+  s += `<foreignObject x="${PAD}" y="${y.intro}" width="${AX1-AX0}" height="${introH}">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+      style="font-family:Newsreader,serif;font-size:13px;line-height:1.4;color:var(--ink3)">Eighteen
+      men rated the same caress. Every one was given by the same woman, who could not see which
+      video was playing. Only the belief changed.</div>
+    </foreignObject>`;
+
+  /* the scale */
+  s += `<line x1="${AX0}" y1="${y.axis}" x2="${AX1}" y2="${y.axis}"
+    stroke="var(--soft)" stroke-width="7" stroke-linecap="round"/>`;
+  s += `<line x1="${MID}" y1="${y.axis-11}" x2="${MID}" y2="${y.axis+11}"
+    stroke="var(--rule)" stroke-width="2"/>`;
+  s += `<text class="xs" x="${AX0}" y="${y.anchor}">−5 unpleasant</text>`;
+  s += `<text class="xs" x="${AX1}" y="${y.anchor}" text-anchor="end">pleasant +5</text>`;
+
+  BELIEF.forEach(b => {
+    const on  = b.id === chosen;
+    const col = on ? "--clay" : "--ink3";
+    const sgn = b.m >= 0 ? "--sage" : "--neg";
+    /* ± one SD, so the spread is visible rather than implied by a bare dot */
+    s += `<line x1="${x(b.m-b.sd)}" y1="${y.axis}" x2="${x(b.m+b.sd)}" y2="${y.axis}"
+      stroke="var(${col})" stroke-width="3" stroke-linecap="round" opacity="${on?.55:.28}"/>`;
+    s += `<circle cx="${x(b.m)}" cy="${y.axis}" r="${on?9:6}" fill="var(${col})"
+      opacity="${on?1:.45}"/>`;
+    s += `<text class="xs" x="${x(b.m)}" y="${y.name}" text-anchor="middle"
+      style="fill:var(${on?"--ink2":"--ink3"})">believed ${esc(b.n)}</text>`;
+    s += `<text class="sm" x="${x(b.m)}" y="${y.value}" text-anchor="middle"
+      style="fill:var(${on?sgn:"--ink3"});font-weight:${on?600:400}">${b.m>0?"+":"−"}${Math.abs(b.m).toFixed(2)}</text>`;
+  });
+
+  /* The two things that must travel with the numbers. A figure gets screenshotted
+     away from its caption, so neither of these lives only in the caption. */
+  s += `<foreignObject x="${PAD}" y="${y.note}" width="${AX1-AX0}" height="${g.noteH}">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+      style="font-family:Newsreader,serif;font-size:13px;line-height:1.45;color:var(--ink2)">
+      <b>Primary somatosensory cortex</b> — the fast road from the first stop, the one carrying
+      &#8220;just information&#8221; — responded more strongly to the caress they believed came
+      from a woman.
+      <div style="color:var(--ink3);margin-top:5px">The woman in the video also behaved warmly and
+      the man distantly, so this is belief about a person, not about sex alone. All eighteen were
+      heterosexual men.</div></div>
+    </foreignObject>`;
+  return s;
+}
+
 function sceneContext(st){
   const S = st || {ctx:{consent:true,known:true,warned:true}};
   const on = k => S.ctx ? S.ctx[k] : true;
@@ -405,8 +507,11 @@ function sceneContext(st){
   ];
   const v=verdicts[score];
   /* Narrow: the conditions become a bulleted list above the doorway, and the
-     verdict moves underneath it — the arcs have nowhere to go at this width. */
-  const H = NARROW ? 486 : 302;
+     verdict moves underneath it — the arcs have nowhere to go at this width.
+     Both heights grew when the measured panel was added below; believePanel()
+     draws it and reports where it ends, so the two numbers stay in one place. */
+  const PANEL_TOP = NARROW ? 492 : 300;
+  const H = beliefGeom(PANEL_TOP).bottom;
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="The same stroke read as ${esc(v[0].toLowerCase())}">`;
   if(NARROW){
@@ -419,11 +524,17 @@ function sceneContext(st){
       s+=`<circle cx="18" cy="${yy-5}" r="5" fill="var(${ok?"--sage":"--neg"})" opacity=".8"/>`;
       s+=`<text class="sm" x="34" y="${yy}" style="fill:var(${ok?"--ink":"--ink3"})">${esc(ok?c.n:c.off)}</text>`;
     });
-    const DX=122, DW=176, DTOP=210, DBASE=336;
+    /* The arch apex sits at DTOP+38-DW/2, not at DTOP — an easy thing to get
+       wrong, and it was wrong: with DW=176 and DTOP=210 the apex reached y=160,
+       above the third condition label at y=176, and the path's opaque fill is
+       drawn after the labels, so it painted over "…was coming". Narrower and
+       lower clears it. layout-check.js cannot see this: it compares <text> with
+       <text> and a <path> covering a label is not an overlap to it. */
+    const DX=140, DW=140, DTOP=218, DBASE=336;
     s+=`<path d="M${DX} ${DBASE}V${DTOP+38}a${DW/2} ${DW/2} 0 0 1 ${DW} 0V${DBASE}"
       fill="var(--paper2)" stroke="var(--clay)" stroke-width="3"/>`;
-    s+=`<text class="sm" x="${DX+DW/2}" y="${DTOP+92}" text-anchor="middle" style="fill:var(--dis)">the fibres</text>`;
-    s+=`<text class="xs" x="${DX+DW/2}" y="${DTOP+112}" text-anchor="middle">a doorway</text>`;
+    s+=`<text class="sm" x="${DX+DW/2}" y="${DTOP+84}" text-anchor="middle" style="fill:var(--dis)">the fibres</text>`;
+    s+=`<text class="xs" x="${DX+DW/2}" y="${DTOP+104}" text-anchor="middle">a doorway</text>`;
     s+=`<rect x="${DX-24}" y="${DBASE}" width="${DW+48}" height="12" rx="6" fill="var(--soft)"/>`;
     s+=`<text class="big" x="12" y="${DBASE+62}" style="font-size:31px"
       fill="var(${score>=4?"--sage":score<=1?"--neg":"--ink2"})">${esc(v[0])}</text>`;
@@ -431,6 +542,7 @@ function sceneContext(st){
       <div xmlns="http://www.w3.org/1999/xhtml"
         style="font-family:Newsreader,serif;font-size:15px;line-height:1.45;color:var(--ink2)">${esc(v[1])}</div>
       </foreignObject>`;
+    s+=believePanel(S, PANEL_TOP);
     return s+"</svg>";
   }
   /* the identical physical stroke, always the same, clear of everything else */
@@ -459,6 +571,7 @@ function sceneContext(st){
     <div xmlns="http://www.w3.org/1999/xhtml"
       style="font-family:Newsreader,serif;font-size:15px;line-height:1.5;color:var(--ink2)">${esc(v[1])}</div>
     </foreignObject>`;
+  s+=believePanel(S, PANEL_TOP);
   return s+"</svg>";
 }
 

@@ -23,7 +23,8 @@ const $ = s => document.querySelector(s);
 /* Every control the reader has touched keeps its value across a redraw,
    because this is module-level and render() does not reset it. */
 const ST = {vel:3, vel2:3, temp:32, rec:"ct", part:"finger", gateTouch:true, bond:"stranger",
-  stim:"brush", claimsShown:false, claimGuess:.7, ctx:{consent:true,known:true,warned:true}};
+  stim:"brush", claimsShown:false, claimGuess:.7, ctx:{consent:true,known:true,warned:true},
+  belief:"woman"};
 
 /* ── the controls each figure needs, and the host the scene draws into ──
    No <figure> wrapper and no caption here: the .qmd owns both. */
@@ -82,6 +83,9 @@ function shell(scene){
       <div class="controls"><span>everything physical stays the same — change only:</span>
         ${CTX.map(c=>`<button class="pill" data-ctx="${c.id}"
           aria-pressed="${ST.ctx[c.id]}">${esc(c.n)}</button>`).join("")}</div>
+      <div class="controls"><span>and, in the measured study, who they believed it came from</span>
+        ${BELIEF.map(b=>`<button class="pill" data-belief="${b.id}"
+          aria-pressed="${ST.belief===b.id}">${esc(b.n)}</button>`).join("")}</div>
       <div id="ctxFig">${SCENES.context(ST)}</div>`;
     case "revisions": return `
       <div class="cards" id="cards">${REVISIONS.map((r,i)=>`
@@ -156,6 +160,11 @@ function wire(){
     b.setAttribute("aria-pressed", ST.ctx[b.dataset.ctx]);
     const c=CTX.find(z=>z.id===b.dataset.ctx);
     b.textContent = ST.ctx[b.dataset.ctx] ? c.n : c.off;
+    $("#ctxFig").innerHTML=SCENES.context(ST); });
+  document.querySelectorAll("[data-belief]").forEach(b=>b.onclick=()=>{
+    ST.belief=b.dataset.belief;
+    document.querySelectorAll("[data-belief]").forEach(z=>
+      z.setAttribute("aria-pressed", z.dataset.belief===ST.belief));
     $("#ctxFig").innerHTML=SCENES.context(ST); });
   document.querySelectorAll("[data-rec]").forEach(g=>g.onclick=()=>{
     ST.rec=g.dataset.rec; $("#skinFig").innerHTML=SCENES.skin(ST); wire(); });

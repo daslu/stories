@@ -63,12 +63,23 @@ from its critics.
 [The research]{.lbl}
 Sailer & Leknes (2022) [@sailer22] and Schirmer, Croy & Schweinberger (2022)
 [@schirmer22]. Position pieces rather than experiments — arguments about how to read
-the evidence, from people who generated much of it.
+the evidence, from people who generated much of it. Under them sit two studies that
+held the touch still and changed only what the person believed: Gazzola (2012)
+[@gazzola12] and Ellingsen (2013) [@ellingsen13].
+
+Both are small and both are awkward, and they are worth having anyway. Gazzola ran
+eighteen heterosexual men, and the man in the video behaved distantly where the woman
+behaved warmly — so belief about sex, about attractiveness and about manner all arrive
+together and cannot be pulled apart. Ellingsen's effects on pleasantness are a fifth of
+a point, and its comparison session involved no spray at all, so nobody was in the dark
+about which session they were in. What survives in both is the thing we came for: the
+contact at the skin never changed, and what people felt did.
 :::
 
 ::: {.journey-figure data-scene="context"}
-Illustrative, not measured — no study assigns these labels. It is here because the point
-is hard to feel from a sentence and easy to feel from a switch.
+Two halves, and they are not the same kind of thing. Above the line it is illustrative —
+no study assigns those verdict words, and they are there because the point is hard to
+feel from a sentence and easy to feel from a switch. Below the line it is measured.
 :::
 
 The same stroke, at the same speed and the same temperature, is not the same
@@ -77,9 +88,24 @@ and what you believe it is for. One paper's title puts it plainly: **meaning mak
 affective**. The other argues that social touch is better understood as a **tool**
 people use to do something to each other than as a signal being transmitted.
 
-That is not a demotion of the nerve fibres. It is a description of where they sit. They
-look like a **doorway** — a channel well suited to carrying this kind of contact. What
-comes through the doorway is decided by everything else.
+This is more than an argument. In one study, eighteen men were stroked on the forearm by
+the same woman every time — she could not see which video was playing — while they were
+shown who was supposedly touching them. Believing it was a man, they rated it **−2.53**.
+Believing it was a woman, **+3.05**, on a scale running from −5 to +5. And the
+[primary somatosensory cortex](https://en.wikipedia.org/wiki/Primary_somatosensory_cortex){.wiki}
+— the usual place, where the fast road arrives and the map of the skin is laid out —
+responded more strongly as well. Belief was not sitting on top of the sensation,
+interpreting it after the fact. It reached the place the signal arrives first.
+
+The second study is quieter. People watched a short film about oxytocin, then sprayed
+salt water up their own noses believing it might be the hormone. Pleasant touch was
+rated a little better, painful heat a little less bad — and in the brain the two moved
+in **opposite directions**, sensory activity rising for the pleasure and falling for the
+pain. Whatever expectation is doing, it is not turning one volume knob down.
+
+None of this is a demotion of the nerve fibres. It is a description of where they sit.
+They look like a **doorway** — a channel well suited to carrying this kind of contact.
+What comes through the doorway is decided by everything else.
 
 Which is, if you think about it, what a good practitioner already knows. The biology
 has caught up with the room.

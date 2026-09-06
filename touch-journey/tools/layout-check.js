@@ -85,6 +85,7 @@ window.addEventListener('load', function(){ setTimeout(function(){
   audit('rest', out);
   document.querySelectorAll('.controls button[data-stim],.controls button[data-temp],'
     + '.controls button[data-part],.controls button[data-bond2],.controls button[data-ctx],'
+    + '.controls button[data-belief],'
     + '#gateBtn,#claimsShow').forEach(function(b){
       b.click(); n++; audit(b.textContent.trim().slice(0, 14), out); });
   [['#vel', 0.3], ['#vel', 30], ['#vel2', 0.3], ['#vel2', 30]].forEach(function(p){
