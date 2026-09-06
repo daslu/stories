@@ -1,0 +1,11 @@
+docs/**/HANDOFF.md
+docs/**/NOTES.md
+docs/**/TODO.md
+docs/**/dev-notes/
+
+docs/**/check.js
+docs/**/build.sh
+docs/**/tools/
+docs/**/dist/
+
+.claude

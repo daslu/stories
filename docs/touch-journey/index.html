@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Touch is not one sense — a reading journey for hands-on practitioners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* A deliberately different look from the instrument pieces in this family.
+   Warm paper, generous measure, soft rounded shapes, no gridlines anywhere.
+   Fraunces for headings (genuinely soft, slightly odd warmth), Newsreader
+   for reading. Light only — this one has no dark mode on purpose. */
+
+:root{
+  --paper:#FAF5EF; --paper2:#F2E9DE; --card:#FFFCF8;
+  --ink:#33291F; --ink2:#6B5D4E; --ink3:#9E8F7D;
+  --rule:#E7DACA; --soft:#EFE4D5;
+  --clay:#C0603F;      /* the slow road — feeling */
+  --blue:#4E7CA6;      /* the fast road — information */
+  --sage:#6E8B68;
+  --gold:#CE9A3F;
+  --dis:#B0755F;
+  --shadow:0 1px 2px rgba(80,60,40,.05), 0 10px 30px -18px rgba(80,60,40,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;font-size:19px;line-height:1.68;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Fraunces","Newsreader",Georgia,serif;font-weight:600;
+  letter-spacing:-.012em;margin:0;line-height:1.14}
+p{margin:0 0 1.05em}
+a{color:var(--clay);text-underline-offset:3px;text-decoration-thickness:1px}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+svg{display:block;width:100%;height:auto}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 120px}
+
+/* ── opening ─────────────────────────────────────────────────── */
+.hero{padding:76px 0 30px;max-width:36rem}
+.hero .eyebrow{font-family:"Fraunces",serif;font-size:14px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dis);margin-bottom:18px}
+.hero h1{font-size:clamp(38px,6vw,60px);margin-bottom:20px}
+.hero .stand{font-size:21.5px;line-height:1.6;color:var(--ink2)}
+.hero .meta{margin-top:26px;font-size:15px;color:var(--ink3);
+  border-top:1px solid var(--rule);padding-top:16px}
+
+/* ── what this is ───────────────────────────────────────────── */
+.about{max-width:38rem;margin:0 0 20px;padding:22px 0 4px;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ab{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:11px 0;
+  border-bottom:1px solid var(--rule)}
+.ab:last-child{border-bottom:none}
+.ab .k{font-family:"Fraunces",serif;font-size:13.5px;letter-spacing:.04em;color:var(--dis);
+  padding-top:3px}
+.ab .v{font-size:17px;line-height:1.58;color:var(--ink2)}
+.ab .v b{color:var(--ink);font-weight:600}
+@media (max-width:640px){.ab{grid-template-columns:1fr;gap:3px}}
+
+/* ── the research, at the top of each stop ──────────────────── */
+.src{max-width:33rem;margin:0 0 22px;padding:13px 16px;border-radius:12px;
+  background:var(--paper2);font-size:16px;line-height:1.55;color:var(--ink2)}
+.src .lbl{display:block;font-family:"Fraunces",serif;font-size:12px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--dis);margin-bottom:5px}
+a.cite{display:inline-block;font-size:11.5px;font-family:"Fraunces",serif;
+  vertical-align:super;line-height:1;text-decoration:none;color:var(--clay);
+  background:var(--card);border-radius:8px;padding:2px 5px;margin:0 1px}
+a.cite:hover{background:var(--clay);color:#fff}
+a.wiki{color:var(--blue);text-decoration:underline;text-decoration-style:dotted;
+  text-underline-offset:3px}
+a.wiki:hover{text-decoration-style:solid}
+
+/* ── references ─────────────────────────────────────────────── */
+ol.refs{margin:10px 0 0;padding-left:26px;font-size:15.5px;line-height:1.5}
+ol.refs li{padding:9px 0;border-bottom:1px solid var(--rule)}
+ol.refs li:target{background:var(--paper2);border-radius:8px;padding-left:8px}
+ol.refs .au{color:var(--ink);display:block}
+ol.refs a{display:block;margin:2px 0}
+ol.refs .jo{color:var(--ink3);font-size:14.5px;display:block}
+
+/* ── contents ────────────────────────────────────────────────── */
+.toc{position:fixed;left:max(14px,calc(50vw - 656px));top:50%;transform:translateY(-50%);
+  z-index:10;display:none}
+@media (min-width:1340px){.toc{display:block}}
+.toc a{display:block;font-family:"Fraunces",serif;font-size:12.5px;color:var(--ink3);
+  text-decoration:none;padding:5px 0 5px 14px;border-left:2px solid var(--rule);
+  max-width:108px;line-height:1.3}
+.toc a:hover{color:var(--ink)}
+.toc a.on{color:var(--clay);border-left-color:var(--clay)}
+
+/* ── a stop on the journey ───────────────────────────────────── */
+.stop{padding:54px 0;border-top:1px solid var(--rule)}
+.stop .year{font-family:"Fraunces",serif;font-size:13px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--dis);margin-bottom:10px}
+.stop h2{font-size:clamp(28px,3.6vw,36px);margin-bottom:16px;max-width:24ch}
+.stop .lead{font-size:20.5px;line-height:1.6;color:var(--ink2);margin-bottom:22px;max-width:34rem}
+.stop .body{max-width:33rem}
+.stop .body b{font-weight:600;color:var(--ink)}
+
+/* part dividers */
+.part{font-family:"Fraunces",serif;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dis);padding:44px 0 0;border-top:2px solid var(--clay);margin-top:34px;opacity:.9}
+.part + .stop{border-top:none;padding-top:14px}
+
+/* ── figures ─────────────────────────────────────────────────── */
+figure{margin:26px 0 24px;background:var(--card);border:1px solid var(--rule);
+  border-radius:18px;padding:18px 20px 14px;box-shadow:var(--shadow)}
+figure .cap{font-size:14.5px;color:var(--ink3);line-height:1.5;margin-top:12px;
+  padding-top:11px;border-top:1px solid var(--rule)}
+.wide{margin-left:calc(-1 * min(52px, 4vw));margin-right:calc(-1 * min(52px, 4vw))}
+@media (max-width:820px){.wide{margin-left:0;margin-right:0}}
+.controls{display:flex;gap:16px;flex-wrap:wrap;align-items:center;
+  margin-bottom:14px;font-size:15px;color:var(--ink2)}
+.controls input[type=range]{width:190px;accent-color:var(--clay)}
+.controls b{font-family:"Fraunces",serif;color:var(--ink);min-width:80px;display:inline-block}
+.pill{border:1.5px solid var(--rule);background:var(--paper);border-radius:22px;
+  padding:6px 15px;font-size:15px;color:var(--ink2)}
+.pill:hover{border-color:var(--ink3);color:var(--ink)}
+.pill[aria-pressed="true"]{background:var(--clay);border-color:var(--clay);color:#fff}
+
+/* ── the paper card ──────────────────────────────────────────── */
+.paper{background:var(--paper2);border-radius:14px;padding:15px 18px;margin:22px 0;
+  max-width:33rem;font-size:15.5px;line-height:1.5}
+.paper .who{color:var(--ink2)}
+.paper .what{font-family:"Fraunces",serif;font-size:17px;font-weight:600;margin:3px 0 4px}
+.paper .where{color:var(--ink3);font-size:14.5px}
+.paper a{font-size:15px}
+.paper .grade{display:inline-block;margin-top:9px;font-size:13.5px;color:var(--ink2);
+  background:var(--card);border-radius:20px;padding:3px 12px}
+
+/* ── the takeaway for hands ──────────────────────────────────── */
+.hands{max-width:33rem;margin:24px 0 0;padding:18px 20px;border-radius:16px;
+  background:linear-gradient(180deg,var(--soft),var(--paper2))}
+.hands .t{font-family:"Fraunces",serif;font-size:13px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dis);margin-bottom:7px}
+.hands p{margin:0;font-size:18px;line-height:1.58}
+
+/* ── flip cards ──────────────────────────────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(214px,1fr));gap:14px;margin:10px 0 4px}
+.flip{background:var(--paper2);border-radius:14px;padding:16px 17px;text-align:left;
+  min-height:170px;display:flex;flex-direction:column;justify-content:space-between;
+  border:1.5px solid transparent}
+.flip:hover{border-color:var(--rule)}
+.flip .side{font-size:16.5px;line-height:1.48;color:var(--ink2)}
+.flip .side span{display:block;font-family:"Fraunces",serif;font-size:12.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+.flip .tap{font-size:13.5px;color:var(--ink3);margin-top:12px}
+.flip[aria-pressed="true"]{background:var(--card);border-color:var(--clay)}
+.flip[aria-pressed="true"] .side{color:var(--ink)}
+.flip[aria-pressed="true"] .side span{color:var(--clay)}
+
+/* ── closing ─────────────────────────────────────────────────── */
+.close{padding:52px 0 0;border-top:1px solid var(--rule)}
+.close h2{font-size:32px;margin-bottom:18px}
+.rules{max-width:33rem;margin:0;padding:0;list-style:none}
+.rules li{padding:14px 0 14px 34px;border-bottom:1px solid var(--rule);position:relative;
+  font-size:18px;line-height:1.55}
+.rules li::before{content:"";position:absolute;left:2px;top:23px;width:11px;height:11px;
+  border-radius:50%;background:var(--clay);opacity:.55}
+.rules li b{font-weight:600}
+.reading{margin-top:34px;max-width:36rem;font-size:16px;line-height:1.6;color:var(--ink2)}
+.reading h3{font-size:20px;margin-bottom:12px;color:var(--ink)}
+.reading div{padding:10px 0;border-bottom:1px solid var(--rule)}
+.reading .n{font-family:"Fraunces",serif;color:var(--ink)}
+.foot{margin-top:44px;font-size:15px;line-height:1.6;color:var(--ink3);max-width:34rem}
+
+/* ── svg text ────────────────────────────────────────────────── */
+.lab{font-family:"Fraunces",serif;font-size:15px;fill:var(--ink)}
+.sm{font-family:"Newsreader",serif;font-size:14.5px;fill:var(--ink2)}
+.xs{font-family:"Newsreader",serif;font-size:13px;fill:var(--ink3)}
+.big{font-family:"Fraunces",serif;font-size:38px;font-weight:600;fill:var(--ink)}
+@media (max-width:700px){
+  body{font-size:18px}
+  figure{padding:14px 14px 10px;border-radius:14px}
+  .stop{padding:42px 0}
+}
+</style>
+</head>
+<body>
+<div class="wrap"></div>
+<script>
+/* journey.js — everything the page says.
+ *
+ * Two small markup conventions used inside the prose strings:
+ *   [ref:id]           → a superscript link down to the reference list
+ *   {{Wiki Page|text}} → a link to English Wikipedia
+ * Both are expanded by md() in page.js.
+ *
+ * Voice: talking to a skilled practitioner who is not a scientist. Warm,
+ * plain, specific. Every stop names its source in the first breath. */
+
+const HERO = {
+ eyebrow:"A reading journey for hands-on practitioners",
+ title:"Touch is not one sense",
+ stand:`Skin carries at least two separate systems, and they are not sending the same
+   message. One tells you <em>what</em> you are touching. The other seems to exist to
+   register being touched <em>affectionately</em> — it was found by accident, confirmed by a
+   man who had lost the ordinary sense of touch, and it has a preferred speed. This is a
+   tour of both: what each is for, what touch does to pain and to relationships, and which
+   popular claims about it do not survive contact with the evidence.`
+};
+
+const ABOUT = [
+ {k:"What this is",
+  v:`A plain-language tour of what research has established about touch — the
+    {{Somatosensory system|sense}}, not the technique. Twelve short stops, about thirty
+    minutes, with figures you can operate rather than just look at.`},
+ {k:"Who it is for",
+  v:`Anyone whose work involves putting hands on other people: massage therapists,
+    bodyworkers, physiotherapists, osteopaths, nurses, midwives, somatic and trauma
+    practitioners. <b>No science background is assumed.</b>`},
+ {k:"How it is sourced",
+  v:`Every claim is attributed to a named paper, cited at the top of its section and listed
+    in full at the bottom. Where researchers disagree — and here they disagree a good deal —
+    the page says so. It is not medical advice and not a technique manual.`}
+];
+
+const STOPS = [
+
+{id:"two", nav:"Two roads", part:"Part one · the territory", year:"The idea",
+ title:"There are two ways of being touched",
+ lead:`Everything else here follows from one thing: touch is not a single sense. Two
+   separate kinds of nerve fibre leave the skin at the same instant, travelling at very
+   different speeds, and they are not carrying the same message.`,
+ src:{line:`This first stop is the shared framework rather than a single study — it is
+   drawn from the review by McGlone, Wessberg & Olausson (2014) [ref:mcglone14], which is
+   also the best single thing to read after this page.`},
+ scene:"roads",
+ body:`<p>The <b>fast road</b> is the one most people mean by touch. Thick fibres wrapped in
+   {{Myelin|myelin}}, an insulating sheath that lets a signal race along at tens of metres
+   per second. They are superb at <b>what and where</b> — the exact spot, the texture, the
+   pressure, the edge of the object in your hand. This is the system that lets you find a
+   coin in your pocket without looking.</p>
+  <p>The <b>slow road</b> is the surprise. Thin fibres with no insulation, a signal ambling
+   along at about one metre per second — so slow that when someone strokes your forearm,
+   that part of the message arrives something like <b>a second behind</b> the rest. They are
+   poor at what and where. They are, apparently, in the business of <b>how it feels</b>.</p>
+  <p>Those two colours — blue for the fast road, clay for the slow one — mean the same
+   thing in every figure from here on. Nothing below assumes you have met any of this
+   before.</p>`,
+ hands:`If you have ever wondered why a client goes quiet a beat <em>after</em> your hands
+   land rather than as they land, there is a real signal running about a second behind the
+   obvious one.`},
+
+{id:"organ", nav:"The organ", year:"Where it happens",
+ title:"You are working on a sense organ, not a covering",
+ lead:`Skin is usually described as a barrier. It is also the largest sensory surface you
+   have, and the fast road alone arrives on four different kinds of receptor, each answering
+   to something different.`,
+ src:{line:`Standard anatomy rather than a finding [ref:standring] — the classification of
+   {{Mechanoreceptor|mechanoreceptors}} below is textbook material, and each type links to
+   its Wikipedia entry if you want the detail.`},
+ scene:"skin",
+ body:`<p>Tap any receptor in the diagram. Two live near the surface and handle fine, quick
+   things: {{Merkel nerve ending|Merkel cells}} for <b>edges and texture</b>, and
+   {{Tactile corpuscle|Meissner corpuscles}} for <b>slip</b> — the receptor that tells you a
+   glass is sliding out of your grip before you consciously notice.</p>
+  <p>Two sit deeper and handle slower, coarser things. {{Bulbous corpuscle|Ruffini endings}}
+   register <b>stretch</b> across the skin, part of how you know where your hand is without
+   looking. {{Lamellar corpuscle|Pacinian corpuscles}} register <b>fast vibration</b>, which
+   is how you feel the texture of a surface through the end of a tool rather than through
+   your fingertips.</p>
+  <p>And then the fifth kind: {{Free nerve ending|bare nerve endings}} with no capsule at
+   all, wandering in the hairy skin. Those are the slow road, and the next four stops are
+   about them.</p>`,
+ hands:`When you change from a fingertip to a flat palm, from gliding to holding, from still
+   to vibrating, you are not adjusting an intensity. You are moving between different
+   receptors with different jobs.`},
+
+{id:"acuity", nav:"How fine", year:"How fine",
+ title:"Your fingertips are twenty times sharper than your back",
+ lead:`How close together can two points be before skin stops feeling them as two? The
+   answer varies across the body by more than twenty-fold — and the conclusion people
+   usually draw from that is wider than the measurement allows.`,
+ src:{line:`The numbers everyone quotes come from Weinstein's 1968 survey [ref:weinstein68].
+   The test itself has been criticised for years as a measure of acuity [ref:tong13] — the
+   ranking across the body is solid, the exact millimetres softer than they look.`},
+ scene:"acuity",
+ body:`<p>Pick a body part and look at the gap drawn to scale. On a <b>fingertip</b> the two
+   dots have to come within two or three millimetres before they merge into one. On the
+   <b>back</b> they can be nearly four centimetres apart and still feel like a single touch.
+   This is {{Two-point discrimination|two-point discrimination}}, and it tracks how densely
+   the fast receptors are packed.</p>
+  <p>It is tempting to conclude from this that precision on a back is pointless. That would
+   be over-reading a very narrow measurement, in at least three ways. <b>Locating</b> a
+   single contact is generally more accurate than telling two apart, so a person can often
+   say roughly where your hand is even where they could not resolve two touches. <b>Pressure
+   reaches past the skin</b> — muscle, fascia and joints have their own sensory supply, and
+   where you press changes what you are pressing on whatever the skin can resolve. And the
+   precision may matter most <b>to you</b>: palpation is information travelling to the
+   practitioner, and your fingertips resolve at two or three millimetres.</p>
+  <p>What the number does tell you is narrower and still worth having: do not expect fine
+   surface detail on a back to be <em>perceived</em> as detail by the person receiving it.
+   And treat the exact figures gently — people can sometimes report "two" when both points
+   are in the same place, which suggests the task picks up cues besides spacing.</p>`,
+ hands:`Try it on yourself with two pencil tips or a bent paperclip. Fingertip, forearm,
+   back. Then have someone touch one spot on your back and point to where you think it was —
+   you will usually be closer than the two-point figure would suggest.`},
+
+{id:"found", nav:"Found", part:"Part two · the second system", year:"1999",
+ title:"Someone put a needle in a nerve and listened",
+ lead:`The second road was found by a group in Gothenburg who were not looking for it. The
+   technique is {{Microneurography|microneurography}}, and it is exactly as unlikely as it
+   sounds: a very fine electrode placed into a nerve in a fully awake person, listening to
+   single fibres while their skin is touched.`,
+ src:{line:`Vallbo, Olausson & Wessberg (1999) [ref:vallbo99]. Not disputed — this is the
+   discovery, and it has held for twenty-five years.`},
+ scene:"micro",
+ body:`<p>Recording from forearm skin, they kept finding fibres that made no sense. They were
+   {{Group C nerve fiber|unmyelinated}} — the thin, slow kind everyone associated with pain
+   and temperature — but they responded happily to a soft brush, and hardly at all to
+   anything sharp.</p>
+  <p>Of 38 units they selected for responding to gentle skin deformation, <b>27 were this
+   low-threshold kind</b>. That ratio is not a prevalence figure — the units were chosen for
+   responding to light touch in the first place. What tells you these fibres are not rare is
+   a separate observation: the team reported running into them about as often as the classic
+   fast ones.</p>
+  <p>The title of the paper is the whole finding: unmyelinated fibres constitute a
+   <b>second system</b> for coding touch in human hairy skin. What that system was
+   <em>for</em> was completely open.</p>`,
+ hands:`These fibres are called <b>CT afferents</b> — C for the slow unmyelinated type, T
+   for tactile. That is the term you will meet everywhere else, and this is where it comes
+   from.`},
+
+{id:"patient", nav:"The proof", year:"2002",
+ title:"The man who could not feel touch, and felt it anyway",
+ lead:`A second system is a nice idea, but how would you ever separate it from the first?
+   The answer arrived in the form of a patient who had lost the fast road entirely.`,
+ src:{line:`Olausson and colleagues (2002) [ref:olausson02]. Strong evidence, and a single
+   case — you cannot arrange for a second patient.`},
+ scene:"patient",
+ body:`<p>A rare neuropathy had destroyed his large myelinated fibres. On any standard test
+   he had no sense of touch on his body: he could not feel a poke, could not say where he
+   had been touched, could not feel vibration. The fast road was gone.</p>
+  <p>Then they stroked his forearm softly with a brush. He <b>felt something</b> — faint,
+   hard to locate, and pleasant. And when they scanned his brain, the signal was not arriving
+   at the usual place. It was lighting up the {{Insular cortex|insula}}, a region that deals
+   with how the body feels from the inside: hunger, warmth, breath, discomfort.</p>
+  <p>This is the study that turned an anatomical curiosity into a claim about experience.
+   The slow road does not just exist. It goes somewhere <b>different</b>, and somewhere with
+   more in common with emotion than with the map of your skin.</p>`,
+ hands:`Affectionate touch is not a gentler version of informative touch. On this evidence
+   it takes a different road and arrives somewhere else in the brain.`},
+
+{id:"speed", nav:"A speed", year:"2009",
+ title:"And it has a favourite speed",
+ lead:`If these fibres were built for being stroked, you would expect them to care about how
+   fast. They do — and it is not the fastest, and it is not the slowest.`,
+ src:{line:`Löken and colleagues (2009) [ref:loken09]. Widely replicated as a group average;
+   individuals vary more than the tidy curve suggests, which part four returns to.`},
+ scene:"speed",
+ body:`<p>They brushed people's forearms at five speeds while listening to single fibres,
+   then asked how pleasant each stroke felt. The fast fibres did the sensible thing: the
+   quicker the brush, the harder they fired. Speed in, speed out.</p>
+  <p>The slow fibres did something more interesting. They fired hardest at <b>middling
+   speeds</b>, around one to ten centimetres a second, and less at both extremes. Drag the
+   dial and watch the shape. It is a hill, not a ramp.</p>
+  <p>And the pleasantness ratings made the same hill. The speeds that lit up these fibres
+   were the speeds people liked, and this range is often described as the speed of a caress.
+   Worth a caveat that is easy to lose: when spontaneous stroking has actually been measured,
+   it tends to run somewhat <b>faster</b> than the tuning peak, even though people stroke
+   more slowly the closer they feel to the person. The hill is real. "This is exactly how
+   humans naturally caress" is a tidier story than the measurements support.</p>`,
+ hands:`The dot moves at the real speed. Watch it rather than the curve, then try matching it
+   with your own hand on your forearm. That is what the research is describing.`},
+
+{id:"warm", nav:"And a warmth", year:"2014",
+ title:"It also wants you to be warm",
+ lead:`A second tuning, and the one most likely to change what you actually do. These fibres
+   are fussy about temperature, and the temperature they want is skin.`,
+ src:{line:`Ackerley and colleagues (2014) [ref:ackerley14]. Well supported, and a small
+   study — as all microneurography is.`},
+ scene:"warmth",
+ body:`<p>They repeated the stroking experiment at different temperatures. The fibres
+   responded best to a brush at about <b>32 degrees</b> — neutral skin temperature. Not warm.
+   Not cool. The temperature of another person.</p>
+  <p>And the ratings followed. People found <b>every speed</b> more pleasant at skin
+   temperature than at 18 degrees or at 42 degrees. Get the warmth wrong and the speed cannot
+   rescue it.</p>
+  <p>Try the two together in the panel. The sweet spot is a small region, not a line, and
+   both dimensions have to be right to land in it.</p>`,
+ hands:`Cold hands are not merely unpleasant, they are the wrong stimulus. So is oil straight
+   from a cool bottle, and so is a treatment room a couple of degrees under. This is the
+   cheapest change on this page.`},
+
+{id:"pain", nav:"Pain", part:"Part three · what touch does", year:"1965 onward",
+ title:"Touch turns pain down, and company turns it down further",
+ lead:`The oldest practical claim about touch, and one of the better supported. Rubbing a
+   banged elbow is not superstition; there is a mechanism, and it was proposed sixty years
+   ago.`,
+ src:{line:`Melzack & Wall's {{Gate control theory of pain|gate control theory}} (1965)
+   [ref:melzack65], then Coan, Schaefer & Davidson (2006) [ref:coan06] and Goldstein and
+   colleagues (2018) [ref:goldstein18]. The framework is foundational and much revised; the
+   handholding studies are small and replicated in direction.`},
+ scene:"gate",
+ body:`<p>The idea was that pain signals have to pass through a <b>gate</b> in the spinal
+   cord on their way up, and that fast touch fibres arriving from the same patch of skin can
+   partly close it. Signals coming <em>down</em> from the brain — attention, expectation,
+   mood — can open or close it too.</p>
+  <p>The details have been revised many times in sixty years. The central claim has held:
+   <b>touch and pain are not independent channels</b>, and one modulates the other before
+   either reaches awareness.</p>
+  <p>Then there is who is doing the touching. When women anticipating an electric shock held
+   someone's hand, the threat response in the brain was reduced — <b>less by a stranger's
+   hand than by their husband's</b>, and the better they rated the marriage, the larger the
+   effect. Later work found that handholding during pain came with increased coupling between
+   the two people's brain activity, and that the more empathic the partner, the more the pain
+   went down.</p>`,
+ hands:`Contact can genuinely reduce pain, and it is not only about the contact — the same
+   hand does more when it belongs to someone the person trusts. That is an argument for the
+   relationship being part of the treatment rather than around it.`},
+
+{id:"where", nav:"Where", year:"2015",
+ title:"Everyone carries a map of who may touch them where",
+ lead:`Not a metaphor either. Ask people to shade in which parts of their body a given person
+   is allowed to touch, and something very orderly comes out.`,
+ src:{line:`Suvilehto and colleagues (2015) [ref:suvilehto15]. Large and cross-cultural, and
+   entirely self-report — maps of what people say they would allow, which is not the same as
+   what happens.`},
+ scene:"topography",
+ body:`<p><b>1,368 people across five countries</b> did exactly that, for everyone from a
+   partner to a stranger. The maps were remarkably consistent, and the headline finding is
+   almost embarrassingly simple: <b>the total area a person is allowed to touch
+   tracks the strength of the emotional bond</b>. Cultural differences were
+   minor.</p>
+  <p>Hands are permitted to nearly everyone. The area expands outward from there as the
+   relationship closes, and for a stranger most of the body is off limits. The regions people
+   guard most closely are also the regions they rate as most pleasurable to be touched on.</p>
+  <p>You occupy an unusual position on that map. As a practitioner you are given access it
+   reserves for intimates — by agreement, in a role, for a purpose. That is a real thing to
+   hold carefully, and it is why consent in this work is not a formality.</p>`,
+ hands:`Your hands are on territory that, for this person, is normally reserved. Saying what
+   you are about to do before you do it is not politeness. It is how the map gets redrawn
+   safely.`},
+
+{id:"claims", nav:"How sure", year:"The evidence",
+ title:"How sure can we be about any of this?",
+ lead:`Touch research makes a lot of claims and they are not equally supported. Here they are
+   sorted honestly, because the strong ones get less airtime than the shaky ones.`,
+ src:{line:`This one figure is a judgement rather than any single paper's result — a reading
+   of the literature cited throughout, leaning on Kidd, Devine & Walker's review
+   [ref:kidd23] for the stress claims and Moyer and colleagues' meta-analysis [ref:moyer11]
+   for the {{Cortisol|cortisol}} one.`},
+ scene:"claims",
+ body:`<p>Notice the shape of it. The best-supported claims are the <b>simplest and most
+   physical</b>: contact reduces pain, {{Kangaroo care|skin-to-skin contact}} steadies
+   newborns. The weakest are the ones about <b>hormones</b> — the {{Oxytocin|oxytocin}} and
+   cortisol stories that circulate most confidently in training rooms are the ones the
+   evidence supports least well.</p>
+  <p>That is not an accident. Subjective outcomes are easy to measure and to move; blood
+   hormones are hard to measure, vary enormously between people and across a day, and rarely
+   shift as neatly as the story requires. When you hear a claim about touch and a named
+   hormone, treat it as the least secure thing in the sentence.</p>`,
+ hands:`You do not need the hormone claims. The evidence you actually have — pain, comfort,
+   distress, sleep in newborns — is stronger, more directly about what people come to you
+   for, and much harder to argue with.`},
+
+{id:"wrong", nav:"Corrections", part:"Part four · being honest about it", year:"2012–2023",
+ title:"Four things this field has had to take back",
+ lead:`Everything in part two is a decade old or more, and parts of it have been revised. A
+   practitioner quoting the 2014 version is now quoting something the researchers have moved
+   on from.`,
+ src:{line:`Six papers between 2021 and 2023, named on the cards: Watkins [ref:watkins21],
+   Case [ref:case21], Ali [ref:ali23], Bendas [ref:bendas21], Crucianelli [ref:crucianelli22]
+   and — the largest — Schirmer, Croy & Ackerley [ref:schirmer23], a review by researchers
+   inside the field auditing their own literature.`},
+ scene:"revisions",
+ body:`<p>None of these demolish the story. They complicate it in ways that mostly make it
+   <b>more</b> useful, and they are worth knowing so that you are not the last person in the
+   room still saying the old version.</p>
+  <p>The fourth is the largest and the least comfortable. Going through the literature, the
+   authors found that of the papers using the phrase "{{Affective touch|affective touch}}",
+   only <b>34%</b> even mention these fibres. A nerve fibre and a human experience had quietly
+   become the same word, and they are not the same thing.</p>`,
+ hands:`When you explain your work, describe the <b>touch</b> — slow, light, warm, moving, on
+   a forearm — rather than claiming to activate a named nerve fibre. The first is accurate and
+   checkable; the second goes further than anyone can currently support.`},
+
+{id:"meaning", nav:"Meaning", year:"Now",
+ title:"The fibre is not the feeling",
+ lead:`The most useful correction of all, and it comes from within the research rather than
+   from its critics.`,
+ src:{line:`Sailer & Leknes (2022) [ref:sailer22] and Schirmer, Croy & Schweinberger (2022)
+   [ref:schirmer22]. Position pieces rather than experiments — arguments about how to read
+   the evidence, from people who generated much of it.`},
+ scene:"context",
+ body:`<p>The same stroke, at the same speed and the same temperature, is not the same
+   experience depending on who is doing it, whether you consented, what happened last time,
+   and what you believe it is for. One paper's title puts it plainly: <b>meaning makes touch
+   affective</b>. The other argues that social touch is better understood as a <b>tool</b>
+   people use to do something to each other than as a signal being transmitted.</p>
+  <p>That is not a demotion of the nerve fibres. It is a description of where they sit. They
+   look like a <b>doorway</b> — a channel well suited to carrying this kind of contact. What
+   comes through the doorway is decided by everything else.</p>
+  <p>Which is, if you think about it, what a good practitioner already knows. The physiology
+   has caught up with the room.</p>`,
+ hands:`Speed and warmth are worth getting right, and they are the smaller half. Consent,
+   predictability, and whether the person wanted to be touched by <em>you</em> are doing more
+   work than any number on this page.`}
+];
+
+const REVISIONS = [
+ {old:"CT fibres are found only in hairy skin. There are none in the palm.",
+  neu:"Sparse innervation has now been reported in the glabrous skin of the hand. Fewer, not none — and pleasant touch is processed differently there rather than being absent.",
+  src:"Watkins et al. 2021"},
+ {old:"Pleasant touch means slow stroking. That is what the system is for.",
+  neu:"Sustained, firmer contact is pleasant too. In one study static touch was preferred over stroking at the wrong speed — though optimal-speed stroking still won overall.",
+  src:"Case et al. 2021 · Ali et al. 2023"},
+ {old:"The tuning curve is the human response to touch speed.",
+  neu:"It is a group average. Individuals vary considerably, and how people habituate to repeated touch differs person to person. The hill is real; your client's hill may sit elsewhere.",
+  src:"Bendas et al. 2021 · Crucianelli et al. 2022"},
+ {old:"“Affective touch” and “CT afferents” describe the same thing.",
+  neu:"They have been used interchangeably without warrant. Only about a third of affective-touch papers mention these fibres at all. One is a nerve; the other is an experience.",
+  src:"Schirmer, Croy & Ackerley 2023"}
+];
+
+/* evidence strength, hand-placed on a 0–1 scale */
+const CLAIMS = [
+ {t:"Skin-to-skin contact reduces newborn pain and distress", s:.93,
+  n:"Repeatedly demonstrated during heel-prick procedures, and now part of routine care."},
+ {t:"Touch can reduce pain", s:.86,
+  n:"Gate control plus a large modern literature. The size of the effect varies a lot."},
+ {t:"Who is touching you changes how much it helps", s:.80,
+  n:"A partner's hand beats a stranger's, and the effect scales with relationship quality."},
+ {t:"Slow, warm, moving touch on hairy skin is rated most pleasant", s:.78,
+  n:"Robust as a group average. Individuals vary more than the curve suggests."},
+ {t:"Touch reduces self-reported stress and anxiety", s:.72,
+  n:"Consistent, but subjective outcomes are the easiest thing in science to move."},
+ {t:"Massage produces lasting reductions in cortisol", s:.34,
+  n:"Widely repeated in training. Meta-analysis has found the effect far smaller than claimed."},
+ {t:"Interpersonal touch measurably raises oxytocin in blood", s:.26,
+  n:"The most confidently stated and least secure claim in the field. Measurement is genuinely hard."}
+];
+
+const RULES = [
+ {t:"Slow down to about a hand's width a second.",
+  d:"One to ten centimetres a second is the range, and it is slower than most people stroke by default."},
+ {t:"Warm your hands, and the oil, and the room.",
+  d:"Around skin temperature. Cold shifts every speed toward less pleasant, and no amount of technique compensates."},
+ {t:"Hairy skin is the home ground, but not the only ground.",
+  d:"Forearm, back, shoulders. The palm has some of these fibres after all — just fewer."},
+ {t:"Still contact counts.",
+  d:"Resting a hand is not a lesser version of stroking. It may be preferred to stroking done wrong."},
+ {t:"Match the receptor to the intention.",
+  d:"Fine detail wants a fingertip and glabrous skin. Contact and comfort want a broad, slow, warm hand on hairy skin. Different systems."},
+ {t:"Expect the person in front of you to differ from the average.",
+  d:"The curve is a population mean. Ask, watch and adjust rather than applying a number."},
+ {t:"Say what you are about to do.",
+  d:"You have access the social map normally reserves for intimates. Narration is how that stays safe rather than merely permitted."},
+ {t:"Describe the touch, not the mechanism.",
+  d:"“Slow, warm, light, moving” is honest and checkable. “Activating your C-tactile fibres” goes beyond the evidence."},
+ {t:"Drop the hormone claims.",
+  d:"The oxytocin and cortisol stories are the weakest evidence you have. The pain and comfort evidence is stronger and needs no embellishment."},
+ {t:"Remember what is doing most of the work.",
+  d:"Safety, consent, predictability and relationship. The fibres are the doorway, not the visit."}
+];
+
+const REFS = {
+ vallbo99:{a:"Vallbo ÅB, Olausson H, Wessberg J", y:1999,
+  t:"Unmyelinated afferents constitute a second system coding tactile stimuli of the human hairy skin",
+  j:"Journal of Neurophysiology 81(6):2753–2763",
+  u:"https://journals.physiology.org/doi/full/10.1152/jn.1999.81.6.2753"},
+ olausson02:{a:"Olausson H, Lamarre Y, Backlund H, et al.", y:2002,
+  t:"Unmyelinated tactile afferents signal touch and project to insular cortex",
+  j:"Nature Neuroscience 5:900–904", u:"https://www.nature.com/articles/nn896"},
+ loken09:{a:"Löken LS, Wessberg J, Morrison I, McGlone F, Olausson H", y:2009,
+  t:"Coding of pleasant touch by unmyelinated afferents in humans",
+  j:"Nature Neuroscience 12:547–548", u:"https://www.nature.com/articles/nn.2312"},
+ ackerley14:{a:"Ackerley R, Backlund Wasling H, Liljencrantz J, et al.", y:2014,
+  t:"Human C-tactile afferents are tuned to the temperature of a skin-stroking caress",
+  j:"Journal of Neuroscience 34(8):2879–2883",
+  u:"https://www.jneurosci.org/content/34/8/2879"},
+ mcglone14:{a:"McGlone F, Wessberg J, Olausson H", y:2014,
+  t:"Discriminative and affective touch: sensing and feeling",
+  j:"Neuron 82(4):737–755",
+  u:"https://www.cell.com/neuron/fulltext/S0896-6273(14)00387-0"},
+ weinstein68:{a:"Weinstein S", y:1968,
+  t:"Intensive and extensive aspects of tactile sensitivity as a function of body part, sex and laterality",
+  j:"In: Kenshalo DR (ed.) The Skin Senses. Springfield: Thomas — still the source of the two-point figures everyone quotes",
+  u:"https://en.wikipedia.org/wiki/Two-point_discrimination"},
+ tong13:{a:"Tong J, Mao O, Goldreich D", y:2013,
+  t:"Two-point orientation discrimination versus the traditional two-point test for tactile spatial acuity assessment",
+  j:"Frontiers in Psychology 4:579",
+  u:"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3772339/"},
+ melzack65:{a:"Melzack R, Wall PD", y:1965, t:"Pain mechanisms: a new theory",
+  j:"Science 150(3699):971–979",
+  u:"https://www.science.org/doi/10.1126/science.150.3699.971"},
+ coan06:{a:"Coan JA, Schaefer HS, Davidson RJ", y:2006,
+  t:"Lending a hand: social regulation of the neural response to threat",
+  j:"Psychological Science 17(12):1032–1039",
+  u:"https://journals.sagepub.com/doi/abs/10.1111/j.1467-9280.2006.01832.x"},
+ goldstein18:{a:"Goldstein P, Weissman-Fogel I, Dumas G, Shamay-Tsoory SG", y:2018,
+  t:"Brain-to-brain coupling during handholding is associated with pain reduction",
+  j:"PNAS 115(11):E2528–E2537", u:"https://www.pnas.org/doi/10.1073/pnas.1703643115"},
+ suvilehto15:{a:"Suvilehto JT, Glerean E, Dunbar RIM, Hari R, Nummenmaa L", y:2015,
+  t:"Topography of social touching depends on emotional bonds between humans",
+  j:"PNAS 112(45):13811–13816",
+  u:"https://www.pnas.org/doi/abs/10.1073/pnas.1519231112"},
+ watkins21:{a:"Watkins RH, Dione M, Ackerley R, Backlund Wasling H, Wessberg J, Löken LS", y:2021,
+  t:"Evidence for sparse C-tactile afferent innervation of glabrous human hand skin",
+  j:"Journal of Neurophysiology 125(1):232–237",
+  u:"https://journals.physiology.org/doi/full/10.1152/jn.00587.2020"},
+ case21:{a:"Case LK, Liljencrantz J, McCall MV, et al.", y:2021,
+  t:"Pleasant deep pressure: expanding the social touch hypothesis",
+  j:"Neuroscience 464:3–11", u:"https://pubmed.ncbi.nlm.nih.gov/33887384/"},
+ ali23:{a:"Ali SH, Makdani AD, Cordero MI, et al.", y:2023,
+  t:"Hold me or stroke me? Individual differences in static and dynamic affective touch",
+  j:"PLoS ONE 18(5):e0281253",
+  u:"https://pmc.ncbi.nlm.nih.gov/articles/PMC10204953/"},
+ bendas21:{a:"Bendas J, Ree A, Pabel L, Sailer U, Croy I", y:2021,
+  t:"Dynamics of affective habituation to touch differ on the group and individual level",
+  j:"Neuroscience 464:44–52", u:"https://pubmed.ncbi.nlm.nih.gov/33359653/"},
+ crucianelli22:{a:"Crucianelli L, Chancel M, Ehrsson HH", y:2022,
+  t:"Modeling affective touch pleasantness across skin types at the individual level reveals a reliable and stable basic function",
+  j:"Journal of Neurophysiology 128(6):1435–1452",
+  u:"https://journals.physiology.org/doi/full/10.1152/jn.00179.2022"},
+ schirmer23:{a:"Schirmer A, Croy I, Ackerley R", y:2023,
+  t:"What are C-tactile afferents and how do they relate to “affective touch”?",
+  j:"Neuroscience & Biobehavioral Reviews 151:105236",
+  u:"https://www.sciencedirect.com/science/article/pii/S0149763423002270"},
+ sailer22:{a:"Sailer U, Leknes S", y:2022, t:"Meaning makes touch affective",
+  j:"Current Opinion in Behavioural Sciences 44:101099",
+  u:"https://www.sciencedirect.com/science/article/pii/S2352154621001984"},
+ schirmer22:{a:"Schirmer A, Croy I, Schweinberger SR", y:2022,
+  t:"Social touch — a tool rather than a signal",
+  j:"Current Opinion in Behavioural Sciences 44:101100",
+  u:"https://www.sciencedirect.com/science/article/pii/S2352154621001996"},
+ moyer11:{a:"Moyer CA, Seefeldt L, Mans ES, Jackson LM", y:2011,
+  t:"Does massage therapy reduce cortisol? A comprehensive quantitative review",
+  j:"Journal of Bodywork and Movement Therapies 15(1):3–14",
+  u:"https://pubmed.ncbi.nlm.nih.gov/21147413/"},
+ kidd23:{a:"Kidd T, Devine SL, Walker SC", y:2023,
+  t:"Affective touch and regulation of stress responses",
+  j:"Health Psychology Review 17(1):60–77",
+  u:"https://www.tandfonline.com/doi/full/10.1080/17437199.2021.1980082"},
+ morrison10:{a:"Morrison I, Löken LS, Olausson H", y:2010,
+  t:"The skin as a social organ", j:"Experimental Brain Research 204(3):305–314",
+  u:"https://link.springer.com/article/10.1007/s00221-009-2007-y"},
+ suvilehto23:{a:"Suvilehto JT, Cekaite A, Morrison I", y:2023,
+  t:"The why, who and how of social touch", j:"Nature Reviews Psychology 2:606–621",
+  u:"https://www.nature.com/articles/s44159-023-00217-5"},
+ standring:{a:"Cutaneous mechanoreceptors", y:"",
+  t:"Merkel cells, Meissner corpuscles, Ruffini endings, Pacinian corpuscles and free nerve endings",
+  j:"Standard anatomical description rather than a single source — each type is linked to its Wikipedia entry in that section",
+  u:"https://en.wikipedia.org/wiki/Mechanoreceptor"}
+};
+
+/* the reading list shown above the references */
+const FURTHER = [
+ {id:"mcglone14", d:"The standard overview, free to read, and the source most people are quoting second-hand. Long, but the first half is very approachable."},
+ {id:"morrison10", d:"The friendliest conceptual framing of why any of this might matter."},
+ {id:"kidd23", d:"The bridge from nerve fibres to stress physiology, and the closest thing to a review written for people who do this for a living."},
+ {id:"suvilehto23", d:"The widest recent view — who touches whom, where, and what for."}
+];
+/* scenes.js — the illustrations.
+ *
+ * Deliberately not charts. Rounded caps, soft fills, no gridlines, no axes
+ * unless one is genuinely needed. Everything is drawn at 860 wide and
+ * scales down.
+ *
+ * A small deterministic wobble is applied to the long "slow road" paths so
+ * they read as drawn rather than plotted — the fast road stays straight,
+ * which is also the point. */
+
+const W = 860;
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const clamp = (v,a,b) => v<a?a:v>b?b:v;
+
+/* forearm shape used in several scenes */
+function arm(x,y,w,h){
+  return `<path d="M${x} ${y+h/2}
+    q${w*0.06} ${-h/2} ${w*0.30} ${-h*0.44}
+    q${w*0.34} ${-h*0.10} ${w*0.58} ${h*0.02}
+    q${w*0.12} ${h*0.06} ${w*0.12} ${h*0.42}
+    q0 ${h*0.36} ${-w*0.12} ${h*0.42}
+    q${-w*0.24} ${h*0.12} ${-w*0.58} ${h*0.02}
+    q${-w*0.24} ${h*0.06} ${-w*0.30} ${-h*0.44} Z"
+    fill="var(--soft)" stroke="var(--rule)" stroke-width="2"/>`;
+}
+
+/* ══ 1. two roads ══════════════════════════════════════════════ */
+function sceneRoads(){
+  const H=330, sx=90, sy=252;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Two nerve routes leaving the skin: a fast straight one and a slow wandering one">`;
+  /* skin */
+  s+=`<rect x="60" y="${sy}" width="${W-120}" height="26" rx="13" fill="var(--soft)"/>`;
+  s+=`<text class="xs" x="72" y="${sy+43}">skin</text>`;
+  /* the touch */
+  s+=`<circle cx="${sx+58}" cy="${sy+13}" r="13" fill="var(--clay)" opacity=".25"/>`;
+  s+=`<circle cx="${sx+58}" cy="${sy+13}" r="6" fill="var(--clay)"/>`;
+  s+=`<text class="sm" x="${sx+58}" y="${sy+62}" text-anchor="middle">a hand lands here</text>`;
+  /* fast road — dead straight */
+  s+=`<path id="fastPath" d="M${sx+70} ${sy+6}L${W-300} 74" stroke="var(--blue)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  s+=`<path d="M${W-300} 74l-16 -2m16 2l-6 15" stroke="var(--blue)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  /* slow road — wanders */
+  s+=`<path id="slowPath" d="M${sx+66} ${sy+20}
+    C${sx+220} ${sy+30} ${sx+180} 200 ${sx+330} 196
+    S${W-430} 168 ${W-300} 174" stroke="var(--clay)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  s+=`<path d="M${W-300} 174l-15 -5m15 5l-8 13" stroke="var(--clay)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  /* destinations */
+  const box=(x,y,t1,t2,c)=>`<rect x="${x}" y="${y}" width="248" height="66" rx="18"
+      fill="var(--card)" stroke="var(${c})" stroke-width="2"/>
+    <text class="lab" x="${x+20}" y="${y+28}" fill="var(${c})">${esc(t1)}</text>
+    <text class="sm" x="${x+20}" y="${y+50}">${esc(t2)}</text>`;
+  s+=box(W-288, 42, "what and where", "texture, edges, exact spot", "--blue");
+  s+=box(W-288, 142, "how it feels", "pleasant, close, being cared for", "--clay");
+  /* speed annotations */
+  s+=`<text class="sm" x="${sx+250}" y="150" fill="var(--blue)">fast · arrives at once</text>`;
+  s+=`<text class="sm" x="${sx+250}" y="${sy-24}" fill="var(--clay)">slow · arrives about a second behind</text>`;
+  /* the two travellers, parked at the skin until a touch is sent */
+  s+=`<circle id="fastDot" cx="${sx+70}" cy="${sy+6}" r="8" fill="var(--blue)" opacity="0"/>`;
+  s+=`<circle id="slowDot" cx="${sx+66}" cy="${sy+20}" r="8" fill="var(--clay)" opacity="0"/>`;
+  s+=`<text class="xs" id="fastLand" x="${W-288}" y="34" opacity="0" fill="var(--blue)">arrived</text>`;
+  s+=`<text class="xs" id="slowLand" x="${W-288}" y="134" opacity="0" fill="var(--clay)">arrived</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 2. microneurography ═══════════════════════════════════════ */
+function sceneMicro(st){
+  const sharp = st && st.stim === "sharp";
+  const H=272;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Listening to single nerve fibres while the skin is ${sharp?"prodded":"brushed"}">`;
+  s+=arm(70, 60, 420, 120);
+  if(sharp){
+    s+=`<path d="M250 40l0 26" stroke="var(--ink3)" stroke-width="5" stroke-linecap="round"/>`;
+    s+=`<path d="M244 66l6 12l6 -12Z" fill="var(--ink2)"/>`;
+    s+=`<text class="xs" x="250" y="30" text-anchor="middle">a sharp point</text>`;
+  }else{
+    s+=`<path d="M250 44l0 30" stroke="var(--ink3)" stroke-width="5" stroke-linecap="round"/>`;
+    s+=`<path d="M238 74q12 16 24 0" fill="var(--clay)" opacity=".5"/>`;
+    s+=`<text class="xs" x="250" y="34" text-anchor="middle">a soft brush</text>`;
+  }
+  s+=`<path d="M470 196L400 132" stroke="var(--ink3)" stroke-width="3" stroke-linecap="round"/>`;
+  s+=`<circle cx="400" cy="132" r="5" fill="var(--ink3)"/>`;
+  s+=`<text class="xs" x="478" y="206">a very fine electrode, in an awake person</text>`;
+  const bx=540, by=88;
+  s+=`<rect x="${bx-12}" y="${by-40}" width="${W-bx-52}" height="150" rx="16" fill="var(--paper2)"/>`;
+  s+=`<text class="xs" x="${bx+4}" y="${by-18}">what the electrode hears</text>`;
+  const spikes=(y,seed,n,col)=>{
+    if(n===0) return `<line x1="${bx}" y1="${y}" x2="${W-76}" y2="${y}" stroke="var(${col})"
+      stroke-width="2" stroke-linecap="round" opacity=".45"/>`;
+    let d=`M${bx} ${y}`;
+    for(let i=0;i<n;i++){
+      const x=bx+8+(i*(W-bx-90)/n)+((seed*(i+3))%7);
+      d+=`L${x} ${y}L${x+2} ${y-22}L${x+4} ${y}`;
+    }
+    return `<path d="${d}L${W-76} ${y}" fill="none" stroke="var(${col})" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"/>`;
+  };
+  s+=spikes(by+26, 3, sharp?20:26, "--blue");
+  s+=`<text class="xs" x="${bx+4}" y="${by+44}" fill="var(--blue)">a fast fibre — answers to both</text>`;
+  s+=spikes(by+96, 5, sharp?1:9, "--clay");
+  s+=`<text class="xs" x="${bx+4}" y="${by+114}" fill="var(--clay)">${sharp
+    ? "the slow one — almost nothing"
+    : "the slow one — new, and not rare"}</text>`;
+  s+=`<text class="big" x="118" y="240">${sharp?"quiet":"27 of 38"}</text>`;
+  s+=`<text class="sm" x="${sharp?238:290}" y="234">${sharp
+    ? "these fibres barely answer a sharp"
+    : "units selected for answering gentle"}</text>`;
+  s+=`<text class="sm" x="${sharp?238:290}" y="254">${sharp
+    ? "stimulus — which is how they were told apart"
+    : "touch were of this slow kind"}</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 3. the patient ════════════════════════════════════════════ */
+function scenePatient(){
+  const H=300;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="With the fast road missing, gentle touch still arrives — at a different place">`;
+  const panel=(x,title,fastOn)=>{
+    let g=`<text class="lab" x="${x+8}" y="26">${esc(title)}</text>`;
+    g+=`<rect x="${x}" y="${44}" width="360" height="228" rx="20"
+      fill="${fastOn?"var(--paper2)":"var(--card)"}" stroke="var(--rule)" stroke-width="${fastOn?0:2}"/>`;
+    /* skin */
+    g+=`<rect x="${x+24}" y="228" width="312" height="20" rx="10" fill="var(--soft)"/>`;
+    g+=`<circle cx="${x+70}" cy="238" r="8" fill="var(--clay)" opacity=".6"/>`;
+    /* fast road */
+    g+=`<path d="M${x+78} 232L${x+242} 96" stroke="var(--blue)" stroke-width="4"
+      fill="none" stroke-linecap="round" opacity="${fastOn?1:.16}"
+      ${fastOn?"":'stroke-dasharray="7 8"'}/>`;
+    /* slow road */
+    g+=`<path d="M${x+76} 242C${x+150} 246 ${x+130} 190 ${x+242} 184"
+      stroke="var(--clay)" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+    /* destinations */
+    g+=`<rect x="${x+246}" y="76" width="106" height="40" rx="14" fill="var(--card)"
+      stroke="var(--blue)" stroke-width="2" opacity="${fastOn?1:.2}"/>`;
+    g+=`<text class="xs" x="${x+299}" y="94" text-anchor="middle" fill="var(--blue)"
+      opacity="${fastOn?1:.35}">touch map</text>`;
+    g+=`<text class="xs" x="${x+299}" y="109" text-anchor="middle" fill="var(--blue)"
+      opacity="${fastOn?1:.35}">what &amp; where</text>`;
+    g+=`<rect x="${x+246}" y="164" width="106" height="40" rx="14" fill="var(--card)"
+      stroke="var(--clay)" stroke-width="2"/>`;
+    g+=`<text class="xs" x="${x+299}" y="182" text-anchor="middle" fill="var(--clay)">insula</text>`;
+    g+=`<text class="xs" x="${x+299}" y="197" text-anchor="middle" fill="var(--clay)">body feeling</text>`;
+    if(!fastOn){
+      g+=`<text class="sm" x="${x+90}" y="140" fill="var(--ink3)">this road is gone</text>`;
+      g+=`<text class="sm" x="${x+96}" y="212" fill="var(--clay)">this one still works</text>`;
+    }
+    return g;
+  };
+  s+=panel(20, "Most people", true);
+  s+=panel(468, "This patient", false);
+  return s+"</svg>";
+}
+
+/* ══ 4. the speed dial ═════════════════════════════════════════ */
+const SPEEDS=[0.3,1,3,10,30];
+const CT   =[0.20,0.66,0.92,0.72,0.24];   // slow fibres — a hill
+const AB   =[0.12,0.26,0.44,0.70,0.96];   // fast fibres — a ramp
+function sceneSpeed(st){
+  const H=340, L=92, R=210, T=34, PH=140;
+  const lv=v=>Math.log(v)/Math.LN10;
+  const x=v=>L+(lv(v)-lv(0.25))/(lv(40)-lv(0.25))*(W-L-R);
+  const y=v=>T+PH-v*PH;
+  const at=arr=>{
+    const v=st.vel;
+    if(v<=SPEEDS[0])return arr[0]; if(v>=SPEEDS[4])return arr[4];
+    let i=0; while(SPEEDS[i+1]<v) i++;
+    const t=(lv(v)-lv(SPEEDS[i]))/(lv(SPEEDS[i+1])-lv(SPEEDS[i]));
+    return arr[i]+(arr[i+1]-arr[i])*t;
+  };
+  const smooth=arr=>{
+    let d="";
+    for(let i=0;i<=70;i++){
+      const v=Math.pow(10, lv(0.3)+(lv(30)-lv(0.3))*i/70);
+      let j=0; while(j<3 && SPEEDS[j+1]<v) j++;
+      const t=(lv(v)-lv(SPEEDS[j]))/(lv(SPEEDS[j+1])-lv(SPEEDS[j]));
+      d+=(i?"L":"M")+x(v).toFixed(1)+" "+y(arr[j]+(arr[j+1]-arr[j])*t).toFixed(1);
+    }
+    return d;
+  };
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Slow fibres respond most at middling speeds; fast fibres just track speed">`;
+  /* the good band */
+  s+=`<rect x="${x(1)}" y="${T-6}" width="${x(10)-x(1)}" height="${PH+12}" rx="14"
+    fill="var(--clay)" opacity=".08"/>`;
+  s+=`<text class="xs" x="${(x(1)+x(10))/2}" y="${T-14}" text-anchor="middle" fill="var(--dis)">the hill · 1–10 cm a second</text>`;
+  s+=`<path d="${smooth(AB)}" fill="none" stroke="var(--blue)" stroke-width="3.5"
+    stroke-linecap="round"/>`;
+  s+=`<path d="${smooth(CT)}" fill="none" stroke="var(--clay)" stroke-width="4"
+    stroke-linecap="round"/>`;
+  /* two label blocks, pushed apart so they can never overlap */
+  let ya=y(AB[4])+5, yc=y(CT[2])+5;
+  if(Math.abs(ya-yc)<62){ if(ya<yc){ yc=ya+62; } else { ya=yc+62; } }
+  s+=`<text class="sm" x="${W-R+12}" y="${ya.toFixed(1)}" fill="var(--blue)">fast fibres</text>`;
+  s+=`<text class="xs" x="${W-R+12}" y="${(ya+19).toFixed(1)}">faster brush,</text>`;
+  s+=`<text class="xs" x="${W-R+12}" y="${(ya+35).toFixed(1)}">more firing</text>`;
+  s+=`<text class="sm" x="${W-R+12}" y="${yc.toFixed(1)}" fill="var(--clay)">slow fibres</text>`;
+  s+=`<text class="xs" x="${W-R+12}" y="${(yc+19).toFixed(1)}">and the pleasantness</text>`;
+  s+=`<text class="xs" x="${W-R+12}" y="${(yc+35).toFixed(1)}">ratings agreed</text>`;
+  SPEEDS.forEach(v=>{
+    s+=`<circle cx="${x(v)}" cy="${y(CT[SPEEDS.indexOf(v)])}" r="4" fill="var(--clay)"/>`;
+    s+=`<text class="xs" x="${x(v)}" y="${T+PH+22}" text-anchor="middle">${v}</text>`;
+  });
+  s+=`<text class="xs" x="${L-14}" y="${T+8}" text-anchor="end">more</text>`;
+  s+=`<text class="xs" x="${L-14}" y="${T+PH+4}" text-anchor="end">less</text>`;
+  s+=`<text class="xs" x="${(L+W-R)/2}" y="${T+PH+44}" text-anchor="middle">centimetres a second</text>`;
+  s+=`<line x1="${x(st.vel)}" y1="${T-6}" x2="${x(st.vel)}" y2="${T+PH+6}"
+    stroke="var(--ink)" stroke-width="2" stroke-linecap="round" opacity=".55"/>`;
+  s+=`<circle cx="${x(st.vel)}" cy="${y(at(CT))}" r="7" fill="var(--clay)"
+    stroke="var(--card)" stroke-width="2.5"/>`;
+  /* the real-speed stroke */
+  const AY=T+PH+72;
+  s+=arm(L, AY, W-L-R+120, 66);
+  s+=`<circle id="stroker" cx="${L+40}" cy="${AY+33}" r="11" fill="var(--clay)" opacity=".85"/>`;
+  s+=`<text class="xs" x="${L}" y="${AY-10}">fifteen centimetres of forearm, stroked at ${st.vel.toFixed(1)} cm a second — watch the dot, not the curve</text>`;
+  s+=`<text class="sm" x="${W-R+12}" y="${AY+38}">${(15/st.vel).toFixed(1)} seconds</text>`;
+  s+=`<text class="xs" x="${W-R+12}" y="${AY+56}">for one pass</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 5. speed × warmth ═════════════════════════════════════════ */
+function sceneWarmth(st){
+  const H=300, L=100, R=190, T=26, PH=196;
+  const lv=v=>Math.log(v)/Math.LN10;
+  const x=v=>L+(lv(v)-lv(0.25))/(lv(40)-lv(0.25))*(W-L-R);
+  const temps=[{t:18,n:"cool",y:T+22},{t:32,n:"skin warm",y:T+PH/2},{t:42,n:"hot",y:T+PH-22}];
+  const sel=temps.find(z=>z.t===st.temp);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="The sweet spot needs the right speed and the right warmth">`;
+  /* the blob */
+  s+=`<ellipse cx="${(x(1)+x(10))/2}" cy="${T+PH/2}" rx="${(x(10)-x(1))/2+26}" ry="46"
+    fill="var(--clay)" opacity=".16"/>`;
+  s+=`<ellipse cx="${(x(1)+x(10))/2}" cy="${T+PH/2}" rx="${(x(10)-x(1))/2}" ry="28"
+    fill="var(--clay)" opacity=".2"/>`;
+  s+=`<text class="lab" x="${(x(1)+x(10))/2}" y="${T+PH/2-56}" text-anchor="middle"
+    fill="var(--dis)">the sweet spot</text>`;
+  temps.forEach(z=>{
+    const on=z.t===st.temp;
+    s+=`<line x1="${L}" y1="${z.y}" x2="${W-R}" y2="${z.y}" stroke="var(--rule)"
+      stroke-width="${on?0:1.5}" stroke-dasharray="${on?"none":"3 6"}"/>`;
+    s+=`<text class="sm" x="${L-14}" y="${z.y+5}" text-anchor="end"
+      fill="var(${on?"--ink":"--ink3"})">${z.t}°</text>`;
+    s+=`<text class="xs" x="${L-14}" y="${z.y+21}" text-anchor="end">${esc(z.n)}</text>`;
+  });
+  SPEEDS.forEach(v=> s+=`<text class="xs" x="${x(v)}" y="${T+PH+24}" text-anchor="middle">${v}</text>`);
+  s+=`<text class="xs" x="${(L+W-R)/2}" y="${T+PH+46}" text-anchor="middle">centimetres a second</text>`;
+  /* your dot */
+  s+=`<circle cx="${x(st.vel2)}" cy="${sel.y}" r="12" fill="var(--clay)"
+    stroke="var(--card)" stroke-width="3"/>`;
+  /* verdict */
+  const inSpeed = st.vel2>=1 && st.vel2<=10, inTemp = st.temp===32;
+  const verdict = inSpeed&&inTemp ? ["In the spot.","Right speed, right warmth."]
+    : inTemp ? ["Warmth is right.","The speed is off the hill."]
+    : inSpeed ? ["Speed is right.","Every speed rates lower away from skin temperature."]
+    : ["Both are off.","This is the corner the research says is least pleasant."];
+  s+=`<text class="lab" x="${W-R+16}" y="${T+82}" fill="var(${inSpeed&&inTemp?"--clay":"--ink2"})">${esc(verdict[0])}</text>`;
+  s+=`<text class="sm" x="${W-R+16}" y="${T+104}">${esc(verdict[1])}</text>`;
+  s+=`<text class="xs" x="${W-R+16}" y="${T+134}">People rated every speed</text>`;
+  s+=`<text class="xs" x="${W-R+16}" y="${T+150}">more pleasant at skin</text>`;
+  s+=`<text class="xs" x="${W-R+16}" y="${T+166}">temperature than at 18°</text>`;
+  s+=`<text class="xs" x="${W-R+16}" y="${T+182}">or 42°.</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 7. meaning ════════════════════════════════════════════════ */
+function sceneContext(){
+  const H=248;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="The fibres are a doorway; meaning decides what comes through">`;
+  /* doorway */
+  s+=`<path d="M330 200V96a100 100 0 0 1 200 0v104" fill="var(--paper2)"
+    stroke="var(--clay)" stroke-width="3"/>`;
+  s+=`<text class="lab" x="430" y="150" text-anchor="middle" fill="var(--dis)">the fibres</text>`;
+  s+=`<text class="sm" x="430" y="174" text-anchor="middle">a doorway</text>`;
+  s+=`<rect x="300" y="200" width="260" height="14" rx="7" fill="var(--soft)"/>`;
+  const item=(x,y,t,anchor)=>`<text class="sm" x="${x}" y="${y}" text-anchor="${anchor}">${esc(t)}</text>`;
+  const arrow=(x1,y1,x2,y2)=>`<path d="M${x1} ${y1}Q${(x1+x2)/2} ${(y1+y2)/2-14} ${x2} ${y2}"
+    fill="none" stroke="var(--ink3)" stroke-width="2" stroke-linecap="round" opacity=".5"/>`;
+  [["who is touching you",56,"end",300,64],
+   ["whether you agreed to it",56,"start",560,64]].forEach(()=>{});
+  s+=item(288,52,"who is touching you","end")+arrow(296,58,340,92);
+  s+=item(288,96,"what happened last time","end")+arrow(296,102,336,120);
+  s+=item(288,140,"whether you agreed","end")+arrow(296,146,332,150);
+  s+=item(572,52,"what you think it is for","start")+arrow(564,58,520,92);
+  s+=item(572,96,"how safe the room feels","start")+arrow(564,102,524,120);
+  s+=item(572,140,"whether it is predictable","start")+arrow(564,146,528,150);
+  s+=`<text class="lab" x="430" y="238" text-anchor="middle">meaning decides what comes through</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 12. the same stroke, four contexts ════════════════════════ */
+const CTX=[
+ {id:"consent", n:"they agreed to it", off:"they did not agree to it"},
+ {id:"known",   n:"someone they trust", off:"a stranger"},
+ {id:"warned",  n:"they knew it was coming", off:"it arrived unannounced"}
+];
+function sceneContext(st){
+  const S = st || {ctx:{consent:true,known:true,warned:true}};
+  const on = k => S.ctx ? S.ctx[k] : true;
+  const score = (on("consent")?2:0)+(on("known")?1:0)+(on("warned")?1:0);
+  const verdicts=[
+   ["Intrusive","Physically identical. Experienced as a violation."],
+   ["Intrusive","Physically identical. Experienced as a violation."],
+   ["Endured","Tolerated rather than received. The nerves are firing the same way."],
+   ["Neutral","It lands, but it is not doing much."],
+   ["Welcome","The same stroke, and now it is worth something."]
+  ];
+  const v=verdicts[score];
+  const H=302;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="The same stroke read as ${esc(v[0].toLowerCase())}">`;
+  /* the identical physical stroke, always the same, clear of everything else */
+  s+=`<text class="xs" x="60" y="26">the physical touch, unchanged in every case</text>`;
+  s+=`<rect x="60" y="34" width="330" height="34" rx="17" fill="var(--soft)"/>`;
+  s+=`<circle cx="150" cy="51" r="10" fill="var(--clay)" opacity=".85"/>`;
+  s+=`<text class="sm" x="402" y="56">3 cm/s · 32° · on a forearm</text>`;
+  /* the doorway, moved right and down so nothing lands on it */
+  const DX=442, DW=176, DTOP=118, DBASE=272;
+  s+=`<path d="M${DX} ${DBASE}V${DTOP+38}a${DW/2} ${DW/2} 0 0 1 ${DW} 0V${DBASE}"
+    fill="var(--paper2)" stroke="var(--clay)" stroke-width="3"/>`;
+  s+=`<text class="sm" x="${DX+DW/2}" y="${DTOP+96}" text-anchor="middle" fill="var(--dis)">the fibres</text>`;
+  s+=`<text class="xs" x="${DX+DW/2}" y="${DTOP+116}" text-anchor="middle">a doorway</text>`;
+  s+=`<rect x="${DX-24}" y="${DBASE}" width="${DW+48}" height="12" rx="6" fill="var(--soft)"/>`;
+  /* what is arriving with it */
+  CTX.forEach((c,i)=>{
+    const yy=142+i*40, ok=on(c.id);
+    s+=`<text class="sm" x="392" y="${yy}" text-anchor="end"
+      fill="var(${ok?"--ink":"--ink3"})">${esc(ok?c.n:c.off)}</text>`;
+    s+=`<path d="M400 ${yy-5}q20 0 34 ${(DTOP+70-yy)/2}" fill="none"
+      stroke="var(${ok?"--sage":"--neg"})" stroke-width="2" opacity=".55"/>`;
+  });
+  /* the verdict */
+  s+=`<text class="big" x="656" y="152" style="font-size:31px"
+    fill="var(${score>=4?"--sage":score<=1?"--neg":"--ink2"})">${esc(v[0])}</text>`;
+  s+=`<foreignObject x="656" y="166" width="${W-686}" height="110">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+      style="font-family:Newsreader,serif;font-size:15px;line-height:1.5;color:var(--ink2)">${esc(v[1])}</div>
+    </foreignObject>`;
+  return s+"</svg>";
+}
+
+const SCENES = {roads:sceneRoads, micro:sceneMicro, patient:scenePatient,
+  speed:sceneSpeed, warmth:sceneWarmth, context:sceneContext};
+
+/* ══ 7. skin cross-section ═════════════════════════════════════ */
+const RECEPTORS=[
+ {id:"merkel", n:"Merkel cells", d:.30, x:.22, c:"--blue", job:"edges, texture, fine detail",
+  say:"Shallow and densely packed in fingertips. These are the ones reading the raised dots of braille, or the grain of a fabric. They keep firing as long as pressure is held."},
+ {id:"meissner", n:"Meissner corpuscles", d:.22, x:.42, c:"--blue", job:"slip and flutter",
+  say:"Also shallow, but they only answer to change. They are why you tighten your grip on a glass a fraction of a second before you consciously notice it sliding."},
+ {id:"ruffini", n:"Ruffini endings", d:.72, x:.62, c:"--sage", job:"skin stretch",
+  say:"Deep, and tuned to skin being pulled rather than pressed. Part of how you know where your hand is in the dark, and the receptor most engaged by a slow drag across tissue."},
+ {id:"pacinian", n:"Pacinian corpuscles", d:.86, x:.80, c:"--sage", job:"fast vibration",
+  say:"Deep, large, and extremely sensitive to rapid vibration. They are how you feel the texture of a surface through the end of a tool rather than through your own skin."},
+ {id:"ct", n:"Free nerve endings", d:.16, x:.10, c:"--clay", job:"slow, affectionate contact",
+  say:"No capsule, no structure, wandering in the upper layers of hairy skin. Poor at what and where. These are the C-tactile fibres, and the rest of this page is about them."}
+];
+function sceneSkin(st){
+  const H=330, L=60, R=272, T=40, SH=190;
+  const bw=W-L-R;
+  const sel=RECEPTORS.find(r=>r.id===st.rec)||RECEPTORS[0];
+  const y=d=>T+22+d*(SH-40);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Where the touch receptors sit in the skin">`;
+  /* layers */
+  s+=`<rect x="${L}" y="${T}" width="${bw}" height="34" rx="10" fill="var(--soft)"/>`;
+  s+=`<rect x="${L}" y="${T+34}" width="${bw}" height="${SH-34}" rx="10" fill="var(--paper2)"/>`;
+  s+=`<text class="xs" x="${L+10}" y="${T+22}">epidermis · the surface</text>`;
+  s+=`<text class="xs" x="${L+10}" y="${T+SH-12}">dermis · deeper tissue</text>`;
+  /* a hair, because it matters which skin */
+  s+=`<path d="M${L+52} ${T+6}q-8 -30 6 -34" stroke="var(--ink3)" stroke-width="2"
+    fill="none" stroke-linecap="round"/>`;
+  s+=`<text class="xs" x="${L+64}" y="${T-16}">hairy skin</text>`;
+  RECEPTORS.forEach(r=>{
+    const cx=L+r.x*bw, cy=y(r.d), on=r.id===sel.id;
+    s+=`<g data-rec="${r.id}" style="cursor:pointer">
+      <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${T+SH+2}" stroke="var(${r.c})"
+        stroke-width="${on?2.5:1.5}" opacity="${on?.6:.28}"/>`;
+    if(r.id==="ct")
+      s+=`<path d="M${cx-14} ${cy}q7 -12 14 0t14 0" stroke="var(${r.c})" stroke-width="${on?4:3}"
+        fill="none" stroke-linecap="round"/>`;
+    else if(r.id==="pacinian")
+      s+=`<ellipse cx="${cx}" cy="${cy}" rx="${on?15:12}" ry="${on?11:9}" fill="none"
+        stroke="var(${r.c})" stroke-width="${on?3:2}"/>
+        <ellipse cx="${cx}" cy="${cy}" rx="${on?8:6}" ry="${on?6:5}" fill="var(${r.c})" opacity=".4"/>`;
+    else if(r.id==="ruffini")
+      s+=`<path d="M${cx-14} ${cy}h28M${cx-10} ${cy-7}h20M${cx-10} ${cy+7}h20"
+        stroke="var(${r.c})" stroke-width="${on?3:2}" stroke-linecap="round"/>`;
+    else
+      s+=`<circle cx="${cx}" cy="${cy}" r="${on?10:8}" fill="var(${r.c})" opacity="${on?.85:.5}"/>`;
+    s+=`<text class="xs" x="${cx}" y="${T+SH+20}" text-anchor="middle"
+      fill="var(${on?r.c:"--ink3"})">${esc(r.job)}</text></g>`;
+  });
+  /* the panel */
+  const RX=W-R+22;
+  s+=`<text class="lab" x="${RX}" y="${T+16}" fill="var(${sel.c})">${esc(sel.n)}</text>`;
+  s+=`<foreignObject x="${RX}" y="${T+26}" width="${R-52}" height="180">
+    <div xmlns="http://www.w3.org/1999/xhtml"
+      style="font-family:Newsreader,serif;font-size:15px;line-height:1.5;color:var(--ink2)">${esc(sel.say)}</div>
+    </foreignObject>`;
+  s+=`<text class="xs" x="${L}" y="${H-8}">tap any receptor</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 8. two-point acuity, drawn to scale ═══════════════════════ */
+const PARTS=[
+ {id:"finger", n:"fingertip", mm:2.5}, {id:"lip", n:"lips", mm:5},
+ {id:"palm", n:"palm", mm:10}, {id:"forehead", n:"forehead", mm:15},
+ {id:"forearm", n:"forearm", mm:35}, {id:"back", n:"back", mm:39},
+ {id:"calf", n:"calf", mm:45}
+];
+function sceneAcuity(st){
+  const H=324, L=64, R=64, T=52;
+  const p=PARTS.find(z=>z.id===st.part)||PARTS[0];
+  const px=mm=>mm*7.4;                       // drawing scale
+  const cx=(L+W-R)/2;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Two points ${p.mm} millimetres apart, as felt on the ${p.n}">`;
+  s+=`<text class="sm" x="${L}" y="${T-16}">the closest two points can be on the <tspan
+    style="font-family:Fraunces,serif" fill="var(--clay)">${esc(p.n)}</tspan> and still feel like two</text>`;
+  /* the gap, to scale */
+  const gap=px(p.mm), y0=T+58;
+  s+=`<line x1="${cx-gap/2}" y1="${y0}" x2="${cx+gap/2}" y2="${y0}" stroke="var(--rule)" stroke-width="2"/>`;
+  s+=`<circle cx="${cx-gap/2}" cy="${y0}" r="9" fill="var(--clay)"/>`;
+  s+=`<circle cx="${cx+gap/2}" cy="${y0}" r="9" fill="var(--clay)"/>`;
+  s+=`<text class="big" x="${cx}" y="${y0+62}" text-anchor="middle">${p.mm} mm</text>`;
+  /* every part, as a faint comparison row */
+  const RY=y0+96;
+  s+=`<text class="xs" x="${L}" y="${RY-14}">all of them, same scale</text>`;
+  PARTS.forEach((q,i)=>{
+    const yy=RY+i*13, on=q.id===p.id, g=px(q.mm);
+    s+=`<line x1="${L+96}" y1="${yy}" x2="${L+96+g}" y2="${yy}"
+      stroke="var(${on?"--clay":"--rule"})" stroke-width="${on?4:3}" stroke-linecap="round"/>`;
+    s+=`<text class="xs" x="${L+88}" y="${yy+4}" text-anchor="end"
+      fill="var(${on?"--ink":"--ink3"})">${esc(q.n)}</text>`;
+  });
+  s+=`<text class="xs" x="${W-R}" y="${RY+PARTS.length*13-4}" text-anchor="end">a fingertip is about twenty times finer than a back</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 9. the gate ═══════════════════════════════════════════════ */
+function sceneGate(st){
+  const H=270, cx=430, cy=150;
+  const open = st.gateTouch ? 0.34 : 1;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Touch partly closes the gate that pain signals pass through">`;
+  s+=`<text class="sm" x="120" y="34">a knock, a burn, a strain</text>`;
+  s+=`<path d="M120 60C240 60 250 ${cy-8} ${cx-58} ${cy-6}" stroke="var(--clay)"
+    stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  s+=`<text class="sm" x="120" y="${cy+66}">touch on the same patch of skin</text>`;
+  s+=`<path d="M120 ${cy+40}C250 ${cy+40} 250 ${cy+14} ${cx-58} ${cy+12}"
+    stroke="var(--blue)" stroke-width="4" fill="none" stroke-linecap="round"
+    opacity="${st.gateTouch?1:.22}"/>`;
+  /* the gate */
+  s+=`<rect x="${cx-52}" y="${cy-58}" width="104" height="118" rx="20"
+    fill="var(--paper2)" stroke="var(--rule)" stroke-width="2"/>`;
+  s+=`<text class="xs" x="${cx}" y="${cy+80}" text-anchor="middle">the gate</text>`;
+  const w=8+open*56;
+  s+=`<rect x="${cx-w/2}" y="${cy-30}" width="${w}" height="62" rx="7"
+    fill="var(--clay)" opacity=".28"/>`;
+  s+=`<line x1="${cx-34}" y1="${cy-34}" x2="${cx-34}" y2="${cy+36}" stroke="var(--ink3)" stroke-width="3" stroke-linecap="round"/>`;
+  s+=`<line x1="${cx+34}" y1="${cy-34}" x2="${cx+34}" y2="${cy+36}" stroke="var(--ink3)" stroke-width="3" stroke-linecap="round"/>`;
+  /* out the other side */
+  const out = st.gateTouch ? .38 : 1;
+  s+=`<path d="M${cx+58} ${cy}H${W-190}" stroke="var(--clay)"
+    stroke-width="${1.5+out*4}" fill="none" stroke-linecap="round" opacity="${.35+out*.6}"/>`;
+  s+=`<text class="lab" x="${W-178}" y="${cy+5}">${st.gateTouch?"less pain":"pain"}</text>`;
+  /* from above */
+  s+=`<path d="M${cx} 26V${cy-62}" stroke="var(--sage)" stroke-width="3"
+    fill="none" stroke-linecap="round" stroke-dasharray="6 6"/>`;
+  s+=`<text class="sm" x="${cx+12}" y="26">attention, expectation, mood, safety</text>`;
+  s+=`<text class="xs" x="${cx+12}" y="44">— can open or close it too</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 10. who may touch you where ═══════════════════════════════ */
+const ZONES=[
+ {id:"head", n:"head", x:.50, y:.09, r:.075},
+ {id:"chest", n:"chest", x:.50, y:.28, r:.10},
+ {id:"arm",  n:"upper arms", x:.245, y:.26, r:.072},
+ {id:"arm2", n:"", x:.755, y:.26, r:.072},
+ {id:"hand", n:"hands", x:.16, y:.44, r:.055},
+ {id:"hand2",n:"", x:.84, y:.44, r:.055},
+ {id:"torso",n:"torso", x:.50, y:.45, r:.095},
+ {id:"hips", n:"hips", x:.50, y:.60, r:.085},
+ {id:"legs", n:"legs", x:.395, y:.79, r:.075},
+ {id:"legs2",n:"", x:.605, y:.79, r:.075},
+ {id:"feet", n:"feet", x:.50, y:.95, r:.048}
+];
+const BONDS=[
+ {id:"partner", n:"partner", area:1.0, allow:{head:1,chest:1,arm:1,hand:1,torso:1,hips:1,legs:1,feet:.9}},
+ {id:"parent",  n:"parent",  area:.62, allow:{head:.9,chest:.5,arm:1,hand:1,torso:.5,hips:.15,legs:.5,feet:.4}},
+ {id:"sibling", n:"sibling", area:.55, allow:{head:.7,chest:.4,arm:1,hand:1,torso:.4,hips:.1,legs:.4,feet:.35}},
+ {id:"friend",  n:"close friend", area:.45, allow:{head:.5,chest:.3,arm:.95,hand:1,torso:.25,hips:.05,legs:.25,feet:.2}},
+ {id:"acq",     n:"acquaintance", area:.22, allow:{head:.12,chest:.06,arm:.6,hand:.95,torso:.05,hips:0,legs:.05,feet:.05}},
+ {id:"stranger",n:"stranger", area:.10, allow:{head:.03,chest:0,arm:.25,hand:.85,torso:0,hips:0,legs:0,feet:0}}
+];
+function sceneTopo(st){
+  const H=330, BX=150, BY=22, BW=150, BH=290;
+  const b=BONDS.find(z=>z.id===st.bond)||BONDS[0];
+  const key=id=>id.replace(/2$/,"");
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Where a ${esc(b.n)} may touch you, and how the total area compares">`;
+  /* body outline, deliberately simple */
+  s+=`<path d="M${BX+75} ${BY+6}a20 20 0 1 1 -.1 0
+    M${BX+75} ${BY+30}c-30 0 -46 12 -46 34v58c0 8 -12 44 -14 62h14c4 -16 12 -40 12 -40
+    v46c0 24 -6 60 -8 88h20c2 -28 8 -56 8 -80h28c0 24 6 52 8 80h20c-2 -28 -8 -64 -8 -88
+    v-46s8 24 12 40h14c-2 -18 -14 -54 -14 -62v-58c0 -22 -16 -34 -46 -34Z"
+    fill="var(--paper2)" stroke="var(--rule)" stroke-width="1.5"/>`;
+  ZONES.forEach(z=>{
+    const a=b.allow[key(z.id)]||0;
+    if(a<=0.02) return;
+    s+=`<ellipse cx="${BX+z.x*BW}" cy="${BY+z.y*BH}" rx="${z.r*BW*1.5}" ry="${z.r*BH*0.62}"
+      fill="var(--clay)" opacity="${(0.12+a*0.42).toFixed(2)}"/>`;
+  });
+  s+=`<text class="lab" x="${BX+BW/2}" y="${BY+BH+26}" text-anchor="middle">${esc(b.n)}</text>`;
+  /* the reliable finding: total area against bond */
+  const CX=420, CW=W-CX-70;
+  s+=`<text class="sm" x="${CX}" y="${BY+26}">the finding that held across five countries</text>`;
+  s+=`<text class="xs" x="${CX}" y="${BY+46}">total area you would allow, by how close the bond is</text>`;
+  BONDS.forEach((z,i)=>{
+    const yy=BY+70+i*36, on=z.id===b.id;
+    s+=`<text class="sm" x="${CX+104}" y="${yy+5}" text-anchor="end"
+      fill="var(${on?"--ink":"--ink3"})">${esc(z.n)}</text>`;
+    s+=`<rect x="${CX+114}" y="${yy-11}" width="${(CW-124)*z.area}" height="20" rx="10"
+      fill="var(--clay)" opacity="${on?.72:.24}" data-bond="${z.id}" style="cursor:pointer"/>`;
+  });
+  s+=`<text class="xs" x="${CX}" y="${H-10}">Zones here are a simplification. The published maps are finer, and the solid result is the relationship between bond and area.</text>`;
+  return s+"</svg>";
+}
+
+/* ══ 11. how sure are we ═══════════════════════════════════════ */
+function sceneClaims(st){
+  const shown = !st || st.claimsShown;
+  const H=54+CLAIMS.length*60, L=56, R=64, BX=L+392;
+  const x=v=>BX+v*(W-BX-R);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="How well supported each claim about touch is">`;
+  s+=`<text class="xs" x="${BX}" y="24">less sure</text>`;
+  s+=`<text class="xs" x="${W-R}" y="24" text-anchor="end">more sure</text>`;
+  s+=`<line x1="${BX}" y1="34" x2="${W-R}" y2="34" stroke="var(--rule)" stroke-width="1.5"/>`;
+  CLAIMS.forEach((c,i)=>{
+    const yy=62+i*60;
+    const col = c.s>.7 ? "--sage" : c.s>.5 ? "--gold" : "--clay";
+    s+=`<line x1="${BX}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="var(--soft)" stroke-width="7"
+      stroke-linecap="round"/>`;
+    if(shown) s+=`<line x1="${BX}" y1="${yy}" x2="${x(c.s)}" y2="${yy}" stroke="var(${col})"
+      stroke-width="7" stroke-linecap="round" opacity=".55"/>`;
+    if(shown) s+=`<circle cx="${x(c.s)}" cy="${yy}" r="8" fill="var(${col})"/>`;
+    if(!shown && i===CLAIMS.length-1){
+      s+=`<circle cx="${x(st.claimGuess)}" cy="${yy}" r="8" fill="none"
+        stroke="var(--ink)" stroke-width="2.5" stroke-dasharray="4 3"/>`;
+      s+=`<text class="xs" x="${x(st.claimGuess)}" y="${yy-16}" text-anchor="middle">your guess</text>`;
+    }
+    if(shown && i===CLAIMS.length-1 && st && st.claimGuess!=null && Math.abs(st.claimGuess-c.s)>.02){
+      s+=`<circle cx="${x(st.claimGuess)}" cy="${yy}" r="8" fill="none"
+        stroke="var(--ink3)" stroke-width="2" stroke-dasharray="4 3"/>`;
+      s+=`<text class="xs" x="${x(st.claimGuess)}" y="${yy+24}" text-anchor="middle">you said</text>`;
+    }
+    s+=`<foreignObject x="${L}" y="${yy-26}" width="${BX-L-26}" height="56">
+      <div xmlns="http://www.w3.org/1999/xhtml"
+        style="font-family:Newsreader,serif;font-size:15px;line-height:1.35;color:var(--ink);text-align:right">
+        ${esc(c.t)}<div style="font-size:13px;color:var(--ink3);line-height:1.3">${esc(c.n)}</div></div>
+      </foreignObject>`;
+  });
+  return s+"</svg>";
+}
+
+Object.assign(SCENES, {skin:sceneSkin, acuity:sceneAcuity, gate:sceneGate,
+  topography:sceneTopo, claims:sceneClaims});
+/* page.js — assembles the journey and wires the two interactive figures.
+   Scroll-based, because this is reading rather than a lesson. */
+
+const $ = s => document.querySelector(s);
+const ST = {vel:3, vel2:3, temp:32, rec:"ct", part:"finger", gateTouch:true, bond:"stranger",
+  stim:"brush", claimsShown:false, claimGuess:.7, ctx:{consent:true,known:true,warned:true}};
+
+/* Expand the two markup conventions used in journey.js:
+     [ref:id]           -> superscript link to the reference list
+     {{Wiki Page|text}} -> link to English Wikipedia                       */
+const REF_ORDER = [];
+function refNum(id){
+  if(!REFS[id]) return null;
+  let i = REF_ORDER.indexOf(id);
+  if(i < 0){ REF_ORDER.push(id); i = REF_ORDER.length-1; }
+  return i+1;
+}
+function md(s){
+  if(!s) return "";
+  return String(s)
+    .replace(/\{\{([^|}]+)\|([^}]+)\}\}/g, (m,page,text) =>
+      `<a class="wiki" href="https://en.wikipedia.org/wiki/${encodeURIComponent(page.trim().replace(/ /g,"_"))}"
+        target="_blank" rel="noopener" title="Wikipedia: ${esc(page.trim())}">${text}</a>`)
+    .replace(/\[ref:([a-z0-9]+)\]/g, (m,id) => {
+      const n = refNum(id);
+      return n ? `<a class="cite" href="#ref-${id}" title="${esc(REFS[id].a+" "+REFS[id].y)}">${n}</a>` : "";
+    });
+}
+
+const paperCard = p => !p ? "" : `
+  <div class="paper">
+    <div class="who">${esc(p.who)} · ${p.y}</div>
+    <div class="what">${esc(p.what)}</div>
+    <div class="where">${esc(p.where)}</div>
+    <div style="margin-top:7px"><a href="${p.u}" target="_blank" rel="noopener">open the paper →</a></div>
+    <div class="grade">${esc(p.grade)}</div>
+  </div>`;
+
+const figure = (inner, cap) =>
+  `<figure class="wide">${inner}${cap?`<div class="cap">${cap}</div>`:""}</figure>`;
+
+function sceneFor(st){
+  switch(st.scene){
+    case "speed": return `
+      <figure class="wide">
+        <div class="controls">
+          <label>how fast you stroke
+            <input type="range" id="vel" min="0.3" max="30" step="0.1" value="${ST.vel}"
+              aria-label="Stroking speed"></label>
+          <b id="velv">${ST.vel.toFixed(1)} cm/s</b>
+        </div>
+        <div id="speedFig">${SCENES.speed(ST)}</div>
+        <div class="cap">Curve shapes follow the published figure; the firing values are
+          indicative rather than exact. The dot moves at the real speed.</div>
+      </figure>`;
+    case "warmth": return `
+      <figure class="wide">
+        <div class="controls">
+          <label>speed
+            <input type="range" id="vel2" min="0.3" max="30" step="0.1" value="${ST.vel2}"
+              aria-label="Stroking speed"></label>
+          <b id="vel2v">${ST.vel2.toFixed(1)} cm/s</b>
+          <span style="display:flex;gap:8px">
+            ${[18,32,42].map(t=>`<button class="pill" data-temp="${t}"
+              aria-pressed="${ST.temp===t}">${t}°</button>`).join("")}
+          </span>
+        </div>
+        <div id="warmFig">${SCENES.warmth(ST)}</div>
+        <div class="cap">A simplified picture of two findings held together. The sweet spot
+          is drawn as a region because that is how it behaves, not as a measured contour.</div>
+      </figure>`;
+    case "roads": return `
+      <figure class="wide">
+        <div class="controls">
+          <button class="pill" id="sendBtn">send a touch →</button>
+          <span id="sendOut" style="color:var(--ink3)">both signals leave the skin at the same instant</span>
+        </div>
+        <div id="roadsFig">${SCENES.roads(ST)}</div>
+        <div class="cap">The animation runs in real time. A fast signal crosses in a few
+          hundredths of a second; the slow one takes about a second. That gap is the
+          finding, not an effect.</div>
+      </figure>`;
+    case "micro": return `
+      <figure class="wide">
+        <div class="controls"><span>touch the skin with</span>
+          <button class="pill" data-stim="brush" aria-pressed="${ST.stim==="brush"}">a soft brush</button>
+          <button class="pill" data-stim="sharp" aria-pressed="${ST.stim==="sharp"}">a sharp point</button></div>
+        <div id="microFig">${SCENES.micro(ST)}</div>
+        <div class="cap">Spike trains are illustrative. The contrast is the real one: these
+          fibres were told apart from pain fibres precisely by answering a gentle stimulus
+          and not a sharp one.</div>
+      </figure>`;
+    case "claims": return `
+      <figure class="wide">
+        <div id="claimsCtl">${ST.claimsShown ? `<div class="controls">
+            <button class="pill" id="claimsHide">hide the answers again</button></div>`
+          : `<div class="controls">
+            <span>before you look — how well supported is <b style="font-family:Fraunces,serif">“touch measurably raises oxytocin”</b>?</span>
+            <input type="range" id="claimGuess" min="0" max="1" step=".01" value="${ST.claimGuess}"
+              aria-label="Your estimate">
+            <button class="pill" id="claimsShow">show the answers</button></div>`}</div>
+        <div id="claimsFig">${SCENES.claims(ST)}</div>
+        <div class="cap">Positions are a judgement about how much weight to give each claim,
+          not measured effect sizes. Arranged so the shape of the field is visible.</div>
+      </figure>`;
+    case "context": return `
+      <figure class="wide">
+        <div class="controls"><span>everything physical stays the same — change only:</span>
+          ${CTX.map(c=>`<button class="pill" data-ctx="${c.id}"
+            aria-pressed="${ST.ctx[c.id]}">${esc(c.n)}</button>`).join("")}</div>
+        <div id="ctxFig">${SCENES.context(ST)}</div>
+        <div class="cap">Illustrative, not measured — no study assigns these labels. It is
+          here because the point is hard to feel from a sentence and easy to feel from a
+          switch.</div>
+      </figure>`;
+    case "skin": return `
+      <figure class="wide"><div id="skinFig">${SCENES.skin(ST)}</div>
+        <div class="cap">Depths and shapes are schematic. Tap a receptor to read what it does.</div></figure>`;
+    case "acuity": return `
+      <figure class="wide">
+        <div class="controls"><span>where on the body</span>
+          ${PARTS.map(q=>`<button class="pill" data-part="${q.id}"
+            aria-pressed="${ST.part===q.id}">${esc(q.n)}</button>`).join("")}</div>
+        <div id="acuFig">${SCENES.acuity(ST)}</div>
+        <div class="cap">Drawn to scale on screen. Values are the classic Weinstein figures,
+          widely reproduced — the ranking is solid, the exact millimetres less so.</div>
+      </figure>`;
+    case "gate": return `
+      <figure class="wide">
+        <div class="controls">
+          <button class="pill" id="gateBtn" aria-pressed="${ST.gateTouch}">${ST.gateTouch?"hand on the skin":"no touch"}</button>
+          <span id="gateHint" style="color:var(--ink3)">${ST.gateTouch?"tap to take the hand away":"tap to put the hand back"}</span></div>
+        <div id="gateFig">${SCENES.gate(ST)}</div>
+        <div class="cap">The original 1965 drawing, much simplified. Sixty years of revision
+          have complicated the mechanism without overturning the central claim.</div>
+      </figure>`;
+    case "topography": return `
+      <figure class="wide">
+        <div class="controls"><span>who is touching you</span>
+          ${BONDS.map(z=>`<button class="pill" data-bond2="${z.id}"
+            aria-pressed="${ST.bond===z.id}">${esc(z.n)}</button>`).join("")}</div>
+        <div id="topoFig">${SCENES.topography(ST)}</div>
+        <div class="cap">The zones are a simplification of the published maps; the
+          area-against-bond relationship on the right is the paper's actual finding.</div>
+      </figure>`;
+    case "claims": return `
+      <figure class="wide"><div>${SCENES.claims()}</div>
+        <div class="cap">Positions are a judgement about how much weight to put on each
+          claim, not measured effect sizes. Arranged so the shape of the field is visible.</div></figure>`;
+    case "revisions": return `
+      <figure class="wide">
+        <div class="cards" id="cards">${REVISIONS.map((r,i)=>`
+          <button class="flip" data-i="${i}" aria-pressed="false">
+            <div class="side"><span>what we said</span>${esc(r.old)}</div>
+            <div class="tap">tap for the correction</div>
+          </button>`).join("")}</div>
+        <div class="cap">Four corrections from the last decade. Tap each card to turn it over.</div>
+      </figure>`;
+    default:
+      return figure(SCENES[st.scene](ST));
+  }
+}
+
+$(".wrap").innerHTML = `
+<header class="hero">
+  <div class="eyebrow">${esc(HERO.eyebrow)}</div>
+  <h1>${HERO.title}</h1>
+  <div class="stand">${HERO.stand}</div>
+</header>
+
+<section class="about" aria-label="About this page">
+  ${ABOUT.map(a=>`<div class="ab"><div class="k">${esc(a.k)}</div><div class="v">${md(a.v)}</div></div>`).join("")}
+</section>
+
+<nav class="toc" aria-label="Contents">${STOPS.map(s=>
+  `<a href="#${s.id}" data-t="${s.id}">${esc(s.nav)}</a>`).join("")}
+  <a href="#refs" data-t="refs" style="margin-top:8px">References</a></nav>
+
+${STOPS.map(s=>`
+${s.part?`<div class="part">${esc(s.part)}</div>`:""}
+<section class="stop" id="${s.id}">
+  <div class="year">${esc(s.year)}</div>
+  <h2>${esc(s.title)}</h2>
+  <div class="lead">${md(s.lead)}</div>
+  ${s.src?`<div class="src"><span class="lbl">The research</span>${md(s.src.line)}</div>`:""}
+  ${sceneFor(s)}
+  <div class="body">${md(s.body)}</div>
+  ${s.hands?`<div class="hands"><div class="t">For your hands</div><p>${md(s.hands)}</p></div>`:""}
+</section>`).join("")}
+
+<section class="close">
+  <h2>What to actually do with this</h2>
+  <p class="lead" style="max-width:34rem">Ten things, in rough order of how confident you
+    can be about them.</p>
+  <ul class="rules">${RULES.map(r=>`<li><b>${esc(r.t)}</b><br>${esc(r.d)}</li>`).join("")}</ul>
+
+  <div class="reading">
+    <h3>If you want to go further</h3>
+    ${FURTHER.map(f=>{const r=REFS[f.id];
+      return `<div><a class="n" href="${r.u}" target="_blank" rel="noopener">${esc(r.a.split(",")[0])} et al. (${r.y})</a>
+        — ${esc(r.d||f.d)}</div>`;}).join("")}
+  </div>
+
+  <div class="reading" id="refs">
+    <h3>References</h3>
+    <p style="font-size:15px;color:var(--ink3);margin-bottom:6px">In the order they are cited above.
+      Every one is linked; several are free to read in full.</p>
+    <ol class="refs">${REF_ORDER.map(id=>{const r=REFS[id];
+      return `<li id="ref-${id}"><span class="au">${esc(r.a)}${r.y?" ("+r.y+")":""}</span>
+        <a href="${r.u}" target="_blank" rel="noopener">${esc(r.t)}</a>
+        <span class="jo">${esc(r.j)}</span></li>`;}).join("")}</ol>
+  </div>
+
+  <p class="foot">Assembled in 2026 from the literature as it stood. This page summarises
+    published research for people who work with touch. It is not medical advice, it does not
+    describe a technique, and it cannot tell you what the person in front of you wants. Where
+    researchers disagree, it says so — that is not hedging, it is the current state of a young
+    field still arguing productively with itself.</p>
+</section>`;
+
+/* ── the two interactive figures ───────────────────────────────── */
+function wire(){
+  const v=$("#vel");
+  if(v) v.oninput=()=>{ ST.vel=+v.value; $("#velv").textContent=ST.vel.toFixed(1)+" cm/s";
+    $("#speedFig").innerHTML=SCENES.speed(ST); stroke(); };
+  const v2=$("#vel2");
+  if(v2) v2.oninput=()=>{ ST.vel2=+v2.value; $("#vel2v").textContent=ST.vel2.toFixed(1)+" cm/s";
+    $("#warmFig").innerHTML=SCENES.warmth(ST); };
+  document.querySelectorAll("[data-temp]").forEach(b=>b.onclick=()=>{
+    ST.temp=+b.dataset.temp;
+    document.querySelectorAll("[data-temp]").forEach(z=>
+      z.setAttribute("aria-pressed", +z.dataset.temp===ST.temp));
+    $("#warmFig").innerHTML=SCENES.warmth(ST); });
+  const sb=$("#sendBtn");
+  if(sb) sb.onclick=()=>sendTouch();
+  document.querySelectorAll("[data-stim]").forEach(b=>b.onclick=()=>{
+    ST.stim=b.dataset.stim;
+    document.querySelectorAll("[data-stim]").forEach(z=>
+      z.setAttribute("aria-pressed", z.dataset.stim===ST.stim));
+    $("#microFig").innerHTML=SCENES.micro(ST); });
+  const cg=$("#claimGuess");
+  if(cg) cg.oninput=()=>{ ST.claimGuess=+cg.value; $("#claimsFig").innerHTML=SCENES.claims(ST); };
+  const swapClaims=v=>{
+    ST.claimsShown=v;
+    $("#claimsCtl").innerHTML = v
+      ? `<div class="controls"><button class="pill" id="claimsHide">hide the answers again</button></div>`
+      : `<div class="controls">
+          <span>before you look — how well supported is <b style="font-family:Fraunces,serif">“touch measurably raises oxytocin”</b>?</span>
+          <input type="range" id="claimGuess" min="0" max="1" step=".01" value="${ST.claimGuess}"
+            aria-label="Your estimate">
+          <button class="pill" id="claimsShow">show the answers</button></div>`;
+    $("#claimsFig").innerHTML=SCENES.claims(ST);
+    wire();
+  };
+  const cs=$("#claimsShow"); if(cs) cs.onclick=()=>swapClaims(true);
+  const ch=$("#claimsHide"); if(ch) ch.onclick=()=>swapClaims(false);
+  document.querySelectorAll("[data-ctx]").forEach(b=>b.onclick=()=>{
+    ST.ctx[b.dataset.ctx]=!ST.ctx[b.dataset.ctx];
+    b.setAttribute("aria-pressed", ST.ctx[b.dataset.ctx]);
+    const c=CTX.find(z=>z.id===b.dataset.ctx);
+    b.textContent = ST.ctx[b.dataset.ctx] ? c.n : c.off;
+    $("#ctxFig").innerHTML=SCENES.context(ST); });
+  document.querySelectorAll("[data-rec]").forEach(g=>g.onclick=()=>{
+    ST.rec=g.dataset.rec; $("#skinFig").innerHTML=SCENES.skin(ST); wire(); });
+  document.querySelectorAll("[data-part]").forEach(b=>b.onclick=()=>{
+    ST.part=b.dataset.part;
+    document.querySelectorAll("[data-part]").forEach(z=>
+      z.setAttribute("aria-pressed", z.dataset.part===ST.part));
+    $("#acuFig").innerHTML=SCENES.acuity(ST); });
+  const gb=$("#gateBtn");
+  if(gb) gb.onclick=()=>{ ST.gateTouch=!ST.gateTouch;
+    gb.setAttribute("aria-pressed",ST.gateTouch);
+    gb.textContent = ST.gateTouch ? "hand on the skin" : "no touch";
+    const gh=$("#gateHint");
+    if(gh) gh.textContent = ST.gateTouch ? "tap to take the hand away" : "tap to put the hand back";
+    $("#gateFig").innerHTML=SCENES.gate(ST); };
+  const setBond=id=>{ ST.bond=id;
+    document.querySelectorAll("[data-bond2]").forEach(z=>
+      z.setAttribute("aria-pressed", z.dataset.bond2===ST.bond));
+    $("#topoFig").innerHTML=SCENES.topography(ST); wire(); };
+  document.querySelectorAll("[data-bond2]").forEach(b=>b.onclick=()=>setBond(b.dataset.bond2));
+  document.querySelectorAll("[data-bond]").forEach(r=>r.onclick=()=>setBond(r.dataset.bond));
+  document.querySelectorAll(".flip").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i, r=REVISIONS[i], on=b.getAttribute("aria-pressed")==="true";
+    b.setAttribute("aria-pressed", !on);
+    b.innerHTML = on
+      ? `<div class="side"><span>what we said</span>${esc(r.old)}</div>
+         <div class="tap">tap for the correction</div>`
+      : `<div class="side"><span>what we say now</span>${esc(r.neu)}</div>
+         <div class="tap">${esc(r.src)}</div>`;
+  });
+}
+
+/* Send one touch up both roads, in real time. A fast fibre crosses a forearm
+   in a few hundredths of a second; the slow one takes about a second. Nothing
+   here is sped up or slowed down — the gap is the point. */
+let sendRaf=null;
+function sendTouch(){
+  const fp=document.getElementById("fastPath"), sp=document.getElementById("slowPath");
+  const fd=document.getElementById("fastDot"), sd=document.getElementById("slowDot");
+  const fl=document.getElementById("fastLand"), sl=document.getElementById("slowLand");
+  const out=$("#sendOut");
+  if(!fp||!sp||!fd||!sd) return;
+  if(sendRaf) cancelAnimationFrame(sendRaf);
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches){
+    [fd,sd,fl,sl].forEach(el=>el&&el.setAttribute("opacity","1"));
+    if(out) out.textContent="the slow signal lands about a second after the fast one";
+    return;
+  }
+  const FL=fp.getTotalLength(), SL=sp.getTotalLength();
+  const FAST=0.06, SLOW=1.0;                       // seconds, as in a real forearm
+  [fl,sl].forEach(el=>el&&el.setAttribute("opacity","0"));
+  const t0=performance.now();
+  const step=now=>{
+    const t=(now-t0)/1000;
+    const f=Math.min(t/FAST,1), s=Math.min(t/SLOW,1);
+    const pf=fp.getPointAtLength(FL*f), ps=sp.getPointAtLength(SL*s);
+    fd.setAttribute("opacity", f<1?"1":"0.3"); fd.setAttribute("cx",pf.x); fd.setAttribute("cy",pf.y);
+    sd.setAttribute("opacity", s<1?"1":"0.3"); sd.setAttribute("cx",ps.x); sd.setAttribute("cy",ps.y);
+    if(f>=1&&fl) fl.setAttribute("opacity","1");
+    if(s>=1&&sl) sl.setAttribute("opacity","1");
+    if(out) out.textContent = s<1
+      ? `fast signal arrived · the slow one is still travelling — ${(SLOW-t).toFixed(1)}s to go`
+      : "the slow signal landed about a second after the fast one";
+    if(f<1||s<1) sendRaf=requestAnimationFrame(step); else sendRaf=null;
+  };
+  sendRaf=requestAnimationFrame(step);
+}
+
+/* the dot travels at the true speed — 15 cm of forearm */
+let raf=null;
+function stroke(){
+  if(raf) cancelAnimationFrame(raf);
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  const step=ts=>{
+    const el=document.getElementById("stroker");
+    if(!el){ raf=null; return; }
+    const secs=15/ST.vel, L=92, span=860-92-210+120-80;
+    const u=((ts/1000)/secs)%2, f=u<1?u:2-u;
+    el.setAttribute("cx", L+40+f*span);
+    raf=requestAnimationFrame(step);
+  };
+  raf=requestAnimationFrame(step);
+}
+
+/* contents highlighting */
+const links=[...document.querySelectorAll(".toc a")];
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting)
+    links.forEach(a=>a.classList.toggle("on", a.dataset.t===e.target.id)); });
+},{rootMargin:"-45% 0px -50% 0px"});
+STOPS.forEach(s=>{ const el=document.getElementById(s.id); if(el) io.observe(el); });
+
+wire(); stroke();
+
+</script>
+</body>
+</html>
