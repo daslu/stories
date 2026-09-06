@@ -22,7 +22,9 @@
   --sage:#6E8B68;
   --gold:#CE9A3F;
   --dis:#B0755F;
+  --neg:#A8503A;      /* the negative reading — a deeper, cooler clay */
   --shadow:0 1px 2px rgba(80,60,40,.05), 0 10px 30px -18px rgba(80,60,40,.35);
+  --gutter:24px;       /* .wrap side padding; figures cancel it on phones */
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -36,9 +38,12 @@ a{color:var(--clay);text-underline-offset:3px;text-decoration-thickness:1px}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
 svg{display:block;width:100%;height:auto}
+/* The narrow scenes are drawn at 420u. Past ~460px of box they would scale a
+   13u label above 14px and start to look like a poster, so cap and centre. */
+@media (max-width:820px){figure svg{max-width:460px;margin-left:auto;margin-right:auto}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px 120px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 var(--gutter) 120px}
 
 /* ── opening ─────────────────────────────────────────────────── */
 .hero{padding:76px 0 30px;max-width:36rem}
@@ -175,8 +180,23 @@ figure .cap{font-size:14.5px;color:var(--ink3);line-height:1.5;margin-top:12px;
 .big{font-family:"Fraunces",serif;font-size:38px;font-weight:600;fill:var(--ink)}
 @media (max-width:700px){
   body{font-size:18px}
-  figure{padding:14px 14px 10px;border-radius:14px}
   .stop{padding:42px 0}
+
+  /* Figures run edge to edge. The gutter is worth more to the drawing than
+     to the card, and nothing inside the SVG moves — only the box it scales
+     into gets wider. Worth ~60px, which is ~20% more drawing on a 375 phone. */
+  /* figure.wide, not figure: .wide zeroes these margins at <=820px and a bare
+     element selector loses to it. */
+  figure, figure.wide{margin-left:calc(-1 * var(--gutter));margin-right:calc(-1 * var(--gutter));
+    padding:14px 8px 10px;border-radius:0;border-left:none;border-right:none}
+  figure .cap{margin-left:8px;margin-right:8px}
+
+  /* thumb-sized controls: 15px pills are a 26px tap target, under the 44px floor */
+  .controls{gap:11px}
+  .controls input[type=range]{width:100%;height:36px}
+  .controls b{min-width:0}
+  .pill{padding:11px 18px;font-size:16px}
+  .flip{min-height:0}
 }
 </style>
 </head>
@@ -666,7 +686,20 @@ const FURTHER = [
  * they read as drawn rather than plotted — the fast road stays straight,
  * which is also the point. */
 
-const W = 860;
+/* Drawing width in user units. The SVG scales to fit its box, so what the
+   reader sees is (box px / W). At 860 that is fine on a desktop and about
+   0.36 on a phone, which puts a 13u label at 4.7px — unreadable. Below the
+   .wide breakpoint the scenes are drawn at NARROW_W instead and laid out in
+   one column, so the same label lands at 9-14px. See layout(). */
+const WIDE_W = 860, NARROW_W = 420;
+const narrowQ = typeof matchMedia === "function" ? matchMedia("(max-width:820px)") : null;
+let NARROW = !!(narrowQ && narrowQ.matches);
+let W = NARROW ? NARROW_W : WIDE_W;
+function layout(){
+  NARROW = !!(narrowQ && narrowQ.matches);
+  W = NARROW ? NARROW_W : WIDE_W;
+  return NARROW;
+}
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const clamp = (v,a,b) => v<a?a:v>b?b:v;
 
@@ -683,7 +716,44 @@ function arm(x,y,w,h){
 }
 
 /* ══ 1. two roads ══════════════════════════════════════════════ */
+/* Narrow: the destinations stack at the top and both roads climb the whole
+   height, so the gap between them still reads as distance travelled. */
+function roadsNarrow(){
+  const H=430, sy=352, tx=62;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
+    aria-label="Two nerve routes leaving the skin: a fast straight one and a slow wandering one">`;
+  s+=`<rect x="12" y="${sy}" width="${W-24}" height="26" rx="13" fill="var(--soft)"/>`;
+  s+=`<text class="xs" x="18" y="${sy+44}">skin</text>`;
+  s+=`<circle cx="${tx}" cy="${sy+13}" r="13" fill="var(--clay)" opacity=".25"/>`;
+  s+=`<circle cx="${tx}" cy="${sy+13}" r="6" fill="var(--clay)"/>`;
+  s+=`<text class="sm" x="${tx+28}" y="${sy+64}">a hand lands here</text>`;
+  const box=(y,t1,t2,c)=>`<rect x="10" y="${y}" width="${W-20}" height="70" rx="18"
+      fill="var(--card)" stroke="var(${c})" stroke-width="2"/>
+    <text class="lab" x="28" y="${y+30}" style="fill:var(${c})">${esc(t1)}</text>
+    <text class="sm" x="28" y="${y+54}">${esc(t2)}</text>`;
+  s+=box(14,"what and where","texture, edges, exact spot","--blue");
+  s+=box(108,"how it feels","pleasant, close, being cared for","--clay");
+  s+=`<path id="fastPath" d="M${tx+10} ${sy+4}L${W-104} 92" stroke="var(--blue)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  s+=`<path d="M${W-104} 92l-1 -17m1 17l-16 -6" stroke="var(--blue)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  s+=`<path id="slowPath" d="M${tx+6} ${sy+18}
+    C${tx+140} ${sy+2} ${tx-34} 296 ${tx+124} 272
+    S${W-186} 244 ${W-152} 190" stroke="var(--clay)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  s+=`<path d="M${W-152} 190l3 -17m-3 17l-15 -8" stroke="var(--clay)" stroke-width="4"
+    fill="none" stroke-linecap="round"/>`;
+  s+=`<text class="xs" x="${W-14}" y="218" text-anchor="end" style="fill:var(--blue)">fast · arrives at once</text>`;
+  s+=`<text class="xs" x="${W-14}" y="330" text-anchor="end" style="fill:var(--clay)">slow · about a second behind</text>`;
+  s+=`<circle id="fastDot" cx="${tx+10}" cy="${sy+4}" r="8" fill="var(--blue)" opacity="0"/>`;
+  s+=`<circle id="slowDot" cx="${tx+6}" cy="${sy+18}" r="8" fill="var(--clay)" opacity="0"/>`;
+  s+=`<text class="xs" id="fastLand" x="${W-28}" y="32" text-anchor="end" opacity="0" style="fill:var(--blue)">arrived</text>`;
+  s+=`<text class="xs" id="slowLand" x="${W-28}" y="126" text-anchor="end" opacity="0" style="fill:var(--clay)">arrived</text>`;
+  return s+"</svg>";
+}
+
 function sceneRoads(){
+  if(NARROW) return roadsNarrow();
   const H=330, sx=90, sy=252;
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="Two nerve routes leaving the skin: a fast straight one and a slow wandering one">`;
@@ -709,108 +779,130 @@ function sceneRoads(){
   /* destinations */
   const box=(x,y,t1,t2,c)=>`<rect x="${x}" y="${y}" width="248" height="66" rx="18"
       fill="var(--card)" stroke="var(${c})" stroke-width="2"/>
-    <text class="lab" x="${x+20}" y="${y+28}" fill="var(${c})">${esc(t1)}</text>
+    <text class="lab" x="${x+20}" y="${y+28}" style="fill:var(${c})">${esc(t1)}</text>
     <text class="sm" x="${x+20}" y="${y+50}">${esc(t2)}</text>`;
   s+=box(W-288, 42, "what and where", "texture, edges, exact spot", "--blue");
   s+=box(W-288, 142, "how it feels", "pleasant, close, being cared for", "--clay");
   /* speed annotations */
-  s+=`<text class="sm" x="${sx+250}" y="150" fill="var(--blue)">fast · arrives at once</text>`;
-  s+=`<text class="sm" x="${sx+250}" y="${sy-24}" fill="var(--clay)">slow · arrives about a second behind</text>`;
+  s+=`<text class="sm" x="${sx+250}" y="150" style="fill:var(--blue)">fast · arrives at once</text>`;
+  s+=`<text class="sm" x="${sx+250}" y="${sy-24}" style="fill:var(--clay)">slow · arrives about a second behind</text>`;
   /* the two travellers, parked at the skin until a touch is sent */
   s+=`<circle id="fastDot" cx="${sx+70}" cy="${sy+6}" r="8" fill="var(--blue)" opacity="0"/>`;
   s+=`<circle id="slowDot" cx="${sx+66}" cy="${sy+20}" r="8" fill="var(--clay)" opacity="0"/>`;
-  s+=`<text class="xs" id="fastLand" x="${W-288}" y="34" opacity="0" fill="var(--blue)">arrived</text>`;
-  s+=`<text class="xs" id="slowLand" x="${W-288}" y="134" opacity="0" fill="var(--clay)">arrived</text>`;
+  s+=`<text class="xs" id="fastLand" x="${W-288}" y="34" opacity="0" style="fill:var(--blue)">arrived</text>`;
+  s+=`<text class="xs" id="slowLand" x="${W-288}" y="134" opacity="0" style="fill:var(--clay)">arrived</text>`;
   return s+"</svg>";
 }
 
 /* ══ 2. microneurography ═══════════════════════════════════════ */
 function sceneMicro(st){
   const sharp = st && st.stim === "sharp";
-  const H=272;
+  /* Narrow: the arm sits above the recording panel instead of beside it. */
+  const H  = NARROW ? 486 : 272;
+  const bx = NARROW ? 20 : 540;
+  const by = NARROW ? 254 : 88;
+  const bw = NARROW ? W-16 : W-bx-52;
+  const bh = NARROW ? 172 : 150;
+  const sx = NARROW ? 150 : 250;
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="Listening to single nerve fibres while the skin is ${sharp?"prodded":"brushed"}">`;
-  s+=arm(70, 60, 420, 120);
+  s+= NARROW ? arm(16, 62, 300, 100) : arm(70, 60, 420, 120);
   if(sharp){
-    s+=`<path d="M250 40l0 26" stroke="var(--ink3)" stroke-width="5" stroke-linecap="round"/>`;
-    s+=`<path d="M244 66l6 12l6 -12Z" fill="var(--ink2)"/>`;
-    s+=`<text class="xs" x="250" y="30" text-anchor="middle">a sharp point</text>`;
+    s+=`<path d="M${sx} ${NARROW?32:40}l0 26" stroke="var(--ink3)" stroke-width="5" stroke-linecap="round"/>`;
+    s+=`<path d="M${sx-6} ${NARROW?58:66}l6 12l6 -12Z" fill="var(--ink2)"/>`;
+    s+=`<text class="xs" x="${sx}" y="${NARROW?22:30}" text-anchor="middle">a sharp point</text>`;
   }else{
-    s+=`<path d="M250 44l0 30" stroke="var(--ink3)" stroke-width="5" stroke-linecap="round"/>`;
-    s+=`<path d="M238 74q12 16 24 0" fill="var(--clay)" opacity=".5"/>`;
-    s+=`<text class="xs" x="250" y="34" text-anchor="middle">a soft brush</text>`;
+    s+=`<path d="M${sx} ${NARROW?36:44}l0 30" stroke="var(--ink3)" stroke-width="5" stroke-linecap="round"/>`;
+    s+=`<path d="M${sx-12} ${NARROW?66:74}q12 16 24 0" fill="var(--clay)" opacity=".5"/>`;
+    s+=`<text class="xs" x="${sx}" y="${NARROW?26:34}" text-anchor="middle">a soft brush</text>`;
   }
-  s+=`<path d="M470 196L400 132" stroke="var(--ink3)" stroke-width="3" stroke-linecap="round"/>`;
-  s+=`<circle cx="400" cy="132" r="5" fill="var(--ink3)"/>`;
-  s+=`<text class="xs" x="478" y="206">a very fine electrode, in an awake person</text>`;
-  const bx=540, by=88;
-  s+=`<rect x="${bx-12}" y="${by-40}" width="${W-bx-52}" height="150" rx="16" fill="var(--paper2)"/>`;
+  if(NARROW){
+    s+=`<path d="M340 186L296 128" stroke="var(--ink3)" stroke-width="3" stroke-linecap="round"/>`;
+    s+=`<circle cx="296" cy="128" r="5" fill="var(--ink3)"/>`;
+    s+=`<text class="xs" x="14" y="206">a very fine electrode, in an awake person</text>`;
+  }else{
+    s+=`<path d="M470 196L400 132" stroke="var(--ink3)" stroke-width="3" stroke-linecap="round"/>`;
+    s+=`<circle cx="400" cy="132" r="5" fill="var(--ink3)"/>`;
+    /* anchored left of the recording panel: at x=478 it ran under the
+       "the slow one" label inside the panel at the same y. */
+    s+=`<text class="xs" x="460" y="214" text-anchor="end">a very fine electrode, in an awake person</text>`;
+  }
+  s+=`<rect x="${bx-12}" y="${by-40}" width="${bw}" height="${bh}" rx="16" fill="var(--paper2)"/>`;
   s+=`<text class="xs" x="${bx+4}" y="${by-18}">what the electrode hears</text>`;
+  const right = NARROW ? W-30 : W-76;
   const spikes=(y,seed,n,col)=>{
-    if(n===0) return `<line x1="${bx}" y1="${y}" x2="${W-76}" y2="${y}" stroke="var(${col})"
+    if(n===0) return `<line x1="${bx}" y1="${y}" x2="${right}" y2="${y}" stroke="var(${col})"
       stroke-width="2" stroke-linecap="round" opacity=".45"/>`;
     let d=`M${bx} ${y}`;
     for(let i=0;i<n;i++){
-      const x=bx+8+(i*(W-bx-90)/n)+((seed*(i+3))%7);
+      const x=bx+8+(i*(right-bx-24)/n)+((seed*(i+3))%7);
       d+=`L${x} ${y}L${x+2} ${y-22}L${x+4} ${y}`;
     }
-    return `<path d="${d}L${W-76} ${y}" fill="none" stroke="var(${col})" stroke-width="2"
+    return `<path d="${d}L${right} ${y}" fill="none" stroke="var(${col})" stroke-width="2"
       stroke-linecap="round" stroke-linejoin="round"/>`;
   };
   s+=spikes(by+26, 3, sharp?20:26, "--blue");
-  s+=`<text class="xs" x="${bx+4}" y="${by+44}" fill="var(--blue)">a fast fibre — answers to both</text>`;
+  s+=`<text class="xs" x="${bx+4}" y="${by+44}" style="fill:var(--blue)">a fast fibre — answers to both</text>`;
   s+=spikes(by+96, 5, sharp?1:9, "--clay");
-  s+=`<text class="xs" x="${bx+4}" y="${by+114}" fill="var(--clay)">${sharp
+  s+=`<text class="xs" x="${bx+4}" y="${by+114}" style="fill:var(--clay)">${sharp
     ? "the slow one — almost nothing"
     : "the slow one — new, and not rare"}</text>`;
-  s+=`<text class="big" x="118" y="240">${sharp?"quiet":"27 of 38"}</text>`;
-  s+=`<text class="sm" x="${sharp?238:290}" y="234">${sharp
-    ? "these fibres barely answer a sharp"
-    : "units selected for answering gentle"}</text>`;
-  s+=`<text class="sm" x="${sharp?238:290}" y="254">${sharp
-    ? "stimulus — which is how they were told apart"
-    : "touch were of this slow kind"}</text>`;
+  if(NARROW){
+    s+=`<text class="big" x="14" y="428">${sharp?"quiet":"27 of 38"}</text>`;
+    s+=`<text class="sm" x="14" y="454">${sharp
+      ? "these fibres barely answer a sharp stimulus —"
+      : "units selected for answering gentle touch"}</text>`;
+    s+=`<text class="sm" x="14" y="474">${sharp
+      ? "which is how they were told apart"
+      : "were of this slow kind"}</text>`;
+  }else{
+    s+=`<text class="big" x="118" y="240">${sharp?"quiet":"27 of 38"}</text>`;
+    s+=`<text class="sm" x="${sharp?238:290}" y="234">${sharp
+      ? "these fibres barely answer a sharp"
+      : "units selected for answering gentle"}</text>`;
+    s+=`<text class="sm" x="${sharp?238:290}" y="254">${sharp
+      ? "stimulus — which is how they were told apart"
+      : "touch were of this slow kind"}</text>`;
+  }
   return s+"</svg>";
 }
 
 /* ══ 3. the patient ════════════════════════════════════════════ */
 function scenePatient(){
-  const H=300;
+  /* Narrow: the two panels stack instead of sitting side by side. */
+  const PW = NARROW ? W-20 : 360;
+  const H  = NARROW ? 604 : 300;
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="With the fast road missing, gentle touch still arrives — at a different place">`;
-  const panel=(x,title,fastOn)=>{
-    let g=`<text class="lab" x="${x+8}" y="26">${esc(title)}</text>`;
-    g+=`<rect x="${x}" y="${44}" width="360" height="228" rx="20"
+  const panel=(x,y,title,fastOn)=>{
+    let g=`<text class="lab" x="${x+8}" y="${y+26}">${esc(title)}</text>`;
+    g+=`<rect x="${x}" y="${y+44}" width="${PW}" height="228" rx="20"
       fill="${fastOn?"var(--paper2)":"var(--card)"}" stroke="var(--rule)" stroke-width="${fastOn?0:2}"/>`;
-    /* skin */
-    g+=`<rect x="${x+24}" y="228" width="312" height="20" rx="10" fill="var(--soft)"/>`;
-    g+=`<circle cx="${x+70}" cy="238" r="8" fill="var(--clay)" opacity=".6"/>`;
-    /* fast road */
-    g+=`<path d="M${x+78} 232L${x+242} 96" stroke="var(--blue)" stroke-width="4"
+    g+=`<rect x="${x+24}" y="${y+228}" width="${PW-48}" height="20" rx="10" fill="var(--soft)"/>`;
+    g+=`<circle cx="${x+70}" cy="${y+238}" r="8" fill="var(--clay)" opacity=".6"/>`;
+    g+=`<path d="M${x+78} ${y+232}L${x+PW-118} ${y+96}" stroke="var(--blue)" stroke-width="4"
       fill="none" stroke-linecap="round" opacity="${fastOn?1:.16}"
       ${fastOn?"":'stroke-dasharray="7 8"'}/>`;
-    /* slow road */
-    g+=`<path d="M${x+76} 242C${x+150} 246 ${x+130} 190 ${x+242} 184"
+    g+=`<path d="M${x+76} ${y+242}C${x+150} ${y+246} ${x+130} ${y+190} ${x+PW-118} ${y+184}"
       stroke="var(--clay)" stroke-width="4" fill="none" stroke-linecap="round"/>`;
-    /* destinations */
-    g+=`<rect x="${x+246}" y="76" width="106" height="40" rx="14" fill="var(--card)"
+    g+=`<rect x="${x+PW-114}" y="${y+76}" width="106" height="40" rx="14" fill="var(--card)"
       stroke="var(--blue)" stroke-width="2" opacity="${fastOn?1:.2}"/>`;
-    g+=`<text class="xs" x="${x+299}" y="94" text-anchor="middle" fill="var(--blue)"
-      opacity="${fastOn?1:.35}">touch map</text>`;
-    g+=`<text class="xs" x="${x+299}" y="109" text-anchor="middle" fill="var(--blue)"
-      opacity="${fastOn?1:.35}">what &amp; where</text>`;
-    g+=`<rect x="${x+246}" y="164" width="106" height="40" rx="14" fill="var(--card)"
+    g+=`<text class="xs" x="${x+PW-61}" y="${y+94}" text-anchor="middle"
+      opacity="${fastOn?1:.35}" style="fill:var(--blue)">touch map</text>`;
+    g+=`<text class="xs" x="${x+PW-61}" y="${y+109}" text-anchor="middle"
+      opacity="${fastOn?1:.35}" style="fill:var(--blue)">what &amp; where</text>`;
+    g+=`<rect x="${x+PW-114}" y="${y+164}" width="106" height="40" rx="14" fill="var(--card)"
       stroke="var(--clay)" stroke-width="2"/>`;
-    g+=`<text class="xs" x="${x+299}" y="182" text-anchor="middle" fill="var(--clay)">insula</text>`;
-    g+=`<text class="xs" x="${x+299}" y="197" text-anchor="middle" fill="var(--clay)">body feeling</text>`;
+    g+=`<text class="xs" x="${x+PW-61}" y="${y+182}" text-anchor="middle" style="fill:var(--clay)">insula</text>`;
+    g+=`<text class="xs" x="${x+PW-61}" y="${y+197}" text-anchor="middle" style="fill:var(--clay)">body feeling</text>`;
     if(!fastOn){
-      g+=`<text class="sm" x="${x+90}" y="140" fill="var(--ink3)">this road is gone</text>`;
-      g+=`<text class="sm" x="${x+96}" y="212" fill="var(--clay)">this one still works</text>`;
+      g+=`<text class="sm" x="${x+90}" y="${y+140}" style="fill:var(--ink3)">this road is gone</text>`;
+      g+=`<text class="sm" x="${x+96}" y="${y+212}" style="fill:var(--clay)">this one still works</text>`;
     }
     return g;
   };
-  s+=panel(20, "Most people", true);
-  s+=panel(468, "This patient", false);
+  if(NARROW){ s+=panel(10, 0, "Most people", true); s+=panel(10, 300, "This patient", false); }
+  else { s+=panel(20, 0, "Most people", true); s+=panel(468, 0, "This patient", false); }
   return s+"</svg>";
 }
 
@@ -818,8 +910,18 @@ function scenePatient(){
 const SPEEDS=[0.3,1,3,10,30];
 const CT   =[0.20,0.66,0.92,0.72,0.24];   // slow fibres — a hill
 const AB   =[0.12,0.26,0.44,0.70,0.96];   // fast fibres — a ramp
+/* Where the stroking dot travels. page.js animates it, so the geometry has to
+   be readable from outside — it differs between the two layouts. */
+let STROKE_GEOM={x:132, span:598};
+
 function sceneSpeed(st){
-  const H=340, L=92, R=210, T=34, PH=140;
+  /* Narrow: the plot takes the full width, its two label blocks move below it
+     as a pair of columns, and the forearm goes underneath those. */
+  const H  = NARROW ? 452 : 340;
+  const L  = NARROW ? 44 : 92;
+  const R  = NARROW ? 14 : 210;
+  const T  = NARROW ? 44 : 34;
+  const PH = NARROW ? 130 : 140;
   const lv=v=>Math.log(v)/Math.LN10;
   const x=v=>L+(lv(v)-lv(0.25))/(lv(40)-lv(0.25))*(W-L-R);
   const y=v=>T+PH-v*PH;
@@ -842,23 +944,13 @@ function sceneSpeed(st){
   };
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="Slow fibres respond most at middling speeds; fast fibres just track speed">`;
-  /* the good band */
   s+=`<rect x="${x(1)}" y="${T-6}" width="${x(10)-x(1)}" height="${PH+12}" rx="14"
     fill="var(--clay)" opacity=".08"/>`;
-  s+=`<text class="xs" x="${(x(1)+x(10))/2}" y="${T-14}" text-anchor="middle" fill="var(--dis)">the hill · 1–10 cm a second</text>`;
+  s+=`<text class="xs" x="${(x(1)+x(10))/2}" y="${T-14}" text-anchor="middle" style="fill:var(--dis)">the hill · 1–10 cm a second</text>`;
   s+=`<path d="${smooth(AB)}" fill="none" stroke="var(--blue)" stroke-width="3.5"
     stroke-linecap="round"/>`;
   s+=`<path d="${smooth(CT)}" fill="none" stroke="var(--clay)" stroke-width="4"
     stroke-linecap="round"/>`;
-  /* two label blocks, pushed apart so they can never overlap */
-  let ya=y(AB[4])+5, yc=y(CT[2])+5;
-  if(Math.abs(ya-yc)<62){ if(ya<yc){ yc=ya+62; } else { ya=yc+62; } }
-  s+=`<text class="sm" x="${W-R+12}" y="${ya.toFixed(1)}" fill="var(--blue)">fast fibres</text>`;
-  s+=`<text class="xs" x="${W-R+12}" y="${(ya+19).toFixed(1)}">faster brush,</text>`;
-  s+=`<text class="xs" x="${W-R+12}" y="${(ya+35).toFixed(1)}">more firing</text>`;
-  s+=`<text class="sm" x="${W-R+12}" y="${yc.toFixed(1)}" fill="var(--clay)">slow fibres</text>`;
-  s+=`<text class="xs" x="${W-R+12}" y="${(yc+19).toFixed(1)}">and the pleasantness</text>`;
-  s+=`<text class="xs" x="${W-R+12}" y="${(yc+35).toFixed(1)}">ratings agreed</text>`;
   SPEEDS.forEach(v=>{
     s+=`<circle cx="${x(v)}" cy="${y(CT[SPEEDS.indexOf(v)])}" r="4" fill="var(--clay)"/>`;
     s+=`<text class="xs" x="${x(v)}" y="${T+PH+22}" text-anchor="middle">${v}</text>`;
@@ -870,83 +962,100 @@ function sceneSpeed(st){
     stroke="var(--ink)" stroke-width="2" stroke-linecap="round" opacity=".55"/>`;
   s+=`<circle cx="${x(st.vel)}" cy="${y(at(CT))}" r="7" fill="var(--clay)"
     stroke="var(--card)" stroke-width="2.5"/>`;
+  /* the two label blocks */
+  if(NARROW){
+    const LY=T+PH+82;
+    s+=`<text class="sm" x="14" y="${LY}" style="fill:var(--blue)">fast fibres</text>`;
+    s+=`<text class="xs" x="14" y="${LY+19}">faster brush,</text>`;
+    s+=`<text class="xs" x="14" y="${LY+35}">more firing</text>`;
+    s+=`<text class="sm" x="216" y="${LY}" style="fill:var(--clay)">slow fibres</text>`;
+    s+=`<text class="xs" x="216" y="${LY+19}">and the pleasantness</text>`;
+    s+=`<text class="xs" x="216" y="${LY+35}">ratings agreed</text>`;
+  }else{
+    let ya=y(AB[4])+5, yc=y(CT[2])+5;
+    if(Math.abs(ya-yc)<62){ if(ya<yc){ yc=ya+62; } else { ya=yc+62; } }
+    s+=`<text class="sm" x="${W-R+12}" y="${ya.toFixed(1)}" style="fill:var(--blue)">fast fibres</text>`;
+    s+=`<text class="xs" x="${W-R+12}" y="${(ya+19).toFixed(1)}">faster brush,</text>`;
+    s+=`<text class="xs" x="${W-R+12}" y="${(ya+35).toFixed(1)}">more firing</text>`;
+    s+=`<text class="sm" x="${W-R+12}" y="${yc.toFixed(1)}" style="fill:var(--clay)">slow fibres</text>`;
+    s+=`<text class="xs" x="${W-R+12}" y="${(yc+19).toFixed(1)}">and the pleasantness</text>`;
+    s+=`<text class="xs" x="${W-R+12}" y="${(yc+35).toFixed(1)}">ratings agreed</text>`;
+  }
   /* the real-speed stroke */
-  const AY=T+PH+72;
-  s+=arm(L, AY, W-L-R+120, 66);
-  s+=`<circle id="stroker" cx="${L+40}" cy="${AY+33}" r="11" fill="var(--clay)" opacity=".85"/>`;
-  s+=`<text class="xs" x="${L}" y="${AY-10}">fifteen centimetres of forearm, stroked at ${st.vel.toFixed(1)} cm a second — watch the dot, not the curve</text>`;
-  s+=`<text class="sm" x="${W-R+12}" y="${AY+38}">${(15/st.vel).toFixed(1)} seconds</text>`;
-  s+=`<text class="xs" x="${W-R+12}" y="${AY+56}">for one pass</text>`;
+  const AY = NARROW ? T+PH+184 : T+PH+72;
+  const AX = NARROW ? 14 : L;
+  const AW = NARROW ? W-28 : W-L-R+120;
+  s+=arm(AX, AY, AW, NARROW?58:66);
+  STROKE_GEOM={x:AX+40, span:AW-80};
+  s+=`<circle id="stroker" cx="${AX+40}" cy="${AY+(NARROW?29:33)}" r="11" fill="var(--clay)" opacity=".85"/>`;
+  if(NARROW){
+    s+=`<text class="xs" x="14" y="${AY-10}">fifteen centimetres of forearm at ${st.vel.toFixed(1)} cm a second</text>`;
+    s+=`<text class="xs" x="14" y="${AY+80}">watch the dot, not the curve · ${(15/st.vel).toFixed(1)} seconds for one pass</text>`;
+  }else{
+    s+=`<text class="xs" x="${L}" y="${AY-10}">fifteen centimetres of forearm, stroked at ${st.vel.toFixed(1)} cm a second — watch the dot, not the curve</text>`;
+    s+=`<text class="sm" x="${W-R+12}" y="${AY+38}">${(15/st.vel).toFixed(1)} seconds</text>`;
+    s+=`<text class="xs" x="${W-R+12}" y="${AY+56}">for one pass</text>`;
+  }
   return s+"</svg>";
 }
 
 /* ══ 5. speed × warmth ═════════════════════════════════════════ */
 function sceneWarmth(st){
-  const H=300, L=100, R=190, T=26, PH=196;
+  /* Narrow: the plot keeps the width and the verdict moves underneath it. */
+  const H  = NARROW ? 376 : 300;
+  const L  = NARROW ? 70 : 100;
+  const R  = NARROW ? 14 : 190;
+  const T  = 26;
+  const PH = NARROW ? 150 : 196;
   const lv=v=>Math.log(v)/Math.LN10;
   const x=v=>L+(lv(v)-lv(0.25))/(lv(40)-lv(0.25))*(W-L-R);
   const temps=[{t:18,n:"cool",y:T+22},{t:32,n:"skin warm",y:T+PH/2},{t:42,n:"hot",y:T+PH-22}];
   const sel=temps.find(z=>z.t===st.temp);
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="The sweet spot needs the right speed and the right warmth">`;
-  /* the blob */
-  s+=`<ellipse cx="${(x(1)+x(10))/2}" cy="${T+PH/2}" rx="${(x(10)-x(1))/2+26}" ry="46"
+  s+=`<ellipse cx="${(x(1)+x(10))/2}" cy="${T+PH/2}" rx="${(x(10)-x(1))/2+26}" ry="${NARROW?38:46}"
     fill="var(--clay)" opacity=".16"/>`;
-  s+=`<ellipse cx="${(x(1)+x(10))/2}" cy="${T+PH/2}" rx="${(x(10)-x(1))/2}" ry="28"
+  s+=`<ellipse cx="${(x(1)+x(10))/2}" cy="${T+PH/2}" rx="${(x(10)-x(1))/2}" ry="${NARROW?24:28}"
     fill="var(--clay)" opacity=".2"/>`;
-  s+=`<text class="lab" x="${(x(1)+x(10))/2}" y="${T+PH/2-56}" text-anchor="middle"
-    fill="var(--dis)">the sweet spot</text>`;
+  s+=`<text class="lab" x="${(x(1)+x(10))/2}" y="${T+PH/2-(NARROW?48:56)}" text-anchor="middle" style="fill:var(--dis)">the sweet spot</text>`;
   temps.forEach(z=>{
     const on=z.t===st.temp;
     s+=`<line x1="${L}" y1="${z.y}" x2="${W-R}" y2="${z.y}" stroke="var(--rule)"
       stroke-width="${on?0:1.5}" stroke-dasharray="${on?"none":"3 6"}"/>`;
-    s+=`<text class="sm" x="${L-14}" y="${z.y+5}" text-anchor="end"
-      fill="var(${on?"--ink":"--ink3"})">${z.t}°</text>`;
+    s+=`<text class="sm" x="${L-14}" y="${z.y+5}" text-anchor="end" style="fill:var(${on?"--ink":"--ink3"})">${z.t}°</text>`;
     s+=`<text class="xs" x="${L-14}" y="${z.y+21}" text-anchor="end">${esc(z.n)}</text>`;
   });
   SPEEDS.forEach(v=> s+=`<text class="xs" x="${x(v)}" y="${T+PH+24}" text-anchor="middle">${v}</text>`);
   s+=`<text class="xs" x="${(L+W-R)/2}" y="${T+PH+46}" text-anchor="middle">centimetres a second</text>`;
-  /* your dot */
   s+=`<circle cx="${x(st.vel2)}" cy="${sel.y}" r="12" fill="var(--clay)"
     stroke="var(--card)" stroke-width="3"/>`;
-  /* verdict */
   const inSpeed = st.vel2>=1 && st.vel2<=10, inTemp = st.temp===32;
   const verdict = inSpeed&&inTemp ? ["In the spot.","Right speed, right warmth."]
     : inTemp ? ["Warmth is right.","The speed is off the hill."]
     : inSpeed ? ["Speed is right.","Every speed rates lower away from skin temperature."]
     : ["Both are off.","This is the corner the research says is least pleasant."];
-  s+=`<text class="lab" x="${W-R+16}" y="${T+82}" fill="var(${inSpeed&&inTemp?"--clay":"--ink2"})">${esc(verdict[0])}</text>`;
-  s+=`<text class="sm" x="${W-R+16}" y="${T+104}">${esc(verdict[1])}</text>`;
-  s+=`<text class="xs" x="${W-R+16}" y="${T+134}">People rated every speed</text>`;
-  s+=`<text class="xs" x="${W-R+16}" y="${T+150}">more pleasant at skin</text>`;
-  s+=`<text class="xs" x="${W-R+16}" y="${T+166}">temperature than at 18°</text>`;
-  s+=`<text class="xs" x="${W-R+16}" y="${T+182}">or 42°.</text>`;
-  return s+"</svg>";
-}
-
-/* ══ 7. meaning ════════════════════════════════════════════════ */
-function sceneContext(){
-  const H=248;
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
-    aria-label="The fibres are a doorway; meaning decides what comes through">`;
-  /* doorway */
-  s+=`<path d="M330 200V96a100 100 0 0 1 200 0v104" fill="var(--paper2)"
-    stroke="var(--clay)" stroke-width="3"/>`;
-  s+=`<text class="lab" x="430" y="150" text-anchor="middle" fill="var(--dis)">the fibres</text>`;
-  s+=`<text class="sm" x="430" y="174" text-anchor="middle">a doorway</text>`;
-  s+=`<rect x="300" y="200" width="260" height="14" rx="7" fill="var(--soft)"/>`;
-  const item=(x,y,t,anchor)=>`<text class="sm" x="${x}" y="${y}" text-anchor="${anchor}">${esc(t)}</text>`;
-  const arrow=(x1,y1,x2,y2)=>`<path d="M${x1} ${y1}Q${(x1+x2)/2} ${(y1+y2)/2-14} ${x2} ${y2}"
-    fill="none" stroke="var(--ink3)" stroke-width="2" stroke-linecap="round" opacity=".5"/>`;
-  [["who is touching you",56,"end",300,64],
-   ["whether you agreed to it",56,"start",560,64]].forEach(()=>{});
-  s+=item(288,52,"who is touching you","end")+arrow(296,58,340,92);
-  s+=item(288,96,"what happened last time","end")+arrow(296,102,336,120);
-  s+=item(288,140,"whether you agreed","end")+arrow(296,146,332,150);
-  s+=item(572,52,"what you think it is for","start")+arrow(564,58,520,92);
-  s+=item(572,96,"how safe the room feels","start")+arrow(564,102,524,120);
-  s+=item(572,140,"whether it is predictable","start")+arrow(564,146,528,150);
-  s+=`<text class="lab" x="430" y="238" text-anchor="middle">meaning decides what comes through</text>`;
+  if(NARROW){
+    const VY=T+PH+86;
+    s+=`<text class="lab" x="14" y="${VY}" style="fill:var(${inSpeed&&inTemp?"--clay":"--ink2"})">${esc(verdict[0])}</text>`;
+    s+=`<foreignObject x="14" y="${VY+10}" width="${W-28}" height="60">
+      <div xmlns="http://www.w3.org/1999/xhtml"
+        style="font-family:Newsreader,serif;font-size:15px;line-height:1.45;color:var(--ink2)">${esc(verdict[1])}</div>
+      </foreignObject>`;
+    s+=`<text class="xs" x="14" y="${VY+92}">People rated every speed more pleasant at</text>`;
+    s+=`<text class="xs" x="14" y="${VY+108}">skin temperature than at 18° or 42°.</text>`;
+  }else{
+    /* verdict[1] wraps: the "Both are off." variant is 308u of text in a
+       158u column and used to run off the right edge of the canvas. */
+    s+=`<text class="lab" x="${W-R+16}" y="${T+82}" style="fill:var(${inSpeed&&inTemp?"--clay":"--ink2"})">${esc(verdict[0])}</text>`;
+    s+=`<foreignObject x="${W-R+16}" y="${T+90}" width="${R-32}" height="72">
+      <div xmlns="http://www.w3.org/1999/xhtml"
+        style="font-family:Newsreader,serif;font-size:15px;line-height:1.4;color:var(--ink2)">${esc(verdict[1])}</div>
+      </foreignObject>`;
+    s+=`<text class="xs" x="${W-R+16}" y="${T+196}">People rated every speed</text>`;
+    s+=`<text class="xs" x="${W-R+16}" y="${T+212}">more pleasant at skin</text>`;
+    s+=`<text class="xs" x="${W-R+16}" y="${T+228}">temperature than at 18°</text>`;
+    s+=`<text class="xs" x="${W-R+16}" y="${T+244}">or 42°.</text>`;
+  }
   return s+"</svg>";
 }
 
@@ -968,9 +1077,35 @@ function sceneContext(st){
    ["Welcome","The same stroke, and now it is worth something."]
   ];
   const v=verdicts[score];
-  const H=302;
+  /* Narrow: the conditions become a bulleted list above the doorway, and the
+     verdict moves underneath it — the arcs have nowhere to go at this width. */
+  const H = NARROW ? 486 : 302;
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="The same stroke read as ${esc(v[0].toLowerCase())}">`;
+  if(NARROW){
+    s+=`<text class="xs" x="12" y="22">the physical touch, unchanged in every case</text>`;
+    s+=`<rect x="12" y="30" width="250" height="34" rx="17" fill="var(--soft)"/>`;
+    s+=`<circle cx="86" cy="47" r="10" fill="var(--clay)" opacity=".85"/>`;
+    s+=`<text class="sm" x="12" y="88">3 cm/s · 32° · on a forearm</text>`;
+    CTX.forEach((c,i)=>{
+      const yy=124+i*26, ok=on(c.id);
+      s+=`<circle cx="18" cy="${yy-5}" r="5" fill="var(${ok?"--sage":"--neg"})" opacity=".8"/>`;
+      s+=`<text class="sm" x="34" y="${yy}" style="fill:var(${ok?"--ink":"--ink3"})">${esc(ok?c.n:c.off)}</text>`;
+    });
+    const DX=122, DW=176, DTOP=210, DBASE=336;
+    s+=`<path d="M${DX} ${DBASE}V${DTOP+38}a${DW/2} ${DW/2} 0 0 1 ${DW} 0V${DBASE}"
+      fill="var(--paper2)" stroke="var(--clay)" stroke-width="3"/>`;
+    s+=`<text class="sm" x="${DX+DW/2}" y="${DTOP+92}" text-anchor="middle" style="fill:var(--dis)">the fibres</text>`;
+    s+=`<text class="xs" x="${DX+DW/2}" y="${DTOP+112}" text-anchor="middle">a doorway</text>`;
+    s+=`<rect x="${DX-24}" y="${DBASE}" width="${DW+48}" height="12" rx="6" fill="var(--soft)"/>`;
+    s+=`<text class="big" x="12" y="${DBASE+62}" style="font-size:31px"
+      fill="var(${score>=4?"--sage":score<=1?"--neg":"--ink2"})">${esc(v[0])}</text>`;
+    s+=`<foreignObject x="12" y="${DBASE+74}" width="${W-24}" height="70">
+      <div xmlns="http://www.w3.org/1999/xhtml"
+        style="font-family:Newsreader,serif;font-size:15px;line-height:1.45;color:var(--ink2)">${esc(v[1])}</div>
+      </foreignObject>`;
+    return s+"</svg>";
+  }
   /* the identical physical stroke, always the same, clear of everything else */
   s+=`<text class="xs" x="60" y="26">the physical touch, unchanged in every case</text>`;
   s+=`<rect x="60" y="34" width="330" height="34" rx="17" fill="var(--soft)"/>`;
@@ -980,14 +1115,13 @@ function sceneContext(st){
   const DX=442, DW=176, DTOP=118, DBASE=272;
   s+=`<path d="M${DX} ${DBASE}V${DTOP+38}a${DW/2} ${DW/2} 0 0 1 ${DW} 0V${DBASE}"
     fill="var(--paper2)" stroke="var(--clay)" stroke-width="3"/>`;
-  s+=`<text class="sm" x="${DX+DW/2}" y="${DTOP+96}" text-anchor="middle" fill="var(--dis)">the fibres</text>`;
+  s+=`<text class="sm" x="${DX+DW/2}" y="${DTOP+96}" text-anchor="middle" style="fill:var(--dis)">the fibres</text>`;
   s+=`<text class="xs" x="${DX+DW/2}" y="${DTOP+116}" text-anchor="middle">a doorway</text>`;
   s+=`<rect x="${DX-24}" y="${DBASE}" width="${DW+48}" height="12" rx="6" fill="var(--soft)"/>`;
   /* what is arriving with it */
   CTX.forEach((c,i)=>{
     const yy=142+i*40, ok=on(c.id);
-    s+=`<text class="sm" x="392" y="${yy}" text-anchor="end"
-      fill="var(${ok?"--ink":"--ink3"})">${esc(ok?c.n:c.off)}</text>`;
+    s+=`<text class="sm" x="392" y="${yy}" text-anchor="end" style="fill:var(${ok?"--ink":"--ink3"})">${esc(ok?c.n:c.off)}</text>`;
     s+=`<path d="M400 ${yy-5}q20 0 34 ${(DTOP+70-yy)/2}" fill="none"
       stroke="var(${ok?"--sage":"--neg"})" stroke-width="2" opacity=".55"/>`;
   });
@@ -1018,9 +1152,15 @@ const RECEPTORS=[
   say:"No capsule, no structure, wandering in the upper layers of hairy skin. Poor at what and where. These are the C-tactile fibres, and the rest of this page is about them."}
 ];
 function sceneSkin(st){
-  const H=330, L=60, R=272, T=40, SH=190;
-  const bw=W-L-R;
   const sel=RECEPTORS.find(r=>r.id===st.rec)||RECEPTORS[0];
+  /* Narrow: the cross-section keeps the full width and the description moves
+     underneath it instead of sitting in a right-hand column. */
+  const H = NARROW ? 442 : 330;
+  const L = NARROW ? 14 : 60;
+  const R = NARROW ? 14 : 272;
+  const T = NARROW ? 56 : 40;
+  const SH = NARROW ? 172 : 190;
+  const bw=W-L-R;
   const y=d=>T+22+d*(SH-40);
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Where the touch receptors sit in the skin">`;
   /* layers */
@@ -1049,13 +1189,19 @@ function sceneSkin(st){
         stroke="var(${r.c})" stroke-width="${on?3:2}" stroke-linecap="round"/>`;
     else
       s+=`<circle cx="${cx}" cy="${cy}" r="${on?10:8}" fill="var(${r.c})" opacity="${on?.85:.5}"/>`;
-    s+=`<text class="xs" x="${cx}" y="${T+SH+20}" text-anchor="middle"
-      fill="var(${on?r.c:"--ink3"})">${esc(r.job)}</text></g>`;
+    s+=`</g>`;
   });
+  /* Only the selected receptor is named under the diagram. Five job labels
+     side by side collide at any width — "edges, texture, fine detail" and
+     "slow, affectionate contact" are 150u wide in a 528u band. */
+  s+=`<text class="sm" x="${L+bw/2}" y="${T+SH+26}" text-anchor="middle"
+    style="fill:var(${sel.c})">${esc(sel.job)}</text>`;
   /* the panel */
-  const RX=W-R+22;
-  s+=`<text class="lab" x="${RX}" y="${T+16}" fill="var(${sel.c})">${esc(sel.n)}</text>`;
-  s+=`<foreignObject x="${RX}" y="${T+26}" width="${R-52}" height="180">
+  const RX = NARROW ? L : W-R+22;
+  const PY = NARROW ? T+SH+58 : T+16;
+  const PW = NARROW ? bw : R-52;
+  s+=`<text class="lab" x="${RX}" y="${PY}" style="fill:var(${sel.c})">${esc(sel.n)}</text>`;
+  s+=`<foreignObject x="${RX}" y="${PY+10}" width="${PW}" height="${NARROW?118:180}">
     <div xmlns="http://www.w3.org/1999/xhtml"
       style="font-family:Newsreader,serif;font-size:15px;line-height:1.5;color:var(--ink2)">${esc(sel.say)}</div>
     </foreignObject>`;
@@ -1071,44 +1217,73 @@ const PARTS=[
  {id:"calf", n:"calf", mm:45}
 ];
 function sceneAcuity(st){
-  const H=324, L=64, R=64, T=52;
   const p=PARTS.find(z=>z.id===st.part)||PARTS[0];
-  const px=mm=>mm*7.4;                       // drawing scale
+  /* Narrow: the header wraps to two lines, the comparison rows get room to
+     breathe, and the mm scale drops just enough that a 45mm calf still fits. */
+  const H  = NARROW ? 392 : 324;
+  const L  = NARROW ? 10 : 64;
+  const R  = NARROW ? 10 : 64;
+  const T  = NARROW ? 76 : 52;
+  const px = mm => mm * (NARROW ? 7.0 : 7.4);
   const cx=(L+W-R)/2;
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="Two points ${p.mm} millimetres apart, as felt on the ${p.n}">`;
-  s+=`<text class="sm" x="${L}" y="${T-16}">the closest two points can be on the <tspan
-    style="font-family:Fraunces,serif" fill="var(--clay)">${esc(p.n)}</tspan> and still feel like two</text>`;
+  const part=`<tspan style="font-family:Fraunces,serif" fill="var(--clay)">${esc(p.n)}</tspan>`;
+  if(NARROW){
+    s+=`<text class="sm" x="${L}" y="${T-46}">the closest two points that can</text>`;
+    s+=`<text class="sm" x="${L}" y="${T-24}">still feel like two, on the ${part}</text>`;
+  } else {
+    s+=`<text class="sm" x="${L}" y="${T-16}">the closest two points can be on the ${part} and still feel like two</text>`;
+  }
   /* the gap, to scale */
-  const gap=px(p.mm), y0=T+58;
+  const gap=px(p.mm), y0=NARROW?T+40:T+58;
   s+=`<line x1="${cx-gap/2}" y1="${y0}" x2="${cx+gap/2}" y2="${y0}" stroke="var(--rule)" stroke-width="2"/>`;
   s+=`<circle cx="${cx-gap/2}" cy="${y0}" r="9" fill="var(--clay)"/>`;
   s+=`<circle cx="${cx+gap/2}" cy="${y0}" r="9" fill="var(--clay)"/>`;
-  s+=`<text class="big" x="${cx}" y="${y0+62}" text-anchor="middle">${p.mm} mm</text>`;
+  s+=`<text class="big" x="${cx}" y="${y0+58}" text-anchor="middle">${p.mm} mm</text>`;
   /* every part, as a faint comparison row */
-  const RY=y0+96;
+  const RY=y0+96, GAP=NARROW?22:13, BX=NARROW?78:L+96;
   s+=`<text class="xs" x="${L}" y="${RY-14}">all of them, same scale</text>`;
   PARTS.forEach((q,i)=>{
-    const yy=RY+i*13, on=q.id===p.id, g=px(q.mm);
-    s+=`<line x1="${L+96}" y1="${yy}" x2="${L+96+g}" y2="${yy}"
+    const yy=RY+i*GAP, on=q.id===p.id, g=px(q.mm);
+    s+=`<line x1="${BX}" y1="${yy}" x2="${BX+g}" y2="${yy}"
       stroke="var(${on?"--clay":"--rule"})" stroke-width="${on?4:3}" stroke-linecap="round"/>`;
-    s+=`<text class="xs" x="${L+88}" y="${yy+4}" text-anchor="end"
-      fill="var(${on?"--ink":"--ink3"})">${esc(q.n)}</text>`;
+    s+=`<text class="xs" x="${BX-8}" y="${yy+4}" text-anchor="end" style="fill:var(${on?"--ink":"--ink3"})">${esc(q.n)}</text>`;
   });
-  s+=`<text class="xs" x="${W-R}" y="${RY+PARTS.length*13-4}" text-anchor="end">a fingertip is about twenty times finer than a back</text>`;
+  const note="a fingertip is about twenty times finer than a back";
+  if(NARROW) s+=`<text class="xs" x="${L}" y="${H-10}">${note}</text>`;
+  else s+=`<text class="xs" x="${W-R}" y="${RY+PARTS.length*GAP-4}" text-anchor="end">${note}</text>`;
   return s+"</svg>";
 }
 
 /* ══ 9. the gate ═══════════════════════════════════════════════ */
 function sceneGate(st){
-  const H=270, cx=430, cy=150;
+  /* Narrow: the modulating inputs move to the top as their own two lines,
+     and the whole flow shifts left so "less pain" still fits on the right. */
+  const H  = NARROW ? 286 : 270;
+  const cx = NARROW ? 230 : 430;
+  const cy = NARROW ? 170 : 150;
+  const IX = NARROW ? 10 : 120;
   const open = st.gateTouch ? 0.34 : 1;
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Touch partly closes the gate that pain signals pass through">`;
-  s+=`<text class="sm" x="120" y="34">a knock, a burn, a strain</text>`;
-  s+=`<path d="M120 60C240 60 250 ${cy-8} ${cx-58} ${cy-6}" stroke="var(--clay)"
+  /* from above */
+  if(NARROW){
+    s+=`<text class="xs" x="10" y="20">attention, expectation, mood, safety</text>`;
+    s+=`<text class="xs" x="10" y="36">— can open or close it too</text>`;
+    s+=`<path d="M${cx} 46V${cy-62}" stroke="var(--sage)" stroke-width="3"
+      fill="none" stroke-linecap="round" stroke-dasharray="6 6"/>`;
+  }else{
+    s+=`<path d="M${cx} 26V${cy-62}" stroke="var(--sage)" stroke-width="3"
+      fill="none" stroke-linecap="round" stroke-dasharray="6 6"/>`;
+    s+=`<text class="sm" x="${cx+12}" y="26">attention, expectation, mood, safety</text>`;
+    s+=`<text class="xs" x="${cx+12}" y="44">— can open or close it too</text>`;
+  }
+  const TY = NARROW ? 84 : 34;
+  s+=`<text class="sm" x="${IX}" y="${TY}">a knock, a burn, a strain</text>`;
+  s+=`<path d="M${IX} ${TY+26}C${IX+120} ${TY+26} ${cx-180} ${cy-8} ${cx-58} ${cy-6}" stroke="var(--clay)"
     stroke-width="4" fill="none" stroke-linecap="round"/>`;
-  s+=`<text class="sm" x="120" y="${cy+66}">touch on the same patch of skin</text>`;
-  s+=`<path d="M120 ${cy+40}C250 ${cy+40} 250 ${cy+14} ${cx-58} ${cy+12}"
+  s+=`<text class="sm" x="${IX}" y="${cy+66}">touch on the same patch of skin</text>`;
+  s+=`<path d="M${IX} ${cy+40}C${cx-180} ${cy+40} ${cx-180} ${cy+14} ${cx-58} ${cy+12}"
     stroke="var(--blue)" stroke-width="4" fill="none" stroke-linecap="round"
     opacity="${st.gateTouch?1:.22}"/>`;
   /* the gate */
@@ -1122,14 +1297,10 @@ function sceneGate(st){
   s+=`<line x1="${cx+34}" y1="${cy-34}" x2="${cx+34}" y2="${cy+36}" stroke="var(--ink3)" stroke-width="3" stroke-linecap="round"/>`;
   /* out the other side */
   const out = st.gateTouch ? .38 : 1;
-  s+=`<path d="M${cx+58} ${cy}H${W-190}" stroke="var(--clay)"
+  const OX = NARROW ? W-80 : W-190;
+  s+=`<path d="M${cx+58} ${cy}H${OX}" stroke="var(--clay)"
     stroke-width="${1.5+out*4}" fill="none" stroke-linecap="round" opacity="${.35+out*.6}"/>`;
-  s+=`<text class="lab" x="${W-178}" y="${cy+5}">${st.gateTouch?"less pain":"pain"}</text>`;
-  /* from above */
-  s+=`<path d="M${cx} 26V${cy-62}" stroke="var(--sage)" stroke-width="3"
-    fill="none" stroke-linecap="round" stroke-dasharray="6 6"/>`;
-  s+=`<text class="sm" x="${cx+12}" y="26">attention, expectation, mood, safety</text>`;
-  s+=`<text class="xs" x="${cx+12}" y="44">— can open or close it too</text>`;
+  s+=`<text class="lab" x="${OX+8}" y="${cy+5}">${st.gateTouch?"less pain":"pain"}</text>`;
   return s+"</svg>";
 }
 
@@ -1156,17 +1327,22 @@ const BONDS=[
  {id:"stranger",n:"stranger", area:.10, allow:{head:.03,chest:0,arm:.25,hand:.85,torso:0,hips:0,legs:0,feet:0}}
 ];
 function sceneTopo(st){
-  const H=330, BX=150, BY=22, BW=150, BH=290;
+  /* Narrow: the body sits above the bars instead of beside them. */
+  const H  = NARROW ? 640 : 356;
+  const BX = NARROW ? 135 : 150;
+  const BY = NARROW ? 16 : 22;
+  const BW = 150;
+  const BH = NARROW ? 250 : 290;
   const b=BONDS.find(z=>z.id===st.bond)||BONDS[0];
   const key=id=>id.replace(/2$/,"");
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img"
     aria-label="Where a ${esc(b.n)} may touch you, and how the total area compares">`;
-  /* body outline, deliberately simple */
   s+=`<path d="M${BX+75} ${BY+6}a20 20 0 1 1 -.1 0
     M${BX+75} ${BY+30}c-30 0 -46 12 -46 34v58c0 8 -12 44 -14 62h14c4 -16 12 -40 12 -40
     v46c0 24 -6 60 -8 88h20c2 -28 8 -56 8 -80h28c0 24 6 52 8 80h20c-2 -28 -8 -64 -8 -88
     v-46s8 24 12 40h14c-2 -18 -14 -54 -14 -62v-58c0 -22 -16 -34 -46 -34Z"
-    fill="var(--paper2)" stroke="var(--rule)" stroke-width="1.5"/>`;
+    fill="var(--paper2)" stroke="var(--rule)" stroke-width="1.5"
+    transform="translate(${BX} ${BY}) scale(1 ${(BH/290).toFixed(3)}) translate(${-BX} ${-BY})"/>`;
   ZONES.forEach(z=>{
     const a=b.allow[key(z.id)]||0;
     if(a<=0.02) return;
@@ -1175,31 +1351,58 @@ function sceneTopo(st){
   });
   s+=`<text class="lab" x="${BX+BW/2}" y="${BY+BH+26}" text-anchor="middle">${esc(b.n)}</text>`;
   /* the reliable finding: total area against bond */
-  const CX=420, CW=W-CX-70;
-  s+=`<text class="sm" x="${CX}" y="${BY+26}">the finding that held across five countries</text>`;
-  s+=`<text class="xs" x="${CX}" y="${BY+46}">total area you would allow, by how close the bond is</text>`;
+  const CX = NARROW ? 12 : 420;
+  const TY = NARROW ? BY+BH+64 : BY+26;
+  const CW = NARROW ? W-CX-12 : W-CX-70;
+  const LW = NARROW ? 98 : 104;
+  const ROW = NARROW ? 30 : 36;
+  if(NARROW){
+    s+=`<text class="sm" x="${CX}" y="${TY}">the finding that held across five countries</text>`;
+    s+=`<text class="xs" x="${CX}" y="${TY+20}">total area you would allow, by how close the bond is</text>`;
+  }else{
+    s+=`<text class="sm" x="${CX}" y="${TY}">the finding that held across five countries</text>`;
+    s+=`<text class="xs" x="${CX}" y="${TY+20}">total area you would allow, by how close the bond is</text>`;
+  }
   BONDS.forEach((z,i)=>{
-    const yy=BY+70+i*36, on=z.id===b.id;
-    s+=`<text class="sm" x="${CX+104}" y="${yy+5}" text-anchor="end"
-      fill="var(${on?"--ink":"--ink3"})">${esc(z.n)}</text>`;
-    s+=`<rect x="${CX+114}" y="${yy-11}" width="${(CW-124)*z.area}" height="20" rx="10"
+    const yy=TY+44+i*ROW, on=z.id===b.id;
+    s+=`<text class="sm" x="${CX+LW}" y="${yy+5}" text-anchor="end" style="fill:var(${on?"--ink":"--ink3"})">${esc(z.n)}</text>`;
+    s+=`<rect x="${CX+LW+10}" y="${yy-11}" width="${(CW-LW-20)*z.area}" height="20" rx="10"
       fill="var(--clay)" opacity="${on?.72:.24}" data-bond="${z.id}" style="cursor:pointer"/>`;
   });
-  s+=`<text class="xs" x="${CX}" y="${H-10}">Zones here are a simplification. The published maps are finer, and the solid result is the relationship between bond and area.</text>`;
+  const note="Zones here are a simplification. The published maps are finer, and the solid result is the relationship between bond and area.";
+  if(NARROW){
+    s+=`<foreignObject x="${CX}" y="${TY+44+BONDS.length*ROW+2}" width="${W-CX-12}" height="60">
+      <div xmlns="http://www.w3.org/1999/xhtml"
+        style="font-family:Newsreader,serif;font-size:13px;line-height:1.4;color:var(--ink3)">${esc(note)}</div>
+      </foreignObject>`;
+  }else{
+    /* was a single 694u line at x=420 on an 860 canvas — it ran off the edge */
+    s+=`<foreignObject x="${CX}" y="${TY+44+BONDS.length*ROW-16}" width="${W-CX-40}" height="56">
+      <div xmlns="http://www.w3.org/1999/xhtml"
+        style="font-family:Newsreader,serif;font-size:13px;line-height:1.4;color:var(--ink3)">${esc(note)}</div>
+      </foreignObject>`;
+  }
   return s+"</svg>";
 }
 
 /* ══ 11. how sure are we ═══════════════════════════════════════ */
 function sceneClaims(st){
   const shown = !st || st.claimsShown;
-  const H=54+CLAIMS.length*60, L=56, R=64, BX=L+392;
+  /* Narrow: each claim reads as a line of text with its bar underneath,
+     rather than a right-hand label column against a shared axis. */
+  const ROW = NARROW ? 96 : 60;
+  const H  = NARROW ? 44+CLAIMS.length*ROW+30 : 54+CLAIMS.length*ROW;
+  const L  = NARROW ? 12 : 56;
+  const R  = NARROW ? 12 : 64;
+  const BX = NARROW ? 12 : L+392;
   const x=v=>BX+v*(W-BX-R);
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="How well supported each claim about touch is">`;
   s+=`<text class="xs" x="${BX}" y="24">less sure</text>`;
   s+=`<text class="xs" x="${W-R}" y="24" text-anchor="end">more sure</text>`;
   s+=`<line x1="${BX}" y1="34" x2="${W-R}" y2="34" stroke="var(--rule)" stroke-width="1.5"/>`;
   CLAIMS.forEach((c,i)=>{
-    const yy=62+i*60;
+    const top = NARROW ? 44+i*ROW : 0;
+    const yy  = NARROW ? top+68 : 62+i*ROW;
     const col = c.s>.7 ? "--sage" : c.s>.5 ? "--gold" : "--clay";
     s+=`<line x1="${BX}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="var(--soft)" stroke-width="7"
       stroke-linecap="round"/>`;
@@ -1216,9 +1419,9 @@ function sceneClaims(st){
         stroke="var(--ink3)" stroke-width="2" stroke-dasharray="4 3"/>`;
       s+=`<text class="xs" x="${x(st.claimGuess)}" y="${yy+24}" text-anchor="middle">you said</text>`;
     }
-    s+=`<foreignObject x="${L}" y="${yy-26}" width="${BX-L-26}" height="56">
+    s+=`<foreignObject x="${L}" y="${NARROW?top:yy-26}" width="${NARROW?W-24:BX-L-26}" height="${NARROW?52:56}">
       <div xmlns="http://www.w3.org/1999/xhtml"
-        style="font-family:Newsreader,serif;font-size:15px;line-height:1.35;color:var(--ink);text-align:right">
+        style="font-family:Newsreader,serif;font-size:15px;line-height:1.35;color:var(--ink);text-align:${NARROW?"left":"right"}">
         ${esc(c.t)}<div style="font-size:13px;color:var(--ink3);line-height:1.3">${esc(c.n)}</div></div>
       </foreignObject>`;
   });
@@ -1372,10 +1575,6 @@ function sceneFor(st){
         <div class="cap">The zones are a simplification of the published maps; the
           area-against-bond relationship on the right is the paper's actual finding.</div>
       </figure>`;
-    case "claims": return `
-      <figure class="wide"><div>${SCENES.claims()}</div>
-        <div class="cap">Positions are a judgement about how much weight to put on each
-          claim, not measured effect sizes. Arranged so the shape of the field is visible.</div></figure>`;
     case "revisions": return `
       <figure class="wide">
         <div class="cards" id="cards">${REVISIONS.map((r,i)=>`
@@ -1390,6 +1589,9 @@ function sceneFor(st){
   }
 }
 
+function assemble(){
+layout();
+REF_ORDER.length = 0;
 $(".wrap").innerHTML = `
 <header class="hero">
   <div class="eyebrow">${esc(HERO.eyebrow)}</div>
@@ -1446,6 +1648,7 @@ ${s.part?`<div class="part">${esc(s.part)}</div>`:""}
     researchers disagree, it says so — that is not hedging, it is the current state of a young
     field still arguing productively with itself.</p>
 </section>`;
+}
 
 /* ── the two interactive figures ───────────────────────────────── */
 function wire(){
@@ -1564,23 +1767,43 @@ function stroke(){
   const step=ts=>{
     const el=document.getElementById("stroker");
     if(!el){ raf=null; return; }
-    const secs=15/ST.vel, L=92, span=860-92-210+120-80;
+    /* geometry comes from the scene, because it differs by layout */
+    const secs=15/ST.vel, g=STROKE_GEOM;
     const u=((ts/1000)/secs)%2, f=u<1?u:2-u;
-    el.setAttribute("cx", L+40+f*span);
+    el.setAttribute("cx", g.x+f*g.span);
     raf=requestAnimationFrame(step);
   };
   raf=requestAnimationFrame(step);
 }
 
 /* contents highlighting */
-const links=[...document.querySelectorAll(".toc a")];
-const io=new IntersectionObserver(es=>{
-  es.forEach(e=>{ if(e.isIntersecting)
-    links.forEach(a=>a.classList.toggle("on", a.dataset.t===e.target.id)); });
-},{rootMargin:"-45% 0px -50% 0px"});
-STOPS.forEach(s=>{ const el=document.getElementById(s.id); if(el) io.observe(el); });
+let io = null;
+function observeStops(){
+  if(io) io.disconnect();
+  const links=[...document.querySelectorAll(".toc a")];
+  io=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting)
+      links.forEach(a=>a.classList.toggle("on", a.dataset.t===e.target.id)); });
+  },{rootMargin:"-45% 0px -50% 0px"});
+  STOPS.forEach(s=>{ const el=document.getElementById(s.id); if(el) io.observe(el); });
+}
 
-wire(); stroke();
+/* One full redraw. Called once at load, and again whenever the viewport
+   crosses the narrow/wide boundary, because the scenes are drawn at a
+   different width on each side of it. ST is module-level, so every control
+   the reader has already touched keeps its value across the redraw. */
+function render(){
+  assemble();
+  observeStops();
+  wire();
+  stroke();
+}
+render();
+if(narrowQ){
+  const onFlip = () => { const before = NARROW; if(layout() !== before) render(); };
+  narrowQ.addEventListener ? narrowQ.addEventListener("change", onFlip)
+                           : narrowQ.addListener(onFlip);
+}
 
 </script>
 </body>

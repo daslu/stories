@@ -3,8 +3,8 @@
 A reading journey for hands-on practitioners.
 
 A scroll-through page on what is known about touch.
-**Twelve stops in four parts**, about thirty minutes, eleven figures of which
-six are interactive.
+**Twelve stops in four parts**, about thirty minutes, twelve figures of which
+eleven are interactive.
 
 ```
 One · the territory      two roads · the organ · how fine
@@ -38,9 +38,11 @@ This is the **published** copy, served from `docs/touch-journey/`:
 ```
 index.html        the built single-file page (build.sh output, renamed)
 hands-src.zip     the source tree the rest of this README describes
-check.js          a copy of tools/check.js, for convenience
-README.md         this file · HANDOFF.md  the decisions behind it
+README.md         this file
 ```
+
+`HANDOFF.md` and `check.js` sit here too but are gitignored, so they stay local
+and are never served.
 
 Everything below describes the **source** tree — unzip `hands-src.zip` and work
 in `hands-src/`. Its `index.html` is the small loader that pulls in `css/` and
@@ -88,6 +90,27 @@ The two-colour scheme does real work: once the reader learns blue = fast/what
 and clay = slow/how-it-feels in the first figure, every later figure reads
 without a legend.
 
+## Two layouts
+
+Scenes are drawn in user units against `W`, and `W` has two values. Above
+820px it is **860** — the original wide layout. At or below 820px `layout()`
+switches it to **420** and every scene takes its narrow branch: side-by-side
+panels stack, right-hand label columns move underneath the art, long
+annotations wrap into a `foreignObject`.
+
+This is not cosmetic. An SVG scales to its box, so a label's real size is
+`fontsize x (box px / W)`. At W=860 on a 390px phone that factor is 0.36 and a
+13u label renders at **4.7px**. At W=420 the same label renders at 11.6px.
+`css/warm.css` caps the narrow SVG at 460px so it cannot scale past a
+comfortable size on a tablet.
+
+`page.js` listens on the media query and calls `render()` when it flips, because
+the drawing width changes on each side of it. `ST` is module-level, so every
+control the reader has already touched keeps its value across the redraw.
+
+**Adding a scene:** give it a narrow branch. `tools/check.js` cannot see
+layout — verify at 320, 390 and 1100px with something that can.
+
 ## Markup conventions
 
 Two small conventions inside the prose strings in `journey.js`, expanded by
@@ -125,8 +148,8 @@ Edit copy in `journey.js`; nothing else contains reader-facing text.
 
 ## The figures
 
-Eleven, deliberately in different visual vocabularies so that no two stops feel
-like the same chart twice. **Nine of the eleven are interactive**, and the rule
+Twelve, deliberately in different visual vocabularies so that no two stops feel
+like the same chart twice. **Eleven of the twelve are interactive**, and the rule
 for adding interaction is that it has to teach something the prose cannot:
 
 1. **Two roads** *(interactive)* — the fast road is drawn dead straight, the slow road wanders. Press **send a touch** and both signals travel **in real time**: the fast one crosses in 0.06 s, the slow one takes a full second, and a live readout counts it down. The one-second gap is the stop's whole claim, and it is the difference between reading it and feeling it.
@@ -134,6 +157,7 @@ for adding interaction is that it has to teach something the prose cannot:
 3. **The patient** — two panels side by side, one with the fast road greyed and dashed. The design of the study *is* the illustration.
 4. **Speed** *(interactive)* — the tuning hill against the ramp, plus a dot stroking 15 cm of forearm at the true speed. Watch the dot, not the curve.
 5. **Speed × warmth** *(interactive)* — the sweet spot as a region rather than a line, with a verdict that changes.
+6. **Corrections** *(interactive)* — four flip cards, each holding what the field used to say on the front and what it says now on the back. Not a chart at all, and the only figure with no SVG in it.
 7. **Skin cross-section** *(interactive)* — five receptor types at their real depths, each drawn as its own shape. Tap to read what it does. The only anatomical figure.
 8. **Two-point acuity** *(interactive)* — two dots drawn **to scale on screen** at the true threshold, plus every body part as a comparison ruler. The most physical figure on the page; readers can test it on themselves in a minute.
 9. **The gate** *(interactive)* — take the hand away and the gate opens. A mechanism diagram, not a chart.
