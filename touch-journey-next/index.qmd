@@ -1,0 +1,80 @@
+---
+title: "Touch is not one sense"
+description: "A reading journey for hands-on practitioners."
+toc: false
+---
+
+:::: {.hero}
+[A reading journey for hands-on practitioners]{.eyebrow}
+
+# Touch is not one sense
+
+::: {.stand}
+Skin carries at least two separate systems, and they are not sending the same
+message. One tells you *what* you are touching. The other answers mainly to being
+touched *affectionately* — found by accident, confirmed by a man who had lost the
+ordinary sense of touch, and it fires hardest at one particular speed.
+What follows is what we found reading our way through it: what each system responds to,
+what touch does to pain and to relationships, and which of the popular claims we could
+not get to stand up.
+:::
+::::
+
+:::: {.about}
+
+::: {.ab}
+[What this is]{.k}
+
+A plain-language walk through the research on touch — the
+[sense](https://en.wikipedia.org/wiki/Somatosensory_system){.wiki}, not the technique.
+Twelve short stops, about thirty minutes, with figures you can operate rather than only
+look at.
+:::
+
+::: {.ab}
+[Who it is for]{.k}
+
+Anyone whose work involves putting hands on other people: massage therapists,
+bodyworkers, physiotherapists, osteopaths, nurses, midwives, somatic and trauma
+practitioners. **No science background is assumed** — we did not begin with much
+of one either.
+:::
+
+::: {.ab}
+[How it is sourced]{.k}
+
+Every claim here points to a named paper, cited at the top of its section and listed at
+the foot of the page it appears on — so you can go and check where we have read it wrong.
+Where researchers disagree, and here they disagree a good deal, we have tried to say so
+rather than pick a side. It is not medical advice and not a technique manual.
+:::
+
+::::
+
+## The four parts {#parts}
+
+The journey runs in order, and each part builds on the one before it. Every page
+carries its own references at the foot.
+
+::: {.reading}
+[**One · the territory**](territory.qmd){.n} — two roads, the receptors they arrive on,
+and how finely skin can actually resolve what it feels.
+
+[**Two · the second system**](second-system.qmd){.n} — how the slow road was found, the
+patient who proved it carries an experience, and the two things it is tuned to.
+
+[**Three · what touch does**](what-touch-does.qmd){.n} — pain, the map of who may touch
+you where, and an honest sorting of how sure anyone can be about any of it.
+
+[**Four · being honest about it**](being-honest.qmd){.n} — four things the field has had
+to take back, and why the fibre is not the feeling.
+
+[**What we carry back into the room**](carry-back.qmd){.n} — ten things we came away
+with, further reading, and the complete reference list.
+:::
+
+::: {.foot}
+Assembled in 2026 from the literature as it stood. A reading of published research,
+written for people who work with touch. It is not medical advice, it does not describe a
+technique, and it cannot tell you what the person in front of you wants.
+:::

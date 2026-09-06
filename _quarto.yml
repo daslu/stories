@@ -1,0 +1,71 @@
+## The stories site.
+##
+## Project root sits at the repo root deliberately. Quarto mirrors input paths
+## under output-dir and offers no path rewriting, so a story's source directory
+## has to carry the name its URL wants. Putting the project in a src/ folder
+## with output-dir: ../docs makes Quarto warn ("strange behavior may result")
+## and leaves it unable to clean docs/site_libs.
+##
+## docs/ is what GitHub Pages serves. It is output only — never hand-edited,
+## never a source. Quarto leaves files it did not generate alone, so the older
+## hand-built pages in there survive a render untouched.
+
+project:
+  type: website
+  output-dir: docs
+  render:
+    - touch-journey-next/*.qmd
+  resources:
+    - touch-journey-next/js/**
+    # The already-published single-file story. docs/ is Quarto's output
+    # directory, and Quarto deletes anything in it that the project does not
+    # know about — it removed this page once. Listing it as a resource makes
+    # every render reproduce it verbatim instead. It goes when the new site
+    # takes over the touch-journey/ name.
+    - touch-journey/index.html
+    - touch-journey/hands-src.zip
+    - touch-journey/README.md
+    # The hand-written shelf. Without an index input Quarto writes a redirect
+    # stub to whichever page sorts first, which it did once. Copied verbatim
+    # until it becomes an index.qmd.
+    - index.html
+
+website:
+  title: "Touch is not one sense"
+  description: "A reading journey for hands-on practitioners."
+  page-navigation: true          # this is a journey; next/previous matters
+  reader-mode: false
+  sidebar:
+    style: floating
+    search: true
+    collapse-level: 1
+    contents:
+      - text: "Start here"
+        href: touch-journey-next/index.qmd
+      - text: "One · the territory"
+        href: touch-journey-next/territory.qmd
+      - text: "Two · the second system"
+        href: touch-journey-next/second-system.qmd
+      - text: "Three · what touch does"
+        href: touch-journey-next/what-touch-does.qmd
+      - text: "Four · being honest about it"
+        href: touch-journey-next/being-honest.qmd
+      - text: "What we carry back"
+        href: touch-journey-next/carry-back.qmd
+
+format:
+  html:
+    # The original page used a 1080px wrap with no persistent sidebar. Quarto's
+    # default grid leaves the body column ~790px at 1400px, which shrinks every
+    # wide-layout figure. This buys most of that width back.
+    grid:
+      sidebar-width: 240px
+      body-width: 940px
+      margin-width: 180px
+      gutter-width: 1.5rem
+    toc: true
+    toc-title: "The stops on this page"
+    section-divs: true           # each stop is a <section>, so the page TOC lists it
+    anchor-sections: true
+    link-external-newwindow: true
+    citations-hover: true

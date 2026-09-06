@@ -1,0 +1,179 @@
+---
+title: "Two · the second system"
+description: "How the slow road was found, the patient who proved it carries an experience, and the two things it is tuned to."
+---
+
+::: {.part}
+Part two · the second system
+:::
+
+## Someone put a needle in a nerve and listened {#found .stop data-stop="found"}
+
+::: {.year}
+1999
+:::
+
+::: {.lead}
+The second road was found by a group in Gothenburg who were not looking for it. The
+technique is
+[microneurography](https://en.wikipedia.org/wiki/Microneurography){.wiki}, and it is
+exactly as unlikely as it sounds: a very fine electrode placed into a nerve in a fully
+awake person, listening to single fibres while their skin is touched.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Vallbo, Olausson & Wessberg (1999) [@vallbo99]. Not disputed — this is the
+discovery, and it has held for twenty-five years.
+:::
+
+::: {.journey-figure data-scene="micro"}
+The spike patterns are drawn to show the idea, not measured. The contrast is the real
+one: these fibres were told apart from pain fibres precisely by answering a gentle
+stimulus and not a sharp one.
+:::
+
+Recording from forearm skin, they kept finding fibres that made no sense. They were
+[unmyelinated](https://en.wikipedia.org/wiki/Group_C_nerve_fiber){.wiki} — the thin,
+slow kind everyone associated with pain and temperature — but they responded happily to
+a soft brush, and hardly at all to anything sharp.
+
+Of 38 units they picked for answering to gentle pressure on the skin, **27 were this
+low-threshold kind**. That ratio is not a count of how common they are — the units were
+chosen for responding to light touch in the first place. What tells you these fibres are
+not rare is a separate observation: the team reported running into them about as often as
+the classic fast ones.
+
+The title of the paper is the whole finding: unmyelinated fibres make up a
+**second system** for coding touch in human hairy skin. What it was *doing*
+there was completely open.
+
+::: {.hands}
+[For your hands]{.t}
+These fibres are called **CT afferents** — C for the slow, unmyelinated kind — the ones
+with no insulating sheath — and T for touch. That is the term you will meet everywhere
+else, and this is where it comes from.
+:::
+
+## The man who could not feel touch, and felt it anyway {#patient .stop data-stop="patient"}
+
+::: {.year}
+2002
+:::
+
+::: {.lead}
+A second system is a nice idea, but how would you ever separate it from the first?
+The answer arrived in the form of a patient who had lost the fast road entirely.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Olausson and colleagues (2002) [@olausson02]. Strong evidence, and a single
+case — you cannot arrange for a second patient.
+:::
+
+::: {.journey-figure data-scene="patient"}
+:::
+
+A rare nerve disease had destroyed his large, insulated fibres. On any standard test
+he had no sense of touch on his body: he could not feel a poke, could not say where he
+had been touched, could not feel vibration. The fast road was gone.
+
+Then they stroked his forearm softly with a brush. He **felt something** — faint,
+hard to locate, and pleasant. And when they scanned his brain, the signal was not
+arriving at the usual place. It was lighting up the
+[insula](https://en.wikipedia.org/wiki/Insular_cortex){.wiki}, a region that deals with
+how the body feels from the inside: hunger, warmth, breath, discomfort.
+
+This is the study that turned an anatomical curiosity into a claim about experience.
+The slow road does not just exist. It goes somewhere **different**, and somewhere with
+more in common with emotion than with the map of your skin.
+
+::: {.hands}
+[For your hands]{.t}
+Affectionate touch is not a gentler version of informative touch. On this evidence
+it takes a different road and arrives somewhere else in the brain.
+:::
+
+## And it has a favourite speed {#speed .stop data-stop="speed"}
+
+::: {.year}
+2009
+:::
+
+::: {.lead}
+If these fibres were built for being stroked, you would expect them to care about how
+fast. They do — and it is not the fastest, and it is not the slowest.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Löken and colleagues (2009) [@loken09]. Widely replicated as a group average;
+individuals vary more than the tidy curve suggests, which part four returns to.
+:::
+
+::: {.journey-figure data-scene="speed"}
+Curve shapes follow the published figure; the firing values are rough rather than exact.
+The dot moves at the real speed.
+:::
+
+They brushed people's forearms at five speeds while listening to single fibres,
+then asked how pleasant each stroke felt. The fast fibres did the sensible thing: the
+quicker the brush, the harder they fired. Speed in, speed out.
+
+The slow fibres did something more interesting. They fired hardest at **middling
+speeds**, around one to ten centimetres a second, and less at both extremes. Drag the
+dial and watch the shape. It is a hill, not a ramp.
+
+And how pleasant people rated it made the same hill. The speeds that lit up these fibres
+were the speeds people liked, and this range is often described as the speed of a caress.
+Worth a caveat that is easy to lose: when spontaneous stroking has actually been measured,
+it tends to run somewhat **faster** than the tuning peak, even though people stroke
+more slowly the closer they feel to the person. The hill is real. "This is exactly how
+humans naturally caress" is a tidier story than the measurements support.
+
+::: {.hands}
+[For your hands]{.t}
+The dot moves at the real speed. Watch it rather than the curve, then try matching it
+with your own hand on your forearm. That is what the research is describing.
+:::
+
+## It also wants you to be warm {#warm .stop data-stop="warm"}
+
+::: {.year}
+2014
+:::
+
+::: {.lead}
+A second tuning, and the one most likely to change what you actually do. These fibres
+are fussy about temperature, and the temperature they want is skin.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Ackerley and colleagues (2014) [@ackerley14]. Well supported, and a small
+study — as all microneurography is.
+:::
+
+::: {.journey-figure data-scene="warmth"}
+A simplified picture of two findings held together. The sweet spot is drawn as a region
+because that is how it behaves, not as a measured contour.
+:::
+
+They repeated the stroking experiment at different temperatures. The fibres
+responded best to a brush at about **32 degrees** — neutral skin temperature. Not warm.
+Not cool. The temperature of another person.
+
+And the ratings followed. People found **every speed** more pleasant at skin
+temperature than at 18 degrees or at 42 degrees. Get the warmth wrong and the speed
+cannot rescue it.
+
+Try the two together in the panel. The sweet spot is a small region, not a line, and
+both dimensions have to be right to land in it.
+
+::: {.hands}
+[For your hands]{.t}
+Cold hands are not merely unpleasant, they are the wrong stimulus. So is oil straight
+from a cool bottle, and so is a treatment room a couple of degrees under. This is the
+cheapest change on this page.
+:::

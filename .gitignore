@@ -1,7 +1,10 @@
-docs/**/HANDOFF.md
-docs/**/NOTES.md
-docs/**/TODO.md
-docs/**/dev-notes/
+# Working documents, wherever they sit. They used to live under docs/, which
+# is now Quarto's output directory and is rebuilt on every render.
+**/HANDOFF.md
+**/NOTES.md
+**/RESEARCH.md
+**/TODO.md
+**/dev-notes/
 
 docs/**/check.js
 docs/**/build.sh
@@ -9,3 +12,6 @@ docs/**/tools/
 docs/**/dist/
 
 .claude
+
+/.quarto/
+**/*.quarto_ipynb

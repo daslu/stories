@@ -1,0 +1,92 @@
+---
+title: "Four · being honest about it"
+description: "Four things the field has had to take back, and why the fibre is not the feeling."
+---
+
+::: {.part}
+Part four · being honest about it
+:::
+
+## Four things this field has had to take back {#wrong .stop data-stop="wrong"}
+
+::: {.year}
+2012–2023
+:::
+
+::: {.lead}
+Everything in part two is a decade old or more, and parts of it have been revised. A
+practitioner quoting the 2014 version is now quoting something the researchers have moved
+on from.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Six papers between 2021 and 2023, named on the cards: Watkins [@watkins21],
+Case [@case21], Ali [@ali23], Bendas [@bendas21], Crucianelli [@crucianelli22]
+and — the largest — Schirmer, Croy & Ackerley [@schirmer23], a review by researchers
+inside the field checking their own published work.
+:::
+
+::: {.journey-figure data-scene="revisions"}
+Four corrections from the last decade. Tap each card to turn it over.
+:::
+
+None of these demolish the story. They complicate it in ways that mostly make it
+**more** useful, and they are worth knowing so that you are not the last person in the
+room still saying the old version.
+
+The fourth is the largest and the least comfortable. Going through the literature, the
+authors found that of the papers using the phrase
+"[affective touch](https://en.wikipedia.org/wiki/Affective_touch){.wiki}",
+only **34%** even mention these fibres. A nerve fibre and a human experience had quietly
+become the same word, and they are not the same thing.
+
+::: {.hands}
+[For your hands]{.t}
+When you explain your work, describe the **touch** — slow, light, warm, moving, on
+a forearm — rather than claiming to activate a named nerve fibre. The first is accurate
+and checkable; the second goes further than anyone can currently support.
+:::
+
+## The fibre is not the feeling {#meaning .stop data-stop="meaning"}
+
+::: {.year}
+Now
+:::
+
+::: {.lead}
+The most useful correction of all, and it comes from within the research rather than
+from its critics.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Sailer & Leknes (2022) [@sailer22] and Schirmer, Croy & Schweinberger (2022)
+[@schirmer22]. Position pieces rather than experiments — arguments about how to read
+the evidence, from people who generated much of it.
+:::
+
+::: {.journey-figure data-scene="context"}
+Illustrative, not measured — no study assigns these labels. It is here because the point
+is hard to feel from a sentence and easy to feel from a switch.
+:::
+
+The same stroke, at the same speed and the same temperature, is not the same
+experience depending on who is doing it, whether you consented, what happened last time,
+and what you believe it is for. One paper's title puts it plainly: **meaning makes touch
+affective**. The other argues that social touch is better understood as a **tool**
+people use to do something to each other than as a signal being transmitted.
+
+That is not a demotion of the nerve fibres. It is a description of where they sit. They
+look like a **doorway** — a channel well suited to carrying this kind of contact. What
+comes through the doorway is decided by everything else.
+
+Which is, if you think about it, what a good practitioner already knows. The biology
+has caught up with the room.
+
+::: {.hands}
+[For your hands]{.t}
+Speed and warmth are worth getting right, and they are the smaller half. Consent,
+predictability, and whether the person wanted to be touched by *you* are doing more
+work than any number on this page.
+:::

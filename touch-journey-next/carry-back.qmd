@@ -1,0 +1,92 @@
+---
+title: "What we carry back into the room"
+description: "Ten things we came away with, further reading, and the complete reference list."
+nocite: |
+  @*
+---
+
+::: {.part}
+Closing
+:::
+
+## What we would carry back into the room {#rules .stop}
+
+::: {.year}
+In practice
+:::
+
+::: {.lead}
+Ten things we came away with, loosely ordered by how much weight we would put on each.
+:::
+
+::: {.rules}
+- **Slower than feels natural — about a hand's width a second.**\
+  One to ten centimetres a second is where the research clusters, and it is slower than
+  most of us work by default.
+- **Warmth seems to matter about as much as speed.**\
+  Around skin temperature — hands, oil, room. Cold shifted every speed toward less
+  pleasant, and technique did not appear to make up for it.
+- **Hairy skin looks like the home ground, though not the only ground.**\
+  Forearm, back, shoulders. The palm has some of these fibres after all — just fewer.
+- **Still contact seems to count.**\
+  Resting a hand is not a lesser version of stroking. It may be preferred to stroking
+  done wrong.
+- **What you are trying to do decides which system you are working with.**\
+  Fine detail comes through a fingertip on hairless skin. Contact and comfort come
+  through a broad, slow, warm hand on hairy skin.
+- **Averages describe populations, not the person on the table.**\
+  The curve is an average across a lot of people. We would ask, watch and adjust rather
+  than put a number on someone.
+- **Saying what you are about to do matters more than we expected.**\
+  You have access the social map normally saves for the people we are closest to. Saying
+  it out loud seems to be how that stays safe rather than just allowed.
+- **Describing the touch travels further than describing the mechanism.**\
+  "Slow, warm, light, moving" is honest and checkable. "Activating your C-tactile fibres"
+  goes beyond the evidence.
+- **The hormone claims are the ones we would hold most loosely.**\
+  That evidence is the thinnest thing here. The pain and comfort findings are steadier
+  and need no help from it.
+- **Most of the work is probably not being done by the fibres.**\
+  Safety, consent, predictability and relationship. The fibres are the doorway, not the
+  visit.
+:::
+
+## If you want to go further {#further .stop}
+
+::: {.year}
+Reading
+:::
+
+::: {.lead}
+Four places to go next, in the order we would send someone.
+:::
+
+::: {.reading}
+[McGlone et al. (2014)](https://www.cell.com/neuron/fulltext/S0896-6273(14)00387-0){.n}
+— The standard overview, free to read, and the source most people are quoting
+second-hand. Long, but the first half is very approachable.
+
+[Morrison et al. (2010)](https://link.springer.com/article/10.1007/s00221-009-2007-y){.n}
+— The friendliest conceptual framing of why any of this might matter.
+
+[Kidd et al. (2023)](https://www.tandfonline.com/doi/full/10.1080/17437199.2021.1980082){.n}
+— The bridge from nerve fibres to stress physiology, and the closest thing to a review
+written for people who do this for a living.
+
+[Suvilehto et al. (2023)](https://www.nature.com/articles/s44159-023-00217-5){.n}
+— The widest recent view — who touches whom, where, and what for.
+:::
+
+::: {.foot}
+Assembled in 2026 from the literature as it stood. A reading of published
+research, written for people who work with touch. It is not medical advice, it does not
+describe a technique, and it cannot tell you what the person in front of you wants. Where
+researchers disagree we have tried to say so rather than tidy it away — that is not
+hedging, it is the current state of a young field still arguing productively with
+itself.
+:::
+
+::: {.refnote}
+Every source the journey cites, in the order it cites them. Each page also carries its
+own references at the foot, numbered for that page.
+:::

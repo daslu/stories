@@ -1,0 +1,144 @@
+---
+title: "Three · what touch does"
+description: "Pain, the map of who may touch you where, and an honest sorting of how sure anyone can be."
+---
+
+::: {.part}
+Part three · what touch does
+:::
+
+## Touch turns pain down, and company turns it down further {#pain .stop data-stop="pain"}
+
+::: {.year}
+1965 onward
+:::
+
+::: {.lead}
+The oldest practical claim about touch, and one of the better supported. Rubbing a
+banged elbow is not superstition; there is a mechanism, and it was proposed sixty years
+ago.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Melzack & Wall's
+[gate control theory](https://en.wikipedia.org/wiki/Gate_control_theory_of_pain){.wiki}
+(1965) [@melzack65], then Coan, Schaefer & Davidson (2006) [@coan06] and Goldstein and
+colleagues (2018) [@goldstein18]. The framework is one of the field's starting points,
+and much revised since; the handholding studies are small and replicated in direction.
+:::
+
+::: {.journey-figure data-scene="gate"}
+The original 1965 drawing, much simplified. Sixty years of revision have complicated the
+mechanism without overturning the central claim.
+:::
+
+The idea was that pain signals have to pass through a **gate** in the spinal
+cord on their way up, and that fast touch fibres arriving from the same patch of skin can
+partly close it. Signals coming *down* from the brain — attention, expectation,
+mood — can open or close it too.
+
+The details have been revised many times in sixty years. The central claim has held:
+**touch and pain are not independent channels**, and one turns the other up or down
+before either reaches awareness.
+
+Then there is who is doing the touching. When women anticipating an electric shock held
+someone's hand, the threat response in the brain was reduced — **less by a stranger's
+hand than by their husband's**, and the better they rated the marriage, the larger the
+effect. Later work found that handholding during pain came with increased coupling
+between the two people's brain activity, and that the more empathic the partner, the more
+the pain went down.
+
+::: {.hands}
+[For your hands]{.t}
+Contact can genuinely reduce pain, and it is not only about the contact — the same
+hand does more when it belongs to someone the person trusts. That is an argument for the
+relationship being part of the treatment rather than around it.
+:::
+
+## Everyone carries a map of who may touch them where {#where .stop data-stop="where"}
+
+::: {.year}
+2015
+:::
+
+::: {.lead}
+Not a metaphor either. Ask people to shade in which parts of their body a given person
+is allowed to touch, and something very orderly comes out.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Suvilehto and colleagues (2015) [@suvilehto15]. Large and cross-cultural, and
+entirely self-report — maps of what people say they would allow, which is not the same as
+what happens.
+:::
+
+::: {.journey-figure data-scene="topography"}
+The zones are a simplification of the published maps; the area-against-bond relationship
+on the right is the paper's actual finding.
+:::
+
+**1,368 people across five countries** did exactly that, for everyone from a
+partner to a stranger. The maps were remarkably consistent, and the headline finding is
+almost embarrassingly simple: **the total area a person is allowed to touch
+tracks the strength of the emotional bond**. Cultural differences were minor.
+
+Hands are permitted to nearly everyone. The area expands outward from there as the
+relationship closes, and for a stranger most of the body is off limits. The regions people
+guard most closely are also the regions they rate as most pleasurable to be touched on.
+
+You occupy an unusual position on that map. As a practitioner you are given access it
+reserves for the people we are closest to — by agreement, in a role, for a purpose. That
+is a real thing to hold carefully, and it is why consent in this work is not a formality.
+
+::: {.hands}
+[For your hands]{.t}
+Your hands are on territory that, for this person, is normally reserved. Saying what
+you are about to do before you do it is not politeness. It is how the map gets redrawn
+safely.
+:::
+
+## How sure can we be about any of this? {#claims .stop data-stop="claims"}
+
+::: {.year}
+The evidence
+:::
+
+::: {.lead}
+Touch research makes a lot of claims and they are not equally supported. Here they are
+sorted honestly, because the strong ones get less airtime than the shaky ones.
+:::
+
+::: {.src}
+[The research]{.lbl}
+This one figure is a judgement rather than any single paper's result — a reading
+of the literature cited throughout, leaning on Kidd, Devine & Walker's review
+[@kidd23] for the stress claims and Moyer and colleagues' meta-analysis [@moyer11]
+for the [cortisol](https://en.wikipedia.org/wiki/Cortisol){.wiki} one.
+:::
+
+::: {.journey-figure data-scene="claims"}
+Positions are a judgement about how much weight to give each claim, not measured effect
+sizes. Arranged so the shape of the field is visible.
+:::
+
+Notice the shape of it. The best-supported claims are the **simplest and most
+physical**: contact reduces pain,
+[skin-to-skin contact](https://en.wikipedia.org/wiki/Kangaroo_care){.wiki} steadies
+newborns. The weakest are the ones about **hormones** — the
+[oxytocin](https://en.wikipedia.org/wiki/Oxytocin){.wiki} and cortisol stories that
+circulate most confidently in training rooms are the ones the evidence supports least
+well.
+
+That is not an accident. Subjective outcomes are easy to measure and to move; blood
+hormones are hard to measure, vary enormously between people and across a day, and rarely
+shift as neatly as the story requires. When you hear a claim about touch and a named
+hormone, treat it as the least secure thing in the sentence.
+
+::: {.hands}
+[For your hands]{.t}
+You do not need the hormone claims. The evidence you actually have — pain, comfort,
+distress, sleep in newborns — is stronger, more directly about what people come to you
+for, and much harder to argue with.
+:::

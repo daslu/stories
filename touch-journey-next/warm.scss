@@ -1,0 +1,41 @@
+/*-- scss:defaults --*/
+
+// Bootstrap variables first, so Quarto's own chrome — sidebar, page TOC,
+// next/previous links, search — comes out in the same warm vocabulary as the
+// page. Setting only a stylesheet leaves the navigation looking like Bootstrap
+// bolted to a book, which is worse than either.
+
+$paper:  #FAF5EF;
+$paper2: #F2E9DE;
+$card:   #FFFCF8;
+$ink:    #33291F;
+$ink2:   #6B5D4E;
+$ink3:   #9E8F7D;
+$rule:   #E7DACA;
+$clay:   #C0603F;
+$blue:   #4E7CA6;
+$dis:    #B0755F;
+
+$body-bg:    $paper;
+$body-color: $ink;
+$font-family-sans-serif: "Newsreader", Georgia, serif;
+$font-size-root: 19px;
+$line-height-base: 1.68;
+
+$headings-font-family: "Fraunces", "Newsreader", Georgia, serif;
+$headings-font-weight: 600;
+$headings-color: $ink;
+
+$link-color: $clay;
+$link-hover-color: darken($clay, 10%);
+$border-color: $rule;
+
+$navbar-bg: $paper;
+$navbar-fg: $ink2;
+$sidebar-bg: $paper;
+$sidebar-fg: $ink2;
+$sidebar-hl: $clay;
+$toc-color: $ink3;
+$toc-active-border: $clay;
+
+$grid-body-width: 1080px;

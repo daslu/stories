@@ -1,0 +1,158 @@
+---
+title: "One · the territory"
+description: "Two roads, the receptors they arrive on, and how finely skin resolves what it feels."
+---
+
+::: {.part}
+Part one · the territory
+:::
+
+## There are two ways of being touched {#two .stop data-stop="two"}
+
+::: {.year}
+The idea
+:::
+
+::: {.lead}
+Everything else here follows from one thing: touch is not a single sense. Two
+separate kinds of nerve fibre leave the skin at the same instant, travelling at very
+different speeds, and they are not carrying the same message.
+:::
+
+::: {.src}
+[The research]{.lbl}
+This first stop is the shared framework rather than a single study — it is
+drawn from the review by McGlone, Wessberg & Olausson (2014) [@mcglone14], which is
+also the best single thing to read after this page.
+:::
+
+::: {.journey-figure data-scene="roads"}
+The animation runs in real time. A fast signal crosses in a few hundredths of a
+second; the slow one takes about a second. That gap is the finding itself, not an
+effect added to illustrate it.
+:::
+
+The **fast road** is the one most people mean by touch. Thick fibres wrapped in
+[myelin](https://en.wikipedia.org/wiki/Myelin){.wiki}, an insulating sheath that lets a
+signal race along at tens of metres per second. They are superb at **what and where** —
+the exact spot, the texture, the pressure, the edge of the object in your hand. This is
+the system that lets you find a coin in your pocket without looking.
+
+The **slow road** is the surprise. Thin fibres with no insulation, a signal ambling
+along at about one metre per second — so slow that when someone strokes your forearm,
+that part of the message arrives something like **a second behind** the rest. They are
+poor at what and where. What they seem to carry, instead, is **how it feels**.
+
+Those two colours — blue for the fast road, clay for the slow one — mean the same
+thing in every figure from here on. Nothing below assumes you have met any of this
+before.
+
+::: {.hands}
+[For your hands]{.t}
+If you have ever wondered why a client goes quiet a beat *after* your hands
+land rather than as they land, there is a real signal running about a second behind the
+obvious one.
+:::
+
+## You are working on a sense organ, not a covering {#organ .stop data-stop="organ"}
+
+::: {.year}
+Where it happens
+:::
+
+::: {.lead}
+Skin is usually described as a barrier. It is also the largest sensory surface you
+have, and the fast road alone arrives on four different kinds of receptor, each answering
+to something different.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Standard anatomy rather than a finding [@standring] — the classification of
+[mechanoreceptors](https://en.wikipedia.org/wiki/Mechanoreceptor){.wiki} below is
+textbook material, and each type links to its Wikipedia entry if you want the detail.
+:::
+
+::: {.journey-figure data-scene="skin"}
+Depths and shapes are schematic. Tap a receptor to read what it does.
+:::
+
+Tap any receptor in the diagram. Two live near the surface and handle fine, quick
+things: [Merkel cells](https://en.wikipedia.org/wiki/Merkel_nerve_ending){.wiki} for
+**edges and texture**, and
+[Meissner corpuscles](https://en.wikipedia.org/wiki/Tactile_corpuscle){.wiki} for
+**slip** — the receptor that tells you a glass is sliding out of your grip before you
+consciously notice.
+
+Two sit deeper and handle slower, coarser things.
+[Ruffini endings](https://en.wikipedia.org/wiki/Bulbous_corpuscle){.wiki} register
+**stretch** across the skin, part of how you know where your hand is without looking.
+[Pacinian corpuscles](https://en.wikipedia.org/wiki/Lamellar_corpuscle){.wiki} register
+**fast vibration**, which is how you feel the texture of a surface through the end of a
+tool rather than through your fingertips.
+
+And then the fifth kind:
+[bare nerve endings](https://en.wikipedia.org/wiki/Free_nerve_ending){.wiki} with no
+capsule at all, wandering in the hairy skin. Those are the slow road, and the next four
+stops are about them.
+
+::: {.hands}
+[For your hands]{.t}
+When you change from a fingertip to a flat palm, from gliding to holding, from still
+to vibrating, you are not adjusting an intensity. You are moving between different
+receptors with different jobs.
+:::
+
+## Your fingertips are twenty times sharper than your back {#acuity .stop data-stop="acuity"}
+
+::: {.year}
+How fine
+:::
+
+::: {.lead}
+How close together can two points be before skin stops feeling them as two? The
+answer varies across the body by more than twenty-fold — and the conclusion people
+usually draw from that is wider than the measurement allows.
+:::
+
+::: {.src}
+[The research]{.lbl}
+The numbers everyone quotes come from Weinstein's 1968 survey [@weinstein68].
+The test itself has been questioned for years as a measure of how finely you can
+feel [@tong13] — the ranking across the body is solid, the exact millimetres softer than
+they look.
+:::
+
+::: {.journey-figure data-scene="acuity"}
+Drawn larger than life so the smallest gaps stay visible; the proportions between body
+parts are the real ones. Values are the classic Weinstein figures, widely reproduced —
+the ranking is solid, the exact millimetres less so.
+:::
+
+Pick a body part and look at the gap drawn to scale. On a **fingertip** the two
+dots have to come within two or three millimetres before they merge into one. On the
+**back** they can be nearly four centimetres apart and still feel like a single touch.
+This is
+[two-point discrimination](https://en.wikipedia.org/wiki/Two-point_discrimination){.wiki},
+and it tracks how densely the fast receptors are packed.
+
+It is tempting to conclude from this that precision on a back is pointless. That would
+be over-reading a very narrow measurement, in at least three ways. **Locating** a
+single contact is generally more accurate than telling two apart, so a person can often
+say roughly where your hand is even where they could not resolve two touches. **Pressure
+reaches past the skin** — muscle, fascia and joints have their own sensory supply, and
+where you press changes what you are pressing on whatever the skin can resolve. And the
+precision may matter most **to you**: feeling your way is information travelling to you,
+the practitioner, and your fingertips resolve at two or three millimetres.
+
+What the number does tell you is narrower and still worth having: do not expect fine
+surface detail on a back to be *perceived* as detail by the person receiving it.
+And treat the exact figures gently — people can sometimes report "two" when both points
+are in the same place, which suggests the task picks up cues besides spacing.
+
+::: {.hands}
+[For your hands]{.t}
+Try it on yourself with two pencil tips or a bent paperclip. Fingertip, forearm,
+back. Then have someone touch one spot on your back and point to where you think it was —
+you will usually be closer than the two-point figure would suggest.
+:::

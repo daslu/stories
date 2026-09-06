@@ -1,0 +1,20 @@
+## Applies to every document in this directory and below, and to nothing
+## outside it. That is the point: the rest of the family uses the strip-chart
+## instrument vocabulary, and this story is deliberately a book instead.
+
+bibliography: refs.bib
+csl: ama.csl
+link-citations: true
+
+format:
+  html:
+    toc: true
+    toc-title: "The stops on this page"
+    theme: [cosmo, warm.scss]
+    css: warm.css
+    include-in-header:
+      - text: |
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    include-after-body: _figures.html
