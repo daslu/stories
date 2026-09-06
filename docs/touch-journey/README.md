@@ -144,7 +144,9 @@ js/scenes.js      six illustrations. Not charts — rounded caps, soft fills
 js/page.js        assembles the page, wires the two live figures
 ```
 
-Edit copy in `journey.js`; nothing else contains reader-facing text.
+Most reader-facing copy is in `journey.js`, but not all of it: the twelve figure
+captions, the closing heading and its lead, and the foot note live in `page.js`.
+Grep both before an editing pass.
 
 ## The figures
 

@@ -217,26 +217,29 @@ const HERO = {
  eyebrow:"A reading journey for hands-on practitioners",
  title:"Touch is not one sense",
  stand:`Skin carries at least two separate systems, and they are not sending the same
-   message. One tells you <em>what</em> you are touching. The other seems to exist to
-   register being touched <em>affectionately</em> — it was found by accident, confirmed by a
-   man who had lost the ordinary sense of touch, and it has a preferred speed. This is a
-   tour of both: what each is for, what touch does to pain and to relationships, and which
-   popular claims about it do not survive contact with the evidence.`
+   message. One tells you <em>what</em> you are touching. The other seems to be there to
+   register being touched <em>affectionately</em> — found by accident, confirmed by a man
+   who had lost the ordinary sense of touch, and it turns out to have a preferred speed.
+   What follows is what I found reading my way through it: what each system is for, what
+   touch does to pain and to relationships, and which of the popular claims I could not
+   get to stand up.`
 };
 
 const ABOUT = [
  {k:"What this is",
-  v:`A plain-language tour of what research has established about touch — the
+  v:`A plain-language walk through the research on touch — the
     {{Somatosensory system|sense}}, not the technique. Twelve short stops, about thirty
-    minutes, with figures you can operate rather than just look at.`},
+    minutes, with figures you can operate rather than only look at.`},
  {k:"Who it is for",
   v:`Anyone whose work involves putting hands on other people: massage therapists,
     bodyworkers, physiotherapists, osteopaths, nurses, midwives, somatic and trauma
-    practitioners. <b>No science background is assumed.</b>`},
+    practitioners. <b>No science background is assumed</b> — I did not begin with much
+    of one either.`},
  {k:"How it is sourced",
   v:`Every claim is attributed to a named paper, cited at the top of its section and listed
-    in full at the bottom. Where researchers disagree — and here they disagree a good deal —
-    the page says so. It is not medical advice and not a technique manual.`}
+    in full at the bottom — so you can go and check where I have read it wrong. Where
+    researchers disagree, and here they disagree a good deal, I have tried to say so rather
+    than pick a side. It is not medical advice and not a technique manual.`}
 ];
 
 const STOPS = [
@@ -557,25 +560,25 @@ const CLAIMS = [
 ];
 
 const RULES = [
- {t:"Slow down to about a hand's width a second.",
-  d:"One to ten centimetres a second is the range, and it is slower than most people stroke by default."},
- {t:"Warm your hands, and the oil, and the room.",
-  d:"Around skin temperature. Cold shifts every speed toward less pleasant, and no amount of technique compensates."},
- {t:"Hairy skin is the home ground, but not the only ground.",
+ {t:"Slower than feels natural — about a hand's width a second.",
+  d:"One to ten centimetres a second is where the research clusters, and it is slower than most of us work by default."},
+ {t:"Warmth seems to matter about as much as speed.",
+  d:"Around skin temperature — hands, oil, room. Cold shifted every speed toward less pleasant, and technique did not appear to make up for it."},
+ {t:"Hairy skin looks like the home ground, though not the only ground.",
   d:"Forearm, back, shoulders. The palm has some of these fibres after all — just fewer."},
- {t:"Still contact counts.",
+ {t:"Still contact seems to count.",
   d:"Resting a hand is not a lesser version of stroking. It may be preferred to stroking done wrong."},
- {t:"Match the receptor to the intention.",
-  d:"Fine detail wants a fingertip and glabrous skin. Contact and comfort want a broad, slow, warm hand on hairy skin. Different systems."},
- {t:"Expect the person in front of you to differ from the average.",
-  d:"The curve is a population mean. Ask, watch and adjust rather than applying a number."},
- {t:"Say what you are about to do.",
-  d:"You have access the social map normally reserves for intimates. Narration is how that stays safe rather than merely permitted."},
- {t:"Describe the touch, not the mechanism.",
+ {t:"Different intentions seem to want different systems.",
+  d:"Fine detail wants a fingertip and glabrous skin. Contact and comfort want a broad, slow, warm hand on hairy skin."},
+ {t:"Averages describe populations, not the person on the table.",
+  d:"The curve is a population mean. I would ask, watch and adjust rather than apply a number to someone."},
+ {t:"Saying what you are about to do matters more than I expected.",
+  d:"You have access the social map normally reserves for intimates. Narration seems to be how that stays safe rather than merely permitted."},
+ {t:"Describing the touch travels further than describing the mechanism.",
   d:"“Slow, warm, light, moving” is honest and checkable. “Activating your C-tactile fibres” goes beyond the evidence."},
- {t:"Drop the hormone claims.",
-  d:"The oxytocin and cortisol stories are the weakest evidence you have. The pain and comfort evidence is stronger and needs no embellishment."},
- {t:"Remember what is doing most of the work.",
+ {t:"The hormone claims are the ones I would hold most loosely.",
+  d:"That evidence is the thinnest thing here. The pain and comfort findings are steadier and need no help from it."},
+ {t:"Most of the work is probably not being done by the fibres.",
   d:"Safety, consent, predictability and relationship. The fibres are the doorway, not the visit."}
 ];
 
@@ -1509,8 +1512,8 @@ function sceneFor(st){
         </div>
         <div id="roadsFig">${SCENES.roads(ST)}</div>
         <div class="cap">The animation runs in real time. A fast signal crosses in a few
-          hundredths of a second; the slow one takes about a second. That gap is the
-          finding, not an effect.</div>
+          hundredths of a second; the slow one takes about a second. That gap is the finding
+          itself, not an effect added to illustrate it.</div>
       </figure>`;
     case "micro": return `
       <figure class="wide">
@@ -1554,8 +1557,9 @@ function sceneFor(st){
           ${PARTS.map(q=>`<button class="pill" data-part="${q.id}"
             aria-pressed="${ST.part===q.id}">${esc(q.n)}</button>`).join("")}</div>
         <div id="acuFig">${SCENES.acuity(ST)}</div>
-        <div class="cap">Drawn to scale on screen. Values are the classic Weinstein figures,
-          widely reproduced — the ranking is solid, the exact millimetres less so.</div>
+        <div class="cap">Drawn larger than life so the smallest gaps stay visible; the
+          proportions between body parts are the real ones. Values are the classic Weinstein
+          figures, widely reproduced — the ranking is solid, the exact millimetres less so.</div>
       </figure>`;
     case "gate": return `
       <figure class="wide">
@@ -1620,9 +1624,9 @@ ${s.part?`<div class="part">${esc(s.part)}</div>`:""}
 </section>`).join("")}
 
 <section class="close">
-  <h2>What to actually do with this</h2>
-  <p class="lead" style="max-width:34rem">Ten things, in rough order of how confident you
-    can be about them.</p>
+  <h2>What I would carry back into the room</h2>
+  <p class="lead" style="max-width:34rem">Ten things I came away with, loosely ordered by
+    how much weight I would put on each.</p>
   <ul class="rules">${RULES.map(r=>`<li><b>${esc(r.t)}</b><br>${esc(r.d)}</li>`).join("")}</ul>
 
   <div class="reading">
@@ -1642,11 +1646,12 @@ ${s.part?`<div class="part">${esc(s.part)}</div>`:""}
         <span class="jo">${esc(r.j)}</span></li>`;}).join("")}</ol>
   </div>
 
-  <p class="foot">Assembled in 2026 from the literature as it stood. This page summarises
-    published research for people who work with touch. It is not medical advice, it does not
+  <p class="foot">Assembled in 2026 from the literature as it stood. A reading of published
+    research, written for people who work with touch. It is not medical advice, it does not
     describe a technique, and it cannot tell you what the person in front of you wants. Where
-    researchers disagree, it says so — that is not hedging, it is the current state of a young
-    field still arguing productively with itself.</p>
+    researchers disagree I have tried to say so rather than tidy it away — that is not
+    hedging, it is the current state of a young field still arguing productively with
+    itself.</p>
 </section>`;
 }
 
