@@ -146,9 +146,17 @@ weakest entry has not drifted upward; and a list of phrasings that have caused
 trouble before does not appear.
 
 **layout-check.js** renders the built pages in headless Chrome at six widths,
-operates every control the kit can make, and asserts that nothing leaves its
-viewBox and no two labels overlap. Geometry comes from `getBBox()`, so results
-are independent of display scale. It skips quietly with no chrome on PATH.
+operates every control the kit can make — plus anything inside a drawing
+carrying `data-fig-click` — and asserts that nothing leaves its viewBox and no
+two labels overlap. Geometry comes from `getBBox()`, so results are independent
+of display scale. It skips quietly with no chrome on PATH.
+
+Its tolerance is **±0.6 user units**, tighter than the ±2 the touch story's own
+checker used. That is not pedantry: text width in *user units* grows as the
+drawing box shrinks — a CSS-pixel font divided by the scale factor — so a
+right-anchored label in a fixed gutter can overrun the edge only at small
+widths. One had been doing so by about a pixel for the life of the narrow
+layout, and ±2 was exactly wide enough to hide it.
 
 **What layout-check cannot catch, and you have to look for yourself: an opaque
 shape drawn over a label.** The overlap test compares `<text>` with `<text>`; a
@@ -206,18 +214,19 @@ quarto render
 node shared/tools/check.js
 
 # 3. layout audit — reads the BUILD, so it goes after the render
+node shared/tools/layout-check.js touch-journey
 node shared/tools/layout-check.js pain-journey
 node shared/tools/layout-check.js breath-journey
-node touch-journey/tools/layout-check.js          # this story has its own
 ```
 
-**Why the touch story has its own layout checker.** It predates the figure kit
-and hand-wires its own controls (`data-stim`, `data-ctx`, `data-belief` …).
-The shared checker operates controls by the kit's attributes, so pointed at
-touch-journey it finds nothing to click. It used to report "clean" anyway; it
-now prints a `clicks` column and **refuses**, with a pointer to the right
-checker. Migrating touch-journey onto the kit would let one checker cover
-everything — see its own TODO.
+Every story uses the same two tools; the touch story had its own until it was
+migrated onto the kit (2026-09-07), and there is no exception left.
+
+**Read the `clicks` column.** It is how many controls the checker actually
+operated, and a zero there on a story with figures means it is auditing them
+at rest and telling you nothing about any other state. It refuses rather than
+reporting "clean" in that case — that failure is exactly how the touch
+migration started.
 
 While drafting, the useful loop is narrower:
 

@@ -13,10 +13,13 @@ The story is a **Quarto website**. Everything runs from the **repository root**,
 not from this directory:
 
 ```
-quarto render                              # -> docs/touch-journey/
-node touch-journey/tools/check.js          # content audit — milliseconds, no deps
-node touch-journey/tools/layout-check.js   # layout audit — needs chrome, render first
+quarto render                                        # -> docs/touch-journey/
+node shared/tools/check.js touch-journey             # content audit, no deps
+node shared/tools/layout-check.js touch-journey      # layout audit, render first
 ```
+
+The checkers are shared across all three stories now; this story's own copies
+were retired when it moved onto the shared figure kit — see §2 and TODO §C.
 
 Four documents, in the order to read them:
 
@@ -86,8 +89,8 @@ Part four · being honest       corrections · meaning
 ```
 
 Build with `quarto render` **from the repository root**, audit content with
-`node touch-journey/tools/check.js`, audit layout with
-`node touch-journey/tools/layout-check.js`. The checkers are cheap; run both
+`node shared/tools/check.js touch-journey`, audit layout with
+`node shared/tools/layout-check.js touch-journey`. The checkers are cheap; run both
 after every edit. layout-check reads the built pages, so render first.
 
 **The source is tracked directly now.** It used to be a single `hands-src.zip`,
@@ -122,6 +125,49 @@ references, 22 cited, 17 wiki links, 7 claims, 10 rules, as before.
 - **Navigation is the Quarto sidebar** plus a per-page TOC, replacing the
   contents rail.
 - **The narrow/wide decision became box-based** — see above.
+
+### Migrated onto the shared figure kit (2026-09-07)
+
+`js/figures.js` was a hand-rolled mount-and-wire layer. It is now a set of
+declarations against `../shared/figure-kit.js`, which two other stories also
+use. **No drawing changed**; `scenes.js` lost only its copies of `W`, `NARROW`,
+`layout()`, `esc()` and `clamp()`, which the kit now owns — two top-level
+`const`s of the same name in one page is a redeclaration error, so there can
+only be one.
+
+The reason was a checker failure, not tidiness. The shared layout checker
+operates controls by the kit's own attributes, so pointed at this story it
+found nothing to click and reported **"24 combinations clean" having exercised
+nothing**. That is the under-reporting failure §5 already names. It now reports
+282 control interactions here, and refuses outright if a story with figures
+yields zero.
+
+- **Verified as a visual no-op**, by pixel-comparing all six pages at two
+  widths before and after. Everything matched except the stroking dot, which a
+  control experiment — two screenshots of the *same* build — showed differs
+  between renders because it is animating.
+- **A caveat on that verification.** The screenshots were 5000px tall and these
+  pages run to 7069px at 1400 and 9597px at 500, so the comparison covered the
+  top 70–100% of each page, not all of it. The uncovered part was reviewed by
+  eye and by the checker instead.
+- **Two pre-existing defects surfaced and were fixed**, both in the narrow
+  warmth figure, both invisible to a text-versus-text checker. See §5.
+- **Two shifts of about a pixel were introduced and removed again**, both from
+  the kit rendering markup the hand-written version did not: an empty readout
+  `<b>` after the claims slider, and a missing space between a slider's label
+  and its input. The kit now renders a label wrapper and a readout only when
+  asked for one.
+
+The kit grew five things to make this possible, all available to every story:
+an `after` hook that runs after **every** draw — needed because redrawing
+replaces a drawing and takes its listeners with it, so animations and handlers
+on parts of a drawing must re-attach; `controls` declarable as a function of
+state, for the one predict-then-reveal whose control row changes shape;
+a `text` control kind for author-written words in a control row;
+`coerce: "number"` for pills whose option ids are numbers, since a DOM
+attribute is always a string and `sceneWarmth` compares temperatures with
+`===`; and `data-fig-click`, which marks parts of a drawing that are themselves
+clickable so the checker can operate them without knowing the story.
 
 ### The meaning build (2026-09-06)
 
@@ -323,6 +369,22 @@ a green checker, and only a screenshot found it. Twice in one session, in fact:
 the measured panel's first draft also had a `<foreignObject>` sitting on two
 labels, equally invisibly. **Rule: after moving anything in a scene, look at it.
 The checker rules out one class of error and not this one.**
+
+**A label that only overflowed at small widths.** In `sceneWarmth` the left
+gutter holds right-anchored labels, and text width in **user units** grows as
+the drawing box shrinks — a CSS-pixel font size divided by the scale factor. So
+"skin warm", the longest of the three, overran the left edge by about one pixel
+at every narrow width, for the life of that layout. This story's own checker
+allowed ±2 units of slack and never saw it; the shared one allows ±0.6 and did.
+Four more units of gutter was the whole fix. **A label that fits at one width
+is not a label that fits.**
+
+**A guide line drawn through a label.** Also in `sceneWarmth`, and also narrow
+only: the 18° dashed line sits at y=48 and "the sweet spot" had its baseline at
+53, so the dashes ran through the words. Same class as the doorway and the
+curve above — a shape over a label, which no text-versus-text checker can see.
+Found by screenshotting the figure after changing something else in it, which
+is the only reason any of these three have ever been found.
 
 **Stale counts after the page grew.** "Six stops" survived an expansion to twelve.
 `check.js` now cross-checks stated counts against the arrays.

@@ -68,12 +68,12 @@ stories/
 │   ├── index.qmd territory.qmd second-system.qmd
 │   ├── what-touch-does.qmd being-honest.qmd carry-back.qmd
 │   ├── js/{figure-data,scenes,figures}.js
-│   └── tools/{check,layout-check}.js
+│   (checkers are shared now — shared/tools/)
 └── docs/                  OUTPUT ONLY — Quarto deletes what it does not own
 ```
 
-`check.js`: 6 pages · 12 stops · 12 figures · 24 references · 22 cited ·
-17 wiki links · 7 claims · 10 rules.
+`shared/tools/check.js`: 6 pages · 12 stops · 12 figures · 26 references ·
+24 cited · 18 wiki links.
 `layout-check.js`: 24 page/width combinations clean. Smallest label 9.4px at
 320px, against 8.9px on the single-file original.
 
@@ -112,3 +112,27 @@ Checked rather than assumed, per HANDOFF §5: a full render afterwards put no
 `.md` into `docs/`. The `resources:` list in `_quarto.yml` is an explicit
 allowlist — `touch-journey/js/**` and `index.html` — so working documents in the
 source tree are never copied to the published site. No Quarto-side guard needed.
+
+
+---
+
+## C. Migrated onto the shared figure kit — done 2026-09-07
+
+This story was written before the kit and hand-wired every control, which meant
+the shared layout checker could not operate any of them: it reported "clean"
+while clicking nothing. `js/figures.js` is now a set of declarations against
+`../shared/figure-kit.js`, and `tools/` is gone — one checker covers all three
+stories.
+
+Verified as a visual no-op by pixel-comparing every page at two widths before
+and after. Two pre-existing defects surfaced on the way and were fixed, both in
+the narrow warmth figure and both invisible to a text-versus-text checker:
+"skin warm" overran the left edge by about a pixel, and the 18° guide line was
+drawn through "the sweet spot".
+
+What the kit gained to make the migration possible, all of it useful to any
+story: an `after` hook that runs on every draw (for animations, and for
+handlers on parts of a drawing), `controls` declarable as a function of state
+(for the predict-then-reveal), a `text` control kind, `coerce: "number"` on
+pills whose ids are numbers, and `data-fig-click` so the checker can operate
+elements inside a drawing.

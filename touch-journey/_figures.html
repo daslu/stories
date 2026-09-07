@@ -1,7 +1,8 @@
-<!-- Load order matters: figure-data.js defines CLAIMS (scenes.js draws it) and
-     REVISIONS (figures.js builds the flip cards from it). scenes.js defines
-     SCENES, esc, layout, NARROW, narrowQ, STROKE_GEOM and the option lists.
-     figures.js mounts everything and must come last. -->
+<!-- Load order matters. figure-kit.js defines the machinery (Fig, layout, esc,
+     W, NARROW and the drawing helpers) and must come first. figure-data.js
+     defines CLAIMS, REVISIONS and BELIEF; scenes.js defines SCENES and the
+     option lists; figures.js is the join and calls Fig.start(), so it is last. -->
+<script src="../shared/figure-kit.js"></script>
 <script src="js/figure-data.js"></script>
 <script src="js/scenes.js"></script>
 <script src="js/figures.js"></script>

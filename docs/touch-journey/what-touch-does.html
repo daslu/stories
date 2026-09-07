@@ -308,10 +308,11 @@ div.csl-indent {
 <div class="csl-left-margin">6. </div><div class="csl-right-inline">Moyer CA, Seefeldt L, Mans ES, Jackson LM. <span class="nocase">Does massage therapy reduce cortisol? A comprehensive quantitative review</span>. <em>Journal of Bodywork and Movement Therapies</em>. 2011;15(1):3-14. <a href="https://pubmed.ncbi.nlm.nih.gov/21147413/">https://pubmed.ncbi.nlm.nih.gov/21147413/</a></div>
 </div>
 </div></section></div></main> <!-- /main -->
-<!-- Load order matters: figure-data.js defines CLAIMS (scenes.js draws it) and
-     REVISIONS (figures.js builds the flip cards from it). scenes.js defines
-     SCENES, esc, layout, NARROW, narrowQ, STROKE_GEOM and the option lists.
-     figures.js mounts everything and must come last. -->
+<!-- Load order matters. figure-kit.js defines the machinery (Fig, layout, esc,
+     W, NARROW and the drawing helpers) and must come first. figure-data.js
+     defines CLAIMS, REVISIONS and BELIEF; scenes.js defines SCENES and the
+     option lists; figures.js is the join and calls Fig.start(), so it is last. -->
+<script src="../shared/figure-kit.js"></script>
 <script src="js/figure-data.js"></script>
 <script src="js/scenes.js"></script>
 <script src="js/figures.js"></script>

@@ -104,7 +104,16 @@ for (const story of stories) {
       note(`refs.bib has "${k}" but nothing cites or links it — dead entry?`);
   });
 
-  /* ── 2. wikipedia links are well formed ────────────────────────── */
+  /* ── 2. the pre-Quarto markup is really gone ───────────────────── */
+  /* Ported from the touch story's own checker when it was retired. These are
+     the two hand-rolled notations that predate citeproc and the .wiki class;
+     a leftover one renders as literal text rather than failing. */
+  prose.forEach(([where, s]) => {
+    if (/\[ref:/.test(s)) fail(`${where}: leftover [ref:] markup — should be [@key] now`);
+    if (/\{\{[^}]*\|/.test(s)) fail(`${where}: leftover {{Page|text}} markup — should be a .wiki link now`);
+  });
+
+  /* ── 3. wikipedia links are well formed ────────────────────────── */
   prose.forEach(([where, s]) => {
     (s.match(/\[[^\]]*\]\([^)]*\)\{\.wiki\}/g) || []).forEach(tok => {
       const m = tok.match(/^\[([^\]]*)\]\(([^)]*)\)/);
@@ -115,7 +124,7 @@ for (const story of stories) {
     });
   });
 
-  /* ── 3. every stop has the parts a stop needs ──────────────────── */
+  /* ── 4. every stop has the parts a stop needs ──────────────────── */
   const STOP_RE = /^## (.+?) \{#([\w-]+) \.stop data-stop="([\w-]+)"\}\s*$/gm;
   const stops = [];
   pages.forEach(p => {
@@ -154,7 +163,7 @@ for (const story of stories) {
       fail(`stop "${s.stop}": the .src block sits below the figure — it belongs above it`);
   });
 
-  /* ── 4. figures name a scene that exists ───────────────────────── */
+  /* ── 5. figures name a scene that exists ───────────────────────── */
   let figureCount = 0;
   pages.forEach(({ file: where, text: s }) => {
     (s.match(/data-scene="([\w-]+)"/g) || []).forEach(tok => {
@@ -171,7 +180,7 @@ for (const story of stories) {
       note(`figures.js registers "${n}" but no page uses it`);
   });
 
-  /* ── 5. judgement figures keep their shape ─────────────────────── */
+  /* ── 6. judgement figures keep their shape ─────────────────────── */
   /* A story may export WEIGHTS or CLAIMS: an ordered gradient whose whole
      value is the ordering. If it stops descending, the figure stops meaning
      anything, and nothing else would notice. */
@@ -184,7 +193,7 @@ for (const story of stories) {
       fail(`${name}: the weakest entry has drifted above 0.4, which is the point of the figure`);
   });
 
-  /* ── 6. counts stated in prose match reality ───────────────────── */
+  /* ── 7. counts stated in prose match reality ───────────────────── */
   const words = {twelve:12, eleven:11, ten:10, nine:9, eight:8, seven:7, six:6,
                  five:5, four:4, three:3, two:2};
   const claim = (re, actual, what) => {
@@ -198,8 +207,10 @@ for (const story of stories) {
     ((allText.split(/:::+ \{\.rules\}/)[1] || "").split(/^:::+\s*$/m)[0].match(/^- \*\*/gm) || []).length,
     "things we came away with");
   claim(/\b(\w+) sources\b/, bibKeys.size, "sources");
+  if (Array.isArray(DATA.REVISIONS))
+    claim(/\b(\w+) corrections from the last decade\b/, DATA.REVISIONS.length, "corrections");
 
-  /* ── 7. phrasings that have caused trouble before ──────────────── */
+  /* ── 8. phrasings that have caused trouble before ──────────────── */
   const risky = [
     [/\bproves?\b/i, "'proves' — almost nothing here proves anything"],
     [/\bwhat you learned\b/i, "assumes the reader was taught anatomy"],

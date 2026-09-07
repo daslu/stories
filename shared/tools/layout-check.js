@@ -107,6 +107,13 @@ window.addEventListener('load', function(){ setTimeout(function(){
   /* every control the kit can render, operated */
   document.querySelectorAll('[data-fig-set],[data-fig-toggle],[data-fig-act]')
     .forEach(function(b){ b.click(); n++; audit(b.textContent.trim().slice(0,16), out); });
+  /* Parts of a drawing that are themselves clickable — a receptor in a
+     cross-section, a row in a chart, a card that turns over. They carry
+     data-fig-click so that this can find them without knowing the story. */
+  document.querySelectorAll('[data-fig-click]').forEach(function(el){
+    el.dispatchEvent(new MouseEvent('click', {bubbles: true})); n++;
+    audit('click:' + (el.getAttribute('data-fig-click') || '').slice(0, 12), out);
+  });
   document.querySelectorAll('[data-fig-range]').forEach(function(e){
     [e.min, e.max, (+e.min + +e.max) / 2].forEach(function(v){
       e.value = v; e.dispatchEvent(new Event('input')); n++;

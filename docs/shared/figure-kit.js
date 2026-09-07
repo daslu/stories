@@ -151,7 +151,7 @@ const Fig = (function(){
     pills: (c, st) => `${c.label ? `<span>${esc(c.label)}</span>` : ""}
       ${c.options.map(o => `<button class="pill" data-fig-set="${esc(c.key)}"
         data-fig-val="${esc(o.id)}"
-        aria-pressed="${getPath(st, c.key) === o.id}">${esc(o.n)}</button>`).join("")}`,
+        aria-pressed="${String(getPath(st, c.key)) === String(o.id)}">${esc(o.n)}</button>`).join("")}`,
 
     /* one button that flips between two states, label included — the label is
        rendered from the value, so it cannot fall out of step with it */
@@ -160,26 +160,48 @@ const Fig = (function(){
       ${c.hint ? `<span style="color:var(--ink3)" data-fig-hint="${esc(c.key)}">${
         esc(getPath(st, c.key) ? c.hint.on : c.hint.off)}</span>` : ""}`,
 
-    /* a slider with its value shown beside it */
-    range: (c, st) => `<label>${esc(c.label || "")}
-        <input type="range" data-fig-range="${esc(c.key)}"
+    /* A slider, with its value beside it when there is one to show. The label
+       wrapper and the readout are each rendered only if asked for: the
+       controls row is a flex row, so an empty <b> or an empty <label> still
+       takes a gap and moves everything after it. */
+    range: (c, st) => {
+      const input = `<input type="range" data-fig-range="${esc(c.key)}"
           min="${c.min}" max="${c.max}" step="${c.step == null ? 1 : c.step}"
-          value="${getPath(st, c.key)}" aria-label="${esc(c.aria || c.label || c.key)}"></label>
-      <b data-fig-out="${esc(c.key)}">${esc(fmtOf(c)(getPath(st, c.key)))}</b>`,
+          value="${getPath(st, c.key)}" aria-label="${esc(c.aria || c.label || c.key)}">`;
+      /* The space after the label text is deliberate: without it the slider
+         butts against its own label. It is also what the hand-written markup
+         this replaced happened to produce, which is how it was noticed. */
+      return (c.label ? `<label>${esc(c.label)} ${input}</label>` : input) +
+        (c.fmt ? `<b data-fig-out="${esc(c.key)}">${esc(c.fmt(getPath(st, c.key)))}</b>` : "");
+    },
 
     /* a button that does not hold state — reveals an answer, replays a motion */
     action: (c, st) => `<button class="pill" data-fig-act="${esc(c.key)}">${esc(c.n)}</button>
-      ${c.note ? `<span style="color:var(--ink3)" data-fig-note="${esc(c.key)}">${esc(c.note)}</span>` : ""}`
+      ${c.note ? `<span style="color:var(--ink3)" data-fig-note="${esc(c.key)}">${esc(c.note)}</span>` : ""}`,
+
+    /* Author-written words in a control row — a question the buttons answer,
+       say. Its `html` is NOT escaped, because it is written here rather than
+       coming from anywhere a reader can reach. */
+    text: (c, st) => `<span>${typeof c.html === "function" ? c.html(st) : c.html}</span>`
   };
 
   const fmtOf = c => c.fmt || (v => String(v));
 
+  /* `controls` may be an array, or a function of state returning one. The
+     second form is for a figure whose control row itself changes with state —
+     a predict-then-reveal swaps its slider for a "hide it again" button once
+     the answer is out. */
+  const controlsOf = (def, st) =>
+    typeof def.controls === "function" ? def.controls(st) : def.controls;
+
   function controlsHtml(def, st){
-    if(!def.controls || !def.controls.length) return "";
+    const declared = controlsOf(def, st);
+    const def2 = {controls: declared};
+    if(!declared || !declared.length) return "";
     /* Controls declared in one array render as one row. A story that wants two
        rows declares an array of arrays — used where a figure has two kinds of
        control that should not read as one set. */
-    const rows = Array.isArray(def.controls[0]) ? def.controls : [def.controls];
+    const rows = Array.isArray(declared[0]) ? declared : [declared];
     return rows.map(row => `<div class="controls">${
       row.map(c => KINDS[c.type](c, st)).join("")}</div>`).join("");
   }
@@ -202,6 +224,18 @@ const Fig = (function(){
       controlsHtml(def, state) +
       `<div data-fig-draw="${esc(name)}">${def.draw(state)}</div>` +
       (cap ? `<div class="cap">${cap}</div>` : "");
+    afterDraw(name);
+  }
+
+  /* Runs after every draw — the first one included. A figure with clickable
+     parts inside its own drawing, or with an animation, has to re-attach
+     after each draw, because redrawing replaces the drawing and takes its
+     listeners with it. Anything in `after` must therefore be safe to run
+     repeatedly. */
+  function afterDraw(name){
+    const def = defs[name];
+    if(def && def.after) def.after(state, {redraw: () => redraw(name),
+                                           refresh: () => refresh(name)});
   }
 
   /* Redraw one figure's drawing without rebuilding its controls, so a slider
@@ -210,7 +244,7 @@ const Fig = (function(){
     const def = defs[name];
     document.querySelectorAll(`[data-fig-draw="${name}"]`)
       .forEach(d => { d.innerHTML = def.draw(state); });
-    if(def.after) def.after(state);
+    afterDraw(name);
   }
 
   /* Rebuild a figure completely — needed when a control's own appearance
@@ -228,11 +262,17 @@ const Fig = (function(){
 
   function wireOne(root){
     root.querySelectorAll("[data-fig-set]").forEach(b => b.onclick = () => {
-      const [name] = defOf(b);
+      const [name, def] = defOf(b);
       const key = b.dataset.figSet;
-      setPath(state, key, b.dataset.figVal);
+      /* A DOM attribute is always a string. A figure whose option ids are
+         numbers — three temperatures, say — compares them with === in its
+         drawing code and would never match, so `coerce: "number"` on the
+         control says to store what the scene expects. */
+      const c = findControl(def, key);
+      const raw = b.dataset.figVal;
+      setPath(state, key, c && c.coerce === "number" ? +raw : raw);
       root.querySelectorAll(`[data-fig-set="${key}"]`).forEach(z =>
-        z.setAttribute("aria-pressed", z.dataset.figVal === getPath(state, key)));
+        z.setAttribute("aria-pressed", z.dataset.figVal === String(getPath(state, key))));
       redraw(name);
     });
 
@@ -244,7 +284,7 @@ const Fig = (function(){
       b.setAttribute("aria-pressed", !!val);
       /* the button's own label and its hint both follow the value, which is
          the whole reason interface text here cannot go stale */
-      const c = flat(def.controls).find(z => z.key === key);
+      const c = findControl(def, key);
       b.textContent = val ? c.on : c.off;
       const hint = root.querySelector(`[data-fig-hint="${key}"]`);
       if(hint && c.hint) hint.textContent = val ? c.hint.on : c.hint.off;
@@ -255,7 +295,7 @@ const Fig = (function(){
       const [name, def] = defOf(inp);
       const key = inp.dataset.figRange;
       setPath(state, key, +inp.value);
-      const c = flat(def.controls).find(z => z.key === key);
+      const c = findControl(def, key);
       const out = root.querySelector(`[data-fig-out="${key}"]`);
       if(out) out.textContent = fmtOf(c)(getPath(state, key));
       redraw(name);
@@ -263,7 +303,7 @@ const Fig = (function(){
 
     root.querySelectorAll("[data-fig-act]").forEach(b => b.onclick = () => {
       const [name, def] = defOf(b);
-      const c = flat(def.controls).find(z => z.key === b.dataset.figAct);
+      const c = findControl(def, b.dataset.figAct);
       if(c && c.run) c.run(state, {
         redraw: () => redraw(name),
         refresh: () => refresh(name),
@@ -279,6 +319,7 @@ const Fig = (function(){
   }
 
   const flat = cs => !cs ? [] : (Array.isArray(cs[0]) ? [].concat.apply([], cs) : cs);
+  const findControl = (def, key) => flat(controlsOf(def, state)).find(z => z.key === key);
 
   /* --- layout ---------------------------------------------------------- */
 

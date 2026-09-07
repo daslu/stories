@@ -32,8 +32,8 @@ From the **repository root**, not from here:
 ```
 quarto render                          # -> docs/
 quarto preview                         # live reload while editing
-node touch-journey/tools/check.js      # content audit — run after every edit
-node touch-journey/tools/layout-check.js   # layout audit — needs chrome/chromium
+node shared/tools/check.js touch-journey      # content audit — run after every edit
+node shared/tools/layout-check.js touch-journey   # layout audit — needs chrome/chromium
 ```
 
 `tools/check.js` has no dependencies and takes milliseconds. It verifies that

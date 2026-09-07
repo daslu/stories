@@ -8,27 +8,18 @@
  * they read as drawn rather than plotted — the fast road stays straight,
  * which is also the point. */
 
-/* Drawing width in user units. The SVG scales to fit its box, so what the
-   reader sees is (box px / W). At 860 that is fine on a desktop and about
-   0.36 on a phone, which puts a 13u label at 4.7px — unreadable. Below the
-   .wide breakpoint the scenes are drawn at NARROW_W instead and laid out in
-   one column, so the same label lands at 9-14px. See layout(). */
-const WIDE_W = 860, NARROW_W = 420;
-const narrowQ = typeof matchMedia === "function" ? matchMedia("(max-width:820px)") : null;
-let NARROW = !!(narrowQ && narrowQ.matches);
-let W = NARROW ? NARROW_W : WIDE_W;
-/* Called with no argument this keeps the original behaviour and reads the
-   media query. figures.js passes an explicit value instead, measured from the
-   width the figure actually has — with a sidebar and a margin TOC the viewport
-   no longer predicts the drawing box, and a W=860 scene dropped into a 560px
-   column is exactly what the narrow layouts exist to prevent. */
-function layout(narrow){
-  NARROW = narrow === undefined ? !!(narrowQ && narrowQ.matches) : !!narrow;
-  W = NARROW ? NARROW_W : WIDE_W;
-  return NARROW;
-}
-const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const clamp = (v,a,b) => v<a?a:v>b?b:v;
+/* W, NARROW, layout(), esc() and clamp() now come from ../shared/figure-kit.js,
+   which every story shares. They used to be declared here; two copies of the
+   same top-level const in one page is a redeclaration error, so the kit is the
+   only place they live.
+ *
+ * The meaning of them is unchanged. Scenes are drawn in user units against W —
+ * 860 wide, 420 narrow — and the SVG scales to fit its box, so what the reader
+ * sees is (box px / W). At 860 on a phone that factor is about 0.36, which puts
+ * a 13-unit label at 4.7px; hence the narrow layouts. The choice is made from
+ * the figure's own box width rather than the viewport, because with a sidebar
+ * and a margin table of contents the viewport stops predicting the drawing box.
+ */
 
 /* forearm shape used in several scenes */
 function arm(x,y,w,h){
@@ -330,7 +321,13 @@ function sceneSpeed(st){
 function sceneWarmth(st){
   /* Narrow: the plot keeps the width and the verdict moves underneath it. */
   const H  = NARROW ? 376 : 300;
-  const L  = NARROW ? 70 : 100;
+  /* The left gutter holds a right-anchored label whose width in USER UNITS
+     grows as the drawing box shrinks — a CSS-pixel font size divided by the
+     scale factor. "skin warm" is the longest of the three and overran the left
+     edge by about one pixel at every narrow width, for the life of this
+     layout. The old checker's ±2-unit tolerance let it through; the shared one
+     uses ±0.6 and caught it. Four more units of gutter is the whole fix. */
+  const L  = NARROW ? 74 : 100;
   const R  = NARROW ? 14 : 190;
   const T  = 26;
   const PH = NARROW ? 150 : 196;
@@ -344,7 +341,11 @@ function sceneWarmth(st){
     fill="var(--clay)" opacity=".16"/>`;
   s+=`<ellipse cx="${(x(1)+x(10))/2}" cy="${T+PH/2}" rx="${(x(10)-x(1))/2}" ry="${NARROW?24:28}"
     fill="var(--clay)" opacity=".2"/>`;
-  s+=`<text class="lab" x="${(x(1)+x(10))/2}" y="${T+PH/2-(NARROW?48:56)}" text-anchor="middle" style="fill:var(--dis)">the sweet spot</text>`;
+  /* Clear of the 18° guide line at y = T+22. At narrow the old offset of 48
+     put this label's baseline at 53 with the line at 48, so the dashes ran
+     through the words — the shape-over-label class again, and again invisible
+     to a checker that compares text with text. */
+  s+=`<text class="lab" x="${(x(1)+x(10))/2}" y="${T+PH/2-(NARROW?60:56)}" text-anchor="middle" style="fill:var(--dis)">the sweet spot</text>`;
   temps.forEach(z=>{
     const on=z.t===st.temp;
     s+=`<line x1="${L}" y1="${z.y}" x2="${W-R}" y2="${z.y}" stroke="var(--rule)"
@@ -614,7 +615,7 @@ function sceneSkin(st){
   s+=`<text class="xs" x="${L+64}" y="${T-16}">hairy skin</text>`;
   RECEPTORS.forEach(r=>{
     const cx=L+r.x*bw, cy=y(r.d), on=r.id===sel.id;
-    s+=`<g data-rec="${r.id}" style="cursor:pointer">
+    s+=`<g data-rec="${r.id}" data-fig-click="rec-${r.id}" style="cursor:pointer">
       <line x1="${cx}" y1="${cy}" x2="${cx}" y2="${T+SH+2}" stroke="var(${r.c})"
         stroke-width="${on?2.5:1.5}" opacity="${on?.6:.28}"/>`;
     if(r.id==="ct")
@@ -807,7 +808,7 @@ function sceneTopo(st){
     const yy=TY+44+i*ROW, on=z.id===b.id;
     s+=`<text class="sm" x="${CX+LW}" y="${yy+5}" text-anchor="end" style="fill:var(${on?"--ink":"--ink3"})">${esc(z.n)}</text>`;
     s+=`<rect x="${CX+LW+10}" y="${yy-11}" width="${(CW-LW-20)*z.area}" height="20" rx="10"
-      fill="var(--clay)" opacity="${on?.72:.24}" data-bond="${z.id}" style="cursor:pointer"/>`;
+      fill="var(--clay)" opacity="${on?.72:.24}" data-bond="${z.id}" data-fig-click="bond-${z.id}" style="cursor:pointer"/>`;
   });
   const note="Zones here are a simplification. The published maps are finer, and the solid result is the relationship between bond and area.";
   if(NARROW){
