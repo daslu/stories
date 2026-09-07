@@ -1,0 +1,8 @@
+<!-- Load order matters. figure-kit.js defines the machinery (Fig, layout, esc,
+     the drawing helpers) and must come first. figure-data.js defines the
+     numbers, scenes.js the drawings, figures.js the join between them — and
+     figures.js calls Fig.start(), so it comes last. -->
+<script src="../shared/figure-kit.js"></script>
+<script src="js/figure-data.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/figures.js"></script>

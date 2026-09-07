@@ -1,0 +1,154 @@
+---
+title: "One · what pain is"
+description: "How much back pain there is, why an experience is not a reading, and what happens to a signal on the way in."
+---
+
+::: {.part}
+Part one · what pain is
+:::
+
+## More people than any other complaint {#burden .stop data-stop="burden"}
+
+::: {.year}
+2023
+:::
+
+::: {.lead}
+Low back pain is the largest single cause of disability on earth. Not the most dangerous,
+not the most expensive to treat — the one that takes the most life away from the most
+people.
+:::
+
+::: {.src}
+[The research]{.lbl}
+The Global Burden of Disease study, 2021 cycle, published in 2023 [@gbd23]. Population
+studies from 204 countries, run through a Bayesian model to fill the gaps.
+
+Strong for the ordering and the direction, softer for any single number — the authors say
+plainly that country-level primary data is thin and that they need better. The uncertainty
+intervals in the figure are theirs, not ours.
+:::
+
+::: {.journey-figure data-scene="burden"}
+Counts, with the range the study itself gives. Turn the uncertainty off to see how much
+more confident a bare headline number looks than the evidence behind it.
+:::
+
+In 2020 about **619 million** people were living with low back pain, and the study projects
+**843 million** by 2050. Both of those come with a range, and the range is wide enough to
+matter: the 2020 figure could be anywhere from 554 to 694 million.
+
+The more interesting number is the one that went the other way. Over the same thirty years
+the **age-standardised rate** — roughly, one person's chance of having back pain — fell by
+about 10%. More people have it and each person is slightly less likely to. The world got
+bigger and older, which is a different story from an epidemic, and worth having ready when
+someone repeats the epidemic version.
+
+About **39%** of the disability was attributed to occupational factors, smoking and high
+body mass together. Which leaves most of it not attributed to any of them.
+
+::: {.hands}
+[For your hands]{.t}
+The scale is worth knowing because it reframes the room. A person with back pain is not
+an unusual case with something rare going on. They are the most ordinary presentation in
+the world, and the base rate for "nothing sinister" is very high.
+:::
+
+## An experience, not a reading {#experience .stop data-stop="experience"}
+
+::: {.year}
+2020
+:::
+
+::: {.lead}
+The field that studies pain spent two years arguing about how to define it, and the
+definition it landed on does not mention damage as a requirement.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Raja and colleagues, 2020 [@raja20] — the report of the International Association for the
+Study of Pain's task force, fourteen people over two years, revising a definition that had
+stood since 1979.
+
+Not an experiment, and it should not be quoted as one. It is the field writing down what it
+agrees on, which is a different kind of evidence and a useful one: it tells you what is no
+longer controversial.
+:::
+
+The revised definition reads:
+
+> An unpleasant sensory and emotional experience associated with, **or resembling that
+> associated with**, actual or potential tissue damage.
+
+Four words were added — *or resembling that associated with* — and they carry most of the
+change. Pain can occur with damage. It can occur with the *threat* of damage. And it can
+occur with neither, and still be pain, and still be exactly as unpleasant.
+
+::: {.journey-figure data-scene="pipeline"}
+A diagram of that definition, not a measurement. The weights behind the switches are
+illustrative — no study assigns them, and the figure would be dishonest if it pretended
+otherwise. What is not illustrative is the shape: the signal on the left does not change.
+:::
+
+Two words worth separating, because most confusion here is the two being used
+interchangeably. **[Nociception](https://en.wikipedia.org/wiki/Nociception){.wiki}** is the
+signalling — nerve endings responding to pressure, heat, or chemistry, and sending
+something up the cord. **Pain** is what a person experiences. They usually travel together.
+They are not the same thing, and either can happen without the other.
+
+That is not a philosophical nicety. It is why the same injury hurts differently on a
+Tuesday morning and at two in the morning, why a footballer finishes the match, and why a
+person whose scan has not changed in three years can hurt more this month than last.
+
+::: {.hands}
+[For your hands]{.t}
+When someone asks *why does it hurt so much if nothing is broken*, the honest answer is
+that hurting a lot and being broken a lot are two different measurements, and the second
+one is not what the first one reports.
+:::
+
+## What happens on the way in {#gate .stop data-stop="gate"}
+
+::: {.year}
+1965 · revised since
+:::
+
+::: {.lead}
+A signal from the body is not delivered intact. It arrives at a junction where other
+traffic is arriving too, and what continues upward depends on what else showed up.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Melzack & Wall, 1965 [@melzack65] — gate control theory, one of the most influential papers
+in the field. And Mendell, 2014 [@mendell14], a review by someone who worked on the original,
+setting out what survived of it and what did not.
+
+Foundational, and much revised. The 1965 circuit diagram should not be presented as current
+detail — several of its specifics turned out to be wrong. That signals are modulated before
+they arrive is not in doubt at all.
+:::
+
+::: {.journey-figure data-scene="gate"}
+Take the hand off the skin and watch the same pain signal get further. The gate is a
+simplification of a much-revised mechanism; the modulation it stands for is real.
+:::
+
+Rubbing a banged shin is not a distraction technique and it is not a placebo. The large,
+fast fibres that carry touch reach the same junction in the spinal cord as the thin, slow
+fibres carrying the pain signal, and their arrival changes what is passed on. The hand goes
+to the shin before anyone decides to send it.
+
+What 1965 got right was the principle: there is a control point, and the volume is set
+there rather than at the skin. What it got wrong was much of the wiring, and the field
+spent decades correcting it. Modern accounts also add something the original barely had —
+signals coming *down* from the brain that open and close the same gate, which is where
+expectation and attention get their hands on the dial.
+
+::: {.hands}
+[For your hands]{.t}
+A great deal of hands-on work is arriving at that junction with competing traffic. That is
+a real mechanism and worth saying out loud. It is also not a claim that you are releasing
+anything, correcting anything, or removing a cause.
+:::

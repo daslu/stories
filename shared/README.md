@@ -1,0 +1,246 @@
+# shared — what every story is built out of
+
+Three stories now, and this is the part they have in common: one warm
+vocabulary, one figure engine, two checkers. A new story writes its own
+research, prose and drawings, and nothing else.
+
+```
+shared/
+├── warm.scss        Bootstrap variables — teaches Quarto's chrome the palette
+├── warm.css         the page's own look: stops, source blocks, figures, cards
+├── ama.csl          numeric superscript citations, numbered by first appearance
+├── figure-kit.js    the figure engine — layout, mounting, controls, redraw
+└── tools/
+    ├── check.js         content audit, every story, no browser
+    └── layout-check.js  layout audit, one story, needs a built site + chrome
+```
+
+`warm.scss`, `warm.css` and `ama.csl` are wired in at **project level** in
+`_quarto.yml`, so a story inherits them by existing. A story's own
+`_metadata.yml` carries only what is genuinely its own: its `refs.bib`, and the
+script tags for its figures.
+
+The split between the two stylesheets is not cosmetic. Quarto's `cssVarsBlock`
+step throws `SCSSParsingError` on quoted strings, negative numbers and `calc()`
+inside an `scss:rules` block. It is non-fatal, so it prints on every render and
+trains you to ignore render output — which is how a real error gets missed.
+**`warm.scss` holds Bootstrap variables only; `warm.css` holds the page's own
+rules.**
+
+---
+
+## Adding a story
+
+```
+new-journey/
+├── _metadata.yml    bibliography + the script tags (copy an existing one)
+├── _figures.html    the four <script> tags, in load order
+├── refs.bib         first-citation order, see below
+├── index.qmd  …     the pages
+└── js/
+    ├── figure-data.js   the numbers, with the source of each in a comment
+    ├── scenes.js        the drawings
+    └── figures.js       what each figure is called and what operates it
+```
+
+Then in `_quarto.yml`: add `new-journey/*.qmd` to `render`, add
+`new-journey/js/**` to `resources`, and add a sidebar with an `id` listing that
+story's pages. Quarto picks the sidebar whose `contents` contain the page being
+rendered, which is how three stories share a site without any of them
+advertising another's stops. Finally add an `<li>` to the shelf in `index.html`.
+
+`check.js` finds the story on its own — a directory with `.qmd` files and a
+`refs.bib` is a story. No configuration to update.
+
+---
+
+## The figure kit
+
+A figure in a `.qmd` is a fenced div holding only its caption:
+
+```markdown
+::: {.journey-figure data-scene="resonance"}
+The caption, as markdown. It stays in the document, where an editor and
+check.js can both see it.
+:::
+```
+
+and in `js/figures.js`:
+
+```js
+Fig.add("resonance", {
+  controls: [
+    {type:"range", key:"rate", label:"breaths a minute",
+     min:3, max:24, step:0.1, fmt:v => `${v.toFixed(1)} a minute`}
+  ],
+  draw: sceneResonance
+});
+Fig.start({rate: 14});
+```
+
+The kit renders the controls above the drawing, leaves the caption underneath,
+wires everything to state and redraws on change.
+
+**Controls are declared, not wired**, and that is the main thing the kit buys.
+Two of the error classes in the touch story's handoff come straight from
+hand-wiring: a control that was never connected at all — the build passed,
+because the file was still valid JavaScript, and only clicking it found the
+problem — and a hint that went on saying *tap to take the hand away* after the
+hand was already away. Neither mistake is available now: the kit renders the
+label from the value.
+
+Four kinds, and adding one here gives it to every story:
+
+| type | what it is | keys it reads |
+|---|---|---|
+| `pills` | a row of mutually exclusive buttons | `key`, `options[{id,n}]`, `label?` |
+| `toggle` | one button that flips, label included | `key`, `on`, `off`, `hint?{on,off}` |
+| `range` | a slider with its value beside it | `key`, `min`, `max`, `step`, `fmt?`, `label?`, `aria?` |
+| `action` | a button that holds no state | `key`, `n`, `run(state, api)`, `note?` |
+
+A `key` may be a dotted path — `"f.threat"` reads and writes `state.f.threat` —
+so a figure with five switches of the same kind keeps them together instead of
+scattering five top-level keys through the state. Declaring `controls` as an
+array of arrays renders them as two rows, for a figure whose controls are two
+different kinds of thing and should not read as one set.
+
+### The drawing helpers
+
+`svgOpen(h, ariaLabel)` · `prose(x,y,w,h,html,opts)` · `track(x0,x1,y,opts)` ·
+`fill(x0,x,y,colour,opts)` · `divider(y,text,opts)` · `esc` · `clamp` · `r2`
+
+`svgOpen` asks for an `aria-label`, which is the cheapest way to make sure none
+gets forgotten. `prose` is a `foreignObject`, because it is the only way to get
+real line breaking inside an SVG.
+
+### Two layouts
+
+Scenes are drawn against `W`: **860 wide, 420 narrow**, and every scene must
+branch on `NARROW`. Without a narrow branch a scene is drawn for an 860 canvas
+inside a 420 one and most of it lands off-screen.
+
+The choice is made from **the figure's own box width**, not the viewport. With
+a sidebar and a margin table of contents the viewport stops predicting the
+drawing box — at an 1100px window the reading column is about 560px, and an
+860-unit scene puts its labels at 8.8px there. A `ResizeObserver` re-renders
+when the decision flips, and only then.
+
+---
+
+## The two checkers
+
+```bash
+node shared/tools/check.js                    # every story
+node shared/tools/check.js pain-journey       # one
+quarto render                                 # layout-check reads the BUILD
+node shared/tools/layout-check.js pain-journey
+node shared/tools/layout-check.js pain-journey 390 1400 --page how-loose
+```
+
+**check.js** reads source. Every citation resolves to a `refs.bib` entry; every
+stop has its year, lead, source block and figure; the source block sits *above*
+the figure, because a reader should not meet a claim before they meet its
+source; every figure names a scene that is registered; stated counts match
+reality; a `WEIGHTS` or `CLAIMS` array is still in descending order and its
+weakest entry has not drifted upward; and a list of phrasings that have caused
+trouble before does not appear.
+
+**layout-check.js** renders the built pages in headless Chrome at six widths,
+operates every control the kit can make, and asserts that nothing leaves its
+viewBox and no two labels overlap. Geometry comes from `getBBox()`, so results
+are independent of display scale. It skips quietly with no chrome on PATH.
+
+**What layout-check cannot catch, and you have to look for yourself: an opaque
+shape drawn over a label.** The overlap test compares `<text>` with `<text>`; a
+`<path>` or a `<foreignObject>` covering one is invisible to it. That has now
+happened three times in this repository — a doorway painting over a condition
+label, a note block landing on two markers, and a curve drawn through its own
+axis label. **After moving anything in a scene, screenshot it.**
+
+A related habit worth keeping: derive a canvas height from where the content
+actually ends rather than typing a number. Every height bug so far has been a
+guessed constant.
+
+---
+
+## refs.bib, and the order it is in
+
+Entries are in **first-citation order across the pages**, not alphabetical,
+because the AMA style numbers by order of appearance and each story's
+`carry-back.qmd` pulls the whole file in with `nocite: @*`. That makes the
+closing list read as a record of the route. A new entry goes in under the
+section comment for the page that first cites it, at the point that page
+reaches it — not appended at the end.
+
+**Do not add an entry before its prose lands.** Because of the `nocite` pull it
+would appear in the closing list uncited, and `check.js` only notes that rather
+than failing.
+
+House style: `@article{nameYY,`, given names as initials, diacritics in author
+names as LaTeX escapes (`{\AA}`, `{\"o}`) while titles keep the published
+characters as they stand, journal names spelled out in full, `--` page ranges,
+and titles in double braces so citeproc reproduces them exactly. A published
+title is a quoted record and is never reworded.
+
+---
+
+## docs/ is output only
+
+`docs/` is what GitHub Pages serves and it is Quarto's `output-dir`. Quarto
+**deletes anything in there that the project does not know about** — it removed
+a published story once and replaced the hand-written shelf with a redirect
+stub. Anything that has to exist there must be a project input: rendered from a
+`.qmd`, or listed under `resources`. Never hand-edit `docs/`.
+
+---
+
+## The render workflow
+
+Everything runs from the **repository root**.
+
+```bash
+# 1. build the whole site — all three stories plus the shelf
+quarto render
+
+# 2. content audit — every story, no browser, milliseconds
+node shared/tools/check.js
+
+# 3. layout audit — reads the BUILD, so it goes after the render
+node shared/tools/layout-check.js pain-journey
+node shared/tools/layout-check.js breath-journey
+node touch-journey/tools/layout-check.js          # this story has its own
+```
+
+**Why the touch story has its own layout checker.** It predates the figure kit
+and hand-wires its own controls (`data-stim`, `data-ctx`, `data-belief` …).
+The shared checker operates controls by the kit's attributes, so pointed at
+touch-journey it finds nothing to click. It used to report "clean" anyway; it
+now prints a `clicks` column and **refuses**, with a pointer to the right
+checker. Migrating touch-journey onto the kit would let one checker cover
+everything — see its own TODO.
+
+While drafting, the useful loop is narrower:
+
+```bash
+quarto render                                                   # or scope it:
+quarto render breath-journey                                    # one story
+node shared/tools/check.js breath-journey
+node shared/tools/layout-check.js breath-journey 390 1400        # two widths
+node shared/tools/layout-check.js breath-journey --page why-slow # one page
+```
+
+`check.js` reads source and needs no render. `layout-check.js` reads
+`docs/`, so **render first or it audits a stale build** — that has caught
+people out.
+
+And the step neither tool can do: **screenshot the figure you changed.** The
+layout checker compares `<text>` with `<text>`, so an opaque shape drawn over a
+label is invisible to it. Three such bugs have shipped past a green checker in
+this repository.
+
+```bash
+google-chrome --headless --disable-gpu --no-sandbox \
+  --allow-file-access-from-files --window-size=1400,7000 \
+  --virtual-time-budget=6000 --screenshot=/tmp/page.png \
+  "file://$PWD/docs/breath-journey/why-slow.html"
+```

@@ -1,0 +1,93 @@
+---
+title: "What we carry back"
+description: "What the reading suggested, and every source in one place."
+nocite: |
+  @*
+---
+
+::: {.part}
+Closing
+:::
+
+## What we would carry back into the room {#carry .stop data-stop="carry"}
+
+::: {.year}
+The end of it
+:::
+
+::: {.lead}
+Nine things we came away with. Not instructions — a record of what the reading suggested,
+in the order the page found them.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Everything cited on the previous pages, weighed as part four weighs it. Nothing new is
+introduced here.
+:::
+
+::: {.journey-figure data-scene="weights"}
+The same judgement as the previous page, repeated because it is the thing to leave with.
+:::
+
+::: {.rules}
+- **Hurt and harm are different quantities.** The amount something hurts is not a reading
+  of how damaged it is, and the two can move independently in both directions.
+
+- **A worn-looking scan is what most backs of that age look like.** At sixty, 88% of
+  people with no pain at all have disc degeneration. That does not make a finding
+  meaningless; it makes it uninformative on its own.
+
+- **What a sensation is believed to mean is part of what is felt.** A −20 °C rod under a
+  red light was rated five and a half points hotter than the same rod under a blue one.
+
+- **Signals are turned up and down before they arrive.** That is what a hand on a banged
+  shin is doing, and it is a real mechanism rather than a distraction.
+
+- **Long-standing pain can be a settings change rather than more damage.** The gain goes
+  up. It is also not something anyone can diagnose from a treatment room.
+
+- **The words are part of the treatment.** *Your pelvis is out* is an input, not a
+  description. So is being unhurried, and so is being believed.
+
+- **Explaining pain does something, and it is not large.** Twelve trials, and the effect
+  on pain intensity is small enough that no effect is still on the table.
+
+- **The most repeated story is usually the weakest evidence.** The nail through the boot
+  is one paragraph in a magazine column and it travels further than any of the trials.
+
+- **Almost nobody in front of you has something rare.** Back pain is the most ordinary
+  presentation on earth, and the base rate for nothing sinister is very high.
+:::
+
+::: {.hands}
+[For your hands]{.t}
+If a client leaves with one sentence, we would want it to be that their back is more
+ordinary than the report makes it sound, and that hurting is not the same as being
+damaged. Both of those are true, and both are the kind of true you can say without
+promising anything.
+:::
+
+## Every source, in the order the journey met them {#sources .stop data-stop="sources"}
+
+::: {.year}
+The whole list
+:::
+
+::: {.lead}
+Ten sources. Where a link is free to read, it is free to read.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Everything cited above, plus nothing that was not. If a claim on this page has no number
+beside it, that is because we could not find a source we were willing to stand behind, and
+the text says so where it happens.
+:::
+
+::: {.journey-figure data-scene="pne"}
+The most honest figure on the page, kept in view on the way out.
+:::
+
+The reference list below is numbered in the order the journey met each source, so it reads
+as a record of the route rather than an alphabetical index.

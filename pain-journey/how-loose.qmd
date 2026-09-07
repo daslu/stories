@@ -1,0 +1,112 @@
+---
+title: "Two · how loose the link is"
+description: "What a scan of a pain-free back actually shows, and what a coloured light does to a fixed physical stimulus."
+---
+
+::: {.part}
+Part two · how loose the link is
+:::
+
+## What a back looks like when nothing hurts {#scans .stop data-stop="scans"}
+
+::: {.year}
+2015
+:::
+
+::: {.lead}
+Somebody gathered every study that had scanned people with **no back pain at all**, and
+counted how many of them had the findings that get blamed for back pain.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Brinjikji and colleagues, 2015 [@brinjikji15]. Thirty-three studies, **3110 people with no
+symptoms**, thirty-two of the studies using MRI. Prevalence by decade comes from a model
+fitted across the studies, so these are estimates rather than counts.
+
+Solid, and the single most useful thing on this page. Its limits are the authors' own:
+many participants were volunteers rather than a random sample, agreement between radiologists
+reading the same scan is moderate at best, the studies span more than 25 years, and — this
+one matters — the findings were **not sorted by severity**. Pain-free people may simply have
+milder versions.
+:::
+
+::: {.journey-figure data-scene="scans"}
+Drag the age. Every number is the percentage of people **with no back pain** who have that
+finding on a scan. The figure cannot tell you these never matter — only how ordinary they
+are in people who feel fine.
+:::
+
+At twenty, more than a third of pain-free people already have disc degeneration. By sixty
+it is 88%, and by eighty, 96%. Disc bulges: 30% of pain-free twenty-year-olds, 84% of
+pain-free eighty-year-olds. Wear at the small joints behind the spine goes from 4% to 83%
+across the same span.
+
+Put plainly: for most of these findings, **having one is the normal condition of a human
+back of that age**, and finding one on a scan of somebody in pain does not establish that
+it is the reason.
+
+This is where the honest version has to hold two things at once, and it would be easy to
+drop one. These findings are not nothing — some of them, in some people, are genuinely part
+of the problem, and the authors say explicitly that imaging must be read against the
+patient in front of you. What the data rules out is the *automatic* inference: scan looks
+worn, therefore worn is why it hurts.
+
+::: {.hands}
+[For your hands]{.t}
+Somebody will show you a report with words like *degeneration*, *bulge* and *wear* on it,
+and they will be frightened. The figure above is a good thing to have seen, because it lets
+you say something true and calming at once: those words describe most backs of that age,
+including the ones that feel fine. It is not your place to reinterpret their imaging — but
+it is entirely reasonable to say that the words are more ordinary than they sound.
+:::
+
+## The same cold, two colours {#cue .stop data-stop="cue"}
+
+::: {.year}
+2007
+:::
+
+::: {.lead}
+A very cold rod was put on people's hands. The rod was identical every time. The only
+thing that changed was a coloured light, and how much it hurt changed with it.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Moseley & Arntz, 2007 [@moseley07]. A rod at **−20 °C** on one hand for **half a second**,
+paired with either a red light, described as hot and more tissue-damaging, or a blue one,
+described as cold and less damaging.
+
+A well-designed laboratory experiment with a large effect, and a laboratory stimulus —
+half a second of cold on a hand is not a bad back. The abstract reports the differences
+between conditions rather than a score for each, and it reports them as approximate. It
+does not report how many people took part, so we do not state a number.
+:::
+
+::: {.journey-figure data-scene="cue"}
+Switch the light. The rod does not change. The paper reports the gap between the two
+conditions rather than a score for each, so the pair is drawn around the middle of the
+scale — the distance between them is the measured thing.
+:::
+
+With the red light, people rated the same freezing rod as roughly **five and a half points
+hotter** on an eleven-point scale. Not more unpleasant in general — *hotter*. The sensation
+itself reported differently.
+
+They also rated it about **three and a half points more unpleasant** and about **three
+points more intense**. Those three numbers are separable on purpose: the study was designed
+to show that context does not simply turn one dial, it moves the sensory reading and the
+emotional reading somewhat independently.
+
+The stimulus was cold. Believing it was hot and dangerous made it feel hot. That is not
+suggestibility or poor reporting — it is what the definition in part one describes, showing
+up in a measurement.
+
+::: {.hands}
+[For your hands]{.t}
+Everything a person believes about what is happening to their tissue is part of what they
+feel. When you name a finding, describe a technique, or explain what you think is going on,
+you are not adding commentary to a sensation that is already fixed. You are inside the
+thing that determines it.
+:::

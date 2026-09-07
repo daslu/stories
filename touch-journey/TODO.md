@@ -60,10 +60,11 @@ stories/
 ├── _quarto.yml            project root · output-dir: docs
 ├── .nojekyll
 ├── index.html             the shelf — still hand-written, copied verbatim
+├── shared/                theme, figure kit and checkers — every story
+│   ├── warm.scss warm.css ama.csl  figure-kit.js  tools/
 ├── touch-journey/         the source
-│   ├── _metadata.yml      theme, bibliography and scripts, this subtree only
-│   ├── warm.scss          Bootstrap variables · warm.css  the page's own look
-│   ├── refs.bib  ama.csl
+│   ├── _metadata.yml      bibliography and scripts, this subtree only
+│   ├── refs.bib
 │   ├── index.qmd territory.qmd second-system.qmd
 │   ├── what-touch-does.qmd being-honest.qmd carry-back.qmd
 │   ├── js/{figure-data,scenes,figures}.js
@@ -84,17 +85,19 @@ covers the mechanics.
 
 **The shelf is still hand-written HTML.** `index.html` at the repo root is
 copied verbatim into `docs/` as a project resource. Converting it to `index.qmd`
-would finish the move, and needs two decisions first:
+would finish the move — and **both blockers are now gone** (2026-09-07):
 
-- the site theme currently lives in `touch-journey/_metadata.yml`, so a root
-  `index.qmd` would render in plain Bootstrap unless the warm vocabulary moves
-  up to the project level or gets its own copy;
-- the sidebar is configured site-wide with the journey's six pages, which is
-  wrong on a shelf listing stories. Quarto scopes sidebars by href, so this
-  needs a second sidebar or a navbar.
+- ~~the theme lives in `touch-journey/_metadata.yml`~~ — it moved to project
+  level in `_quarto.yml` when the second and third stories were added, so a
+  root `index.qmd` would inherit the warm vocabulary;
+- ~~the sidebar is site-wide with this journey's six pages~~ — there is a
+  sidebar per story now, scoped by href, so a shelf page would simply match
+  none of them.
 
-Left deliberately: the shelf works and looks right today, and converting it
-risks a visible regression on the site's front door for no functional gain.
+Still left deliberately: the shelf works and looks right today, and converting
+it risks a visible regression on the site's front door for no functional gain.
+The reason to do it would be to stop maintaining a second copy of the palette,
+which `index.html` still carries inline.
 
 ### One risk — decided 2026-09-06
 

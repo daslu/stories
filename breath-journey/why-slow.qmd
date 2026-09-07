@@ -1,0 +1,154 @@
+---
+title: "Two · why slow works"
+description: "The heart is already following your breath, one rate makes that swing largest, and that rate is not the same for everybody."
+---
+
+::: {.part}
+Part two · why slow works
+:::
+
+## The heart is already breathing with you {#rsa .stop data-stop="rsa"}
+
+::: {.year}
+Now, in you
+:::
+
+::: {.lead}
+Your heart rate is not steady. It rises as you breathe in and falls as you breathe out, and
+it is doing that at this moment.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Lehrer & Gevirtz, 2014 [@lehrer14], and Russo and colleagues, 2017 [@russo17]. The pattern
+has a name — **respiratory sinus arrhythmia** — and the 2014 review states it plainly:
+heart rate "increases during inhalation and decreases during exhalation".
+
+As solid as anything on these pages. It is directly observable in anyone, with any device
+that reads a pulse, and it needs no statistics at all.
+:::
+
+::: {.journey-figure data-scene="rsa"}
+Move through one breath. The direction is the established finding; the size of the swing
+drawn here is illustrative, because yours depends on your age, your fitness and how slowly
+you are breathing.
+:::
+
+If you have ever put a pulse oximeter on someone and watched the number wander, this is what
+you were watching. It is not the device being imprecise.
+
+Why it happens is a longer story than it looks, and the 2014 review is careful to say that
+parts of the account are proposed rather than settled. The short version is that the same
+brainstem machinery times the breath and adjusts the heart, and that the pressure sensors in
+the big arteries — the
+**[baroreflex](https://en.wikipedia.org/wiki/Baroreflex){.wiki}** — are correcting blood
+pressure continuously as the chest changes shape around them.
+
+The useful part for a practitioner is simpler. The breath is not a separate system you are
+reaching in to influence. It is already wired to the heart, continuously, in everyone, and
+what a breathing instruction does is change the timing of something that is happening anyway.
+
+::: {.hands}
+[For your hands]{.t}
+This is the one claim on the page a client can check for themselves in thirty seconds with a
+finger on their own wrist and a long slow breath. Things people verify on their own body
+land differently from things they are told.
+:::
+
+## One rate rings louder than the others {#resonance .stop data-stop="resonance"}
+
+::: {.year}
+2014
+:::
+
+::: {.lead}
+Breathe at about six a minute and the swing in your heart rate gets much bigger. Not
+gradually bigger as you slow down — biggest at one particular rate, and smaller again either
+side of it.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Lehrer & Gevirtz, 2014 [@lehrer14]. "Maximum heart rate oscillations at respiratory
+frequency occurred at approximately 0.1 Hz (six breaths per minute)", refined in the same
+review to about **5.5 a minute**, a breath of roughly eleven seconds. Russo's review reports
+the same peak [@russo17].
+
+Where the peak sits is replicated and solid. The mechanism has a good account — and the
+authors of the review are explicit that parts of it are speculation, including the newer
+suggestion about signals travelling up the vagus nerve to the front of the brain.
+:::
+
+::: {.journey-figure data-scene="resonance"}
+Find the peak. Where it sits is the established finding; the height of the hill is drawn
+rather than measured, and how sharp yours is will not be quite this.
+:::
+
+Here is the part that makes it a **resonance** rather than just a good rate. Your blood
+pressure is being corrected continuously by the baroreflex, and that correction takes a few
+seconds to take effect. Breathe at around six a minute and your breathing-driven changes
+arrive exactly out of step with the correction — heart rate and blood pressure end up running
+**half a cycle apart**, so blood pressure starts falling just as heart rate starts rising.
+Each push lands where it adds to the last one.
+
+It is the same reason a child on a swing goes higher when the pushes are timed to the swing
+rather than delivered faster. The system has a natural period, and matching it costs nothing
+and does more.
+
+What this does **not** establish is what people usually go on to say. A bigger swing in heart
+rate is a real physiological change, and it is a measurement, not an outcome. The step from
+*this makes your heart rate variation larger* to *this makes you healthier* is the step part
+three is about, and it is much less secure than this stop.
+
+::: {.hands}
+[For your hands]{.t}
+If you are going to give someone a number, six a minute is the one with the most behind it —
+in through the nose for about four seconds, out for about six, and no straining at either
+end. Longer out than in is the part most people find easiest to hold on to.
+:::
+
+## And it is not the same rate for everybody {#predicts .stop data-stop="predicts"}
+
+::: {.year}
+2006
+:::
+
+::: {.lead}
+Six a minute is the average of a spread, not a setting. People have their own rate, it can
+be found, and it stays put.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Vaschillo, Vaschillo & Lehrer, 2006 [@vaschillo06] — 32 adults with asthma and 24 healthy
+adults, each tested to find the rate at which their own heart rate swung most.
+
+One laboratory, 56 people, and the findings are reported as **directions** rather than as
+numbers — which is why the figure shows directions and no numbers. Good enough to say the
+spread is real and roughly what predicts it. Not good enough to give anyone a formula.
+:::
+
+::: {.journey-figure data-scene="predicts"}
+What predicted a person's own best rate, and what did not. No numbers on this figure,
+deliberately — the paper does not publish the coefficients and inventing them would be
+worse than leaving them out.
+:::
+
+Taller people resonated at a slower rate, and men slower than women — which is very likely
+the same finding twice, since the paper relates it to blood volume rather than to sex as
+such. Age did not predict it. Weight did not. Having asthma did not.
+
+And the finding that matters most for anyone teaching this: a person's rate **stayed the
+same across ten sessions**. It is a stable property of them, like a resting heart rate,
+rather than something that moves with their mood or how the day has gone.
+
+So the honest version of "breathe at six a minute" is: six is a good place to start, your own
+best rate is probably within a breath or two either side of it, and the way to find it is to
+try a few and notice which one feels like it takes the least effort to keep going.
+
+::: {.hands}
+[For your hands]{.t}
+If six feels wrong for someone — strained, or oddly effortful — that is worth taking at face
+value rather than as a failure to relax. Try five and try seven. Bigger people tend to sit
+at the slower end.
+:::

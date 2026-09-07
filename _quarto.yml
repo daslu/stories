@@ -19,38 +19,101 @@ project:
   output-dir: docs
   render:
     - touch-journey/*.qmd
+    - pain-journey/*.qmd
+    - breath-journey/*.qmd
   resources:
+    # Only the file the pages actually fetch at runtime. A `shared/**` glob
+    # also published shared/README.md — a working document — onto the live
+    # site. The stylesheets and the citation style reach docs/ through
+    # Quarto's own theme handling and do not belong here.
+    - shared/figure-kit.js
     - touch-journey/js/**
+    - pain-journey/js/**
+    - breath-journey/js/**
     # The hand-written shelf. Without an index input Quarto writes a redirect
     # stub to whichever page sorts first, which it did once. Copied verbatim
     # until it becomes an index.qmd — see touch-journey/TODO.md.
     - index.html
 
 website:
-  title: "Touch is not one sense"
-  description: "A reading journey for hands-on practitioners."
-  page-navigation: true          # this is a journey; next/previous matters
+  title: "Stories"
+  description: "Reading journeys through what is known, and not known, about how bodies work."
+  page-navigation: true          # these are journeys; next/previous matters
   reader-mode: false
-  sidebar:
-    style: floating
-    search: true
-    collapse-level: 1
-    contents:
-      - text: "Start here"
-        href: touch-journey/index.qmd
-      - text: "One · the territory"
-        href: touch-journey/territory.qmd
-      - text: "Two · the second system"
-        href: touch-journey/second-system.qmd
-      - text: "Three · what touch does"
-        href: touch-journey/what-touch-does.qmd
-      - text: "Four · being honest about it"
-        href: touch-journey/being-honest.qmd
-      - text: "What we carry back"
-        href: touch-journey/carry-back.qmd
 
+  ## Quarto picks the sidebar whose contents contain the page being rendered,
+  ## so each story gets its own stops and no story advertises another's.
+  sidebar:
+    - id: touch
+      title: "Touch is not one sense"
+      style: floating
+      search: true
+      collapse-level: 1
+      contents:
+        - text: "Start here"
+          href: touch-journey/index.qmd
+        - text: "One · the territory"
+          href: touch-journey/territory.qmd
+        - text: "Two · the second system"
+          href: touch-journey/second-system.qmd
+        - text: "Three · what touch does"
+          href: touch-journey/what-touch-does.qmd
+        - text: "Four · being honest about it"
+          href: touch-journey/being-honest.qmd
+        - text: "What we carry back"
+          href: touch-journey/carry-back.qmd
+        - text: "← all stories"
+          href: index.html
+
+    - id: pain
+      title: "Pain is not a damage report"
+      style: floating
+      search: true
+      collapse-level: 1
+      contents:
+        - text: "Start here"
+          href: pain-journey/index.qmd
+        - text: "One · what pain is"
+          href: pain-journey/what-pain-is.qmd
+        - text: "Two · how loose the link is"
+          href: pain-journey/how-loose.qmd
+        - text: "Three · when pain stays"
+          href: pain-journey/when-it-stays.qmd
+        - text: "Four · being honest about it"
+          href: pain-journey/being-honest.qmd
+        - text: "What we carry back"
+          href: pain-journey/carry-back.qmd
+        - text: "← all stories"
+          href: index.html
+
+    - id: breath
+      title: "Breathing is not a switch"
+      style: floating
+      search: true
+      collapse-level: 1
+      contents:
+        - text: "Start here"
+          href: breath-journey/index.qmd
+        - text: "One · what breathing is doing"
+          href: breath-journey/what-it-does.qmd
+        - text: "Two · why slow works"
+          href: breath-journey/why-slow.qmd
+        - text: "Three · being honest about it"
+          href: breath-journey/being-honest.qmd
+        - text: "What we carry back"
+          href: breath-journey/carry-back.qmd
+        - text: "← all stories"
+          href: index.html
+
+## The warm vocabulary lives here, at project level, so every story inherits it
+## and there is one copy of the stylesheet rather than one per story. A story's
+## own _metadata.yml adds only what is genuinely its own: its bibliography, and
+## the script tags for its figures.
 format:
   html:
+    theme: [cosmo, shared/warm.scss]
+    css: shared/warm.css
+    csl: shared/ama.csl
     # The original page used a 1080px wrap with no persistent sidebar. Quarto's
     # default grid leaves the body column ~790px at 1400px, which shrinks every
     # wide-layout figure. This buys most of that width back.

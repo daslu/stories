@@ -1,10 +1,5 @@
 ## Applies to every document in this directory and below, and to nothing
-## outside it.
-##
-## The warm theme, the stylesheet and the citation style are project-level now
-## (see _quarto.yml) — every story shares one copy. What stays here is what is
-## genuinely this story's own: which references it cites, and which scripts
-## draw its figures.
+## outside it. Theme, stylesheet and citation style are project-level.
 
 bibliography: refs.bib
 link-citations: true

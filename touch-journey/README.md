@@ -60,10 +60,11 @@ index.html            at the repo root — the site shelf, copied verbatim
 
 touch-journey/
   _metadata.yml       theme, bibliography and scripts, this subtree only
-  warm.scss           Bootstrap variables — teaches the chrome the palette
-  warm.css            the page's own look
+  (the look now lives in ../shared — see shared/README.md. warm.scss holds
+   Bootstrap variables, warm.css the page's own rules, and both are wired in
+   at project level so every story inherits one copy.)
   refs.bib            every source
-  ama.csl             numeric superscript citation style
+  (ama.csl moved to ../shared too, and is set project-wide.)
   *.qmd               ALL prose, including figure captions
   _figures.html       the three <script> tags, injected after the body
   js/figure-data.js   CLAIMS and REVISIONS — data the figures draw
@@ -193,8 +194,9 @@ The two-colour scheme does real work: once the reader learns blue = fast/what an
 clay = slow/how-it-feels in the first figure, every later figure reads without a
 legend.
 
-The look is kept in two files on purpose. **`warm.scss` holds Bootstrap variables
-only** and **`warm.css` holds the page's own rules**, because Quarto's
+The look is kept in two files on purpose, and both now live in `../shared`.
+**`warm.scss` holds Bootstrap variables only** and **`warm.css` holds the
+page's own rules**, because Quarto's
 `cssVarsBlock` step parses the compiled theme CSS and its parser cannot handle
 quoted strings, negative numbers or `calc()` — any of which in an `scss:rules`
 block throws `SCSSParsingError` on every render. The split sidesteps it, and is

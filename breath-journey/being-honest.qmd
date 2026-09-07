@@ -1,0 +1,102 @@
+---
+title: "Three · being honest about it"
+description: "What breathwork does in randomised trials, and how much weight each claim on this page can carry."
+---
+
+::: {.part}
+Part three · being honest about it
+:::
+
+## What it measurably does {#evidence .stop data-stop="evidence"}
+
+::: {.year}
+2023
+:::
+
+::: {.lead}
+Somebody gathered the randomised trials of breathwork and pooled them. The effect is real,
+it is small-to-medium, and the authors went out of their way to warn against the version of
+their own result that was about to get quoted.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Fincham, Strauss, Montero-Marin & Cavanagh, 2023 [@fincham23]. From 1325 initial results
+they took randomised controlled trials only: **12 trials and 785 adults** for stress, 20 for
+anxiety, 18 for low mood.
+
+The best evidence on the question, and the authors say most of the trials were at
+**moderate risk of bias** — which for a breathing intervention is close to unavoidable,
+since nobody can be blinded to how they are breathing. Their own closing sentence asks for
+better research "to avoid a miscalibration between hype and evidence."
+:::
+
+::: {.journey-figure data-scene="evidence"}
+Only stress has a published confidence interval, so only stress gets a bar. The other two
+are drawn as bare points, because a made-up interval would be a worse figure than an
+incomplete one.
+:::
+
+Stress came out at a standardised effect of **−0.35**, somewhere between −0.55 and −0.14.
+Anxiety −0.32 and low mood −0.40, both clearly better than the control conditions.
+
+In plain terms: this works, and it works about as well as a decent self-help intervention
+works. It is not nothing and it is not transformative. If somebody leaves your room breathing
+more slowly than they arrived, you have done something worth doing, and you have not
+rewired them.
+
+Two limits worth carrying. Every one of these outcomes is **self-reported** — how people say
+they feel, which is the easiest thing in the field to shift and also the thing that matters
+most to them. And "breathwork" pools a lot of quite different practices, which is part of
+why the trials disagree with each other.
+
+::: {.hands}
+[For your hands]{.t}
+The evidence supports offering this warmly and describing it modestly. "This reliably helps
+people feel less stressed, by a useful amount" is well within what the trials show. Anything
+about states, systems or rewiring is not.
+:::
+
+## How much each of these can carry {#weights .stop data-stop="weights"}
+
+::: {.year}
+Now
+:::
+
+::: {.lead}
+Ten stops, six sources, and they are not equally good. Flattening that would undo most of
+the point of writing it down.
+:::
+
+::: {.src}
+[The research]{.lbl}
+All of it, weighed against each other. The placement below is **our judgement**, not a
+measurement, and the caption says so — what it is for is the ordering.
+
+The bottom entry has no source at all, which is the honest way to record it. "Breathing
+technique changes long-run health" is the claim that sells the workshops, and we could not
+find trials that establish it. Its absence is a finding.
+:::
+
+::: {.journey-figure data-scene="weights"}
+A judgement, not a measurement. The value is the gradient: the best-supported claims are the
+ones you can check on your own wrist, and the one with the most riding on it sits at the
+bottom with nothing under it.
+:::
+
+Notice the shape. The top of this list is made of things that are directly observable — your
+heart rate follows your breath; the swing is largest around six a minute. They need no trial
+because you can watch them happen.
+
+The bottom is where the money is. *Breathing technique changes long-run health* is the claim
+that fills rooms, and there is no adequate evidence for it — not evidence against it, which
+is a different thing, but an absence where the trials would be. That is worth saying out
+loud precisely because everything above it is so solid. A page that establishes four real
+things is not licensed to wave the fifth through.
+
+::: {.hands}
+[For your hands]{.t}
+The strongest thing you can offer is also the most checkable: a rate, a reason, and something
+the person can verify on their own pulse. It is a smaller claim than the one they may have
+heard, and it has the advantage of being true.
+:::

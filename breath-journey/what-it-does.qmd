@@ -1,0 +1,156 @@
+---
+title: "One · what breathing is doing"
+description: "What an ordinary rate looks like, why the lungs are not the interesting part, and what goes wrong when you breathe more than the body asked for."
+---
+
+::: {.part}
+Part one · what breathing is doing
+:::
+
+## What an ordinary rate looks like {#rates .stop data-stop="rates"}
+
+::: {.year}
+2017
+:::
+
+::: {.lead}
+"Slow breathing" sounds like it must begin somewhere unusual. It begins one breath below
+where most people already are.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Russo, Santarelli & O'Rourke, 2017 [@russo17] — a review of the physiology of slow
+breathing in healthy people, written for a respiratory audience and free to read.
+
+A review rather than an experiment, and the best single overview of this material. Its
+authors end by saying there is "a dire need for further research into the area", which is
+worth carrying through everything below.
+:::
+
+::: {.journey-figure data-scene="rates"}
+Drag the rate. The same number is shown as a breath length underneath, because seconds per
+breath is what anyone actually counts.
+:::
+
+The review puts an ordinary resting rate at **10 to 20 breaths a minute**, and defines slow
+breathing as **4 to 10**. The two meet exactly at ten, which is the useful thing to notice:
+there is no gap between normal and slow, and nothing exotic is being asked for.
+
+At six breaths a minute — the rate the rest of this page is about — a breath takes ten
+seconds. That is long enough to feel deliberate and short enough that most people can hold
+it without strain. Below about four a minute the research thins out, which is why the
+figure stops naming the bands there.
+
+::: {.hands}
+[For your hands]{.t}
+"Breathe slowly" is not a useful instruction, because it has no number in it. "About ten
+seconds a breath" is one, and someone can check themselves against it.
+:::
+
+## The lungs are not where the interesting part is {#oxygen .stop data-stop="oxygen"}
+
+::: {.year}
+Standard physiology
+:::
+
+::: {.lead}
+Breathing harder cannot load much more oxygen onto the blood, because the blood is very
+nearly full already. What changes with your breathing is how readily the oxygen comes
+**off** again at the far end.
+:::
+
+::: {.src}
+[The research]{.lbl}
+The oxygen–haemoglobin dissociation curve [@dissociation] — textbook respiratory
+physiology, with no single modern source to point at, so the reference is a pointer to a
+standard description rather than to a study. Nothing here is contested.
+
+The figure draws the curve from the standard equation. It is a **shape**, not measured
+data, and it is a good shape: it has been the accepted description for over a century.
+:::
+
+::: {.journey-figure data-scene="oxygen"}
+Move the carbon dioxide. Watch the gap between the two dots — that gap is what actually
+gets handed over to the tissue, and the low end of the curve is the end that moves.
+:::
+
+Two things are worth separating here, and almost every workshop account runs them together.
+
+**Loading.** Blood leaving healthy lungs is already carrying oxygen at something like 97 or
+98% of what it can hold. The top of that curve is nearly flat, so breathing harder pushes
+you along the flat part. There is very little headroom, which is why *getting more oxygen
+in* is not the mechanism for anything you are about to feel.
+
+**Unloading.** The bottom of the curve is steep, and that is the end that responds to
+carbon dioxide. More carbon dioxide, and a slightly more acid blood, makes haemoglobin
+loosen its grip and hand oxygen over more readily. This is the
+**[Bohr effect](https://en.wikipedia.org/wiki/Bohr_effect){.wiki}**, and it points the
+opposite way to most people's intuition: carbon dioxide is not simply waste to be got rid
+of. It is part of how the delivery works.
+
+So blowing off a lot of carbon dioxide shifts the whole curve leftward, and the blood holds
+on tighter. Oxygen-rich blood arrives at the tissue and hands over **less** of its load.
+More breathing, less delivered.
+
+There is a real benefit at the other end of this, and the review reports it: breathing
+slowly at around six a minute produced a small **rise** in blood oxygen saturation, by using
+the lungs more efficiently rather than by moving more air. Slow and efficient, not fast and
+hard.
+
+::: {.hands}
+[For your hands]{.t}
+If someone on your table starts breathing big and fast because they were told deep breathing
+is good, that is not a mild version of the right thing. Slower is the ingredient. Bigger,
+on its own, is the next stop.
+:::
+
+## When more breathing is less {#over .stop data-stop="over"}
+
+::: {.year}
+2005
+:::
+
+::: {.lead}
+The light-headed, tingling, faintly unreal feeling that comes with over-breathing is not
+anxiety about the exercise. It is a measurable drop in blood flow to the brain.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Stocchetti and colleagues, 2005 [@stocchetti05], a review of deliberately induced
+hyperventilation in head injury.
+
+An odd-looking source for a page like this, and the honest one. In intensive care,
+hyperventilation is used **on purpose** to narrow blood vessels in the brain and lower the
+pressure inside the skull — and its known danger is cutting blood flow too far. That
+establishes the direction, and that the lever is large. It says nothing about the dose
+anyone gets on a mat, and the figure carries no dose for that reason.
+:::
+
+::: {.journey-figure data-scene="over"}
+Directions only, no numbers. The chain is well established; how far along it any particular
+person travels is not something anyone can currently put a figure on.
+:::
+
+The chain runs: breathe more than the body is asking for → carbon dioxide in the blood falls
+→ blood vessels in the brain narrow → less blood reaches the brain → light-headed, tingling
+hands and lips, a sense of unreality. Add the Bohr effect from the last stop and the blood
+that does arrive gives up less of its oxygen.
+
+None of that is dangerous in a healthy person doing it briefly, and it stops when the
+breathing stops. It is worth knowing anyway, for two reasons. It explains a thing you will
+see. And it is the clearest case on this page where *more of the good thing* is simply a
+different thing.
+
+Note what the honest version cannot say. It cannot tell you how fast is too fast, because
+the evidence comes from a setting where the amount is controlled by machine and measured
+directly. Anyone offering a threshold is going past their evidence.
+
+::: {.hands}
+[For your hands]{.t}
+Tingling hands and light-headedness in a breathing exercise are a signal to slow the rate,
+not to push through. The nearest thing to an antidote is an unhurried, ordinary breath — and
+the person needs to be told it is a normal response to over-breathing, or they will read it
+as something being wrong with them.
+:::

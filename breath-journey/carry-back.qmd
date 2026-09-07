@@ -1,0 +1,91 @@
+---
+title: "What we carry back"
+description: "What the reading suggested, and every source in one place."
+nocite: |
+  @*
+---
+
+::: {.part}
+Closing
+:::
+
+## What we would carry back into the room {#carry .stop data-stop="carry"}
+
+::: {.year}
+The end of it
+:::
+
+::: {.lead}
+Eight things we came away with. Not instructions — a record of what the reading suggested,
+in the order the page found them.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Everything cited on the previous pages, weighed as part three weighs it. Nothing new is
+introduced here.
+:::
+
+::: {.journey-figure data-scene="weights"}
+The same judgement as the previous page, repeated because it is the thing to leave with.
+:::
+
+::: {.rules}
+- **Slower is the active ingredient, not deeper.** Almost everything established on this
+  page follows from rate. Very little of it follows from size of breath.
+
+- **Six a minute is the rate with the most behind it.** A ten-second breath. Heart rate
+  variation is largest there, and the reason it is largest there is understood.
+
+- **The best rate is a property of the person.** Taller people sit slower, it does not move
+  with mood, and it stayed the same across ten sessions. Six is a starting point, not a
+  setting.
+
+- **The blood is already nearly full of oxygen.** Breathing harder cannot load much more on.
+  What your breathing changes is how readily oxygen comes off again at the far end.
+
+- **Carbon dioxide is not just waste.** It is part of how oxygen gets handed over. Blow off
+  too much and the blood holds on tighter and delivers less.
+
+- **Light-headed and tingling means slow the rate.** It is a normal response to
+  over-breathing, not a sign that something is wrong with the person — and they need to be
+  told that, or they will assume it is.
+
+- **Breathwork reliably reduces self-reported stress, by a useful and modest amount.**
+  Twelve randomised trials. Not nothing, not transformative.
+
+- **The claim with the most riding on it has the least under it.** That breathing technique
+  changes long-run health is what fills the rooms, and the trials for it are not there.
+:::
+
+::: {.hands}
+[For your hands]{.t}
+If a client leaves with one thing, we would want it to be a number and a reason: about ten
+seconds a breath, because that is where the heart and the blood vessels fall into step. It
+is smaller than what they may have been promised elsewhere, and they can check it on their
+own wrist.
+:::
+
+## Every source, in the order the journey met them {#sources .stop data-stop="sources"}
+
+::: {.year}
+The whole list
+:::
+
+::: {.lead}
+Six sources. Where a link is free to read, it is free to read — and for this story most of
+them are.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Everything cited above, plus nothing that was not. Where a claim on this page has no source
+beside it, the text says so — the last line of the weights figure is the clearest case.
+:::
+
+::: {.journey-figure data-scene="evidence"}
+The most honest figure on the page, kept in view on the way out.
+:::
+
+The reference list below is numbered in the order the journey met each source, so it reads
+as a record of the route rather than an alphabetical index.

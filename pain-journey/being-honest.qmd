@@ -1,0 +1,102 @@
+---
+title: "Four · being honest about it"
+description: "What teaching people about pain measurably does, and how much weight each claim on this page can carry."
+---
+
+::: {.part}
+Part four · being honest about it
+:::
+
+## What teaching people this actually does {#teaching .stop data-stop="teaching"}
+
+::: {.year}
+2026
+:::
+
+::: {.lead}
+This whole page is an argument for explaining pain to people. So it is only fair to ask
+what happens when somebody does that in a trial, and the answer is: less than the field
+would like.
+:::
+
+::: {.src}
+[The research]{.lbl}
+Khan and colleagues, 2026 [@khan26] — a systematic review and meta-analysis of **pain
+neuroscience education**, which is the formal name for teaching people roughly what parts
+one to three of this page teach. Twelve randomised trials, 1485 people.
+
+The most honest number on this page. The effect on pain intensity is small, and its
+confidence interval reaches exactly zero — the trials also disagreed with each other a
+great deal. The sleep result is cleaner and the trials agreed on it. Read as a whole: this
+does something, and it is not the large effect the enthusiasm around it suggests.
+:::
+
+::: {.journey-figure data-scene="pne"}
+The bar is where the true effect probably sits. The pain bar reaches zero, which means "no
+effect at all" has not been ruled out. The sleep bar does not reach it.
+:::
+
+The pain result is a standardised effect of **−0.27**, with a range from −0.50 to **0.00**.
+In plain terms: on average people hurt somewhat less, the effect is small, and the evidence
+is compatible with it doing nothing to pain at all. The trials also disagreed substantially
+among themselves, which usually means the thing being tested was not the same thing in
+every trial.
+
+Total sleep time came out at **+0.42**, from 0.12 to 0.71, and there the trials agreed with
+each other completely. It is the sturdier finding, and it is not the one anybody advertises.
+
+We could have left this stop out. The page would have read better and been worse. If the
+argument is *check what the evidence actually says*, that has to include checking it on the
+thing the page is itself doing.
+
+::: {.hands}
+[For your hands]{.t}
+Explaining pain well is worth doing, and it is not a treatment on its own. The trials that
+did best combined it with movement and with the rest of care — which is roughly what you
+were going to do anyway.
+:::
+
+## How much each of these can carry {#weights .stop data-stop="weights"}
+
+::: {.year}
+Now
+:::
+
+::: {.lead}
+Eleven stops, ten sources, and they are not equally good. Flattening that would undo most of
+the point.
+:::
+
+::: {.src}
+[The research]{.lbl}
+All of it, weighed against each other. The placement below is **our judgement**, not a
+measurement, and the caption says so — what it is for is the ordering.
+
+The last entry deserves naming. A builder jumped onto a plank and a seven-inch nail went
+through his boot. He was in agony and was sedated before the boot came off, at which point
+the nail turned out to have passed cleanly between his toes without touching him
+[@fisher95]. It is a wonderful story, and it is **one paragraph in a magazine column** —
+no method, no follow-up, no imaging — retold in more lectures than most randomised trials.
+:::
+
+::: {.journey-figure data-scene="weights"}
+A judgement, not a measurement. The value is the gradient: the best-supported things are
+the least dramatic, and the most repeated story on the page sits at the bottom.
+:::
+
+Notice the shape of it. The claims near the top are boring — *findings that look like
+damage are common in people with no pain*, *signals are turned up and down on the way in*.
+The claims near the bottom are the ones that make a good lecture. That is not a coincidence
+and it is not unique to this field, but it is worth being able to see.
+
+The nail story is a good test of your own habits. It probably persuaded you when you first
+heard it, and it should not have — not because it is false, but because a paragraph cannot
+carry the weight of a general claim about how pain works. The scans in part two carry that
+weight. The nail carries almost none of it, and gets repeated ten times as often.
+
+::: {.hands}
+[For your hands]{.t}
+When you find yourself reaching for the most memorable example, check what it is made of.
+The strongest thing you can say to a frightened client is not the dramatic anecdote — it is
+the boring, replicated one about what ordinary backs look like.
+:::
