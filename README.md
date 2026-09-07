@@ -18,7 +18,8 @@ stories/
 ├── touch-journey/    Touch is not one sense        12 stops
 ├── pain-journey/     Pain is not a damage report   11 stops
 ├── breath-journey/   Breathing is not a switch     10 stops
-└── docs/             OUTPUT ONLY — Quarto deletes what it does not own here
+├── docs/             OUTPUT ONLY — Quarto deletes what it does not own here
+└── dev-notes/        working notes — gitignored, local to a working copy
 ```
 
 ## Working on it
@@ -32,10 +33,16 @@ node shared/tools/layout-check.js pain-journey   # layout audit, needs a build
 Both checkers are cheap. Run them after every edit; `layout-check` reads the
 built pages, so render first.
 
-**[shared/README.md](shared/README.md)** is the place to start: it covers the
-figure kit, the two layouts, the checkers, how citations are ordered, and how
-to add a story. Each story then carries its own `HANDOFF.md` — what was
-decided, what was verified and how well, and what is still open.
+**[shared/README.md](shared/README.md)** covers the machinery — the figure kit,
+the two layouts, the checkers, how citations are ordered, and how to add a
+story.
+
+Alongside it, a working copy keeps notes in **`dev-notes/`**, which is
+gitignored and so is not part of what this repository publishes:
+`dev-notes/HANDOFF.md` for where the site stands and what was decided, and one
+per story for what was verified and how well. If you have cloned this and the
+directory is not there, that is expected — the notes live only on the machine
+they were written on.
 
 ## The standard
 

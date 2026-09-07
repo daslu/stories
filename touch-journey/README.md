@@ -19,11 +19,13 @@ a link learns what it is, who it is for and how it is sourced before the first
 stop. Three rows, deliberately short — it is orientation, not an introduction,
 and anything that could live inside a stop does.
 
-> **Continuing this?** Read [HANDOFF.md](HANDOFF.md) first. It covers what was
-> decided and why, what is verified and how well, and the error classes that
-> actually occurred during authoring. [TODO.md](TODO.md) is the short list of
-> what is next; [RESEARCH.md](RESEARCH.md) assesses candidate papers for new
-> stops. This README covers the mechanics.
+> **Continuing this?** This README covers the mechanics. The working notes are
+> in `dev-notes/`, which is gitignored and local to a working copy:
+> `dev-notes/touch-journey/HANDOFF.md` for what was decided and why, what is
+> verified and how well, and the error classes that actually occurred;
+> `dev-notes/touch-journey/TODO.md` for what is next; and
+> `dev-notes/touch-journey/RESEARCH.md` for candidate papers assessed for new
+> stops.
 
 ## Run it
 
@@ -264,7 +266,7 @@ supply, and (c) in manual work the precision often matters most to the
 tissue rather than skin spotted it immediately.
 
 The lesson for editing: when a sentence moves from *what was measured* to
-*what you should therefore do*, that is the sentence to re-read. HANDOFF.md §5
+*what you should therefore do*, that is the sentence to re-read. The handoff's §5
 has four more of the same species.
 
 ## Known rough edges

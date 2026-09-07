@@ -1,7 +1,5 @@
-# Working documents — HANDOFF.md, RESEARCH.md, TODO.md — are tracked. They
-# used to be ignored because they lived under docs/, which is now Quarto's
-# output directory and is rebuilt on every render. They live in the source
-# tree now, nothing else preserves them, and a render destroyed one once.
+dev-notes/
+**/dev-notes/
 
 docs/**/check.js
 docs/**/build.sh

@@ -32,7 +32,7 @@ project:
     - breath-journey/js/**
     # The hand-written shelf. Without an index input Quarto writes a redirect
     # stub to whichever page sorts first, which it did once. Copied verbatim
-    # until it becomes an index.qmd — see touch-journey/TODO.md.
+    # until it becomes an index.qmd — see dev-notes/touch-journey/TODO.md.
     - index.html
 
 website:
